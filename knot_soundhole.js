@@ -75,8 +75,10 @@
 //   Both are printed and checked.
 //
 // OUTPUT LAYERS   cut / engrave
-//   Only the red #ff0000 cut layer goes through the material. The blue
+//   Only the black #000000 cut layer goes through the material. The blue
 //   #0000ff engrave lines cross the ribbon; cutting them severs it.
+//   Black is the last cut across these repositories, and this file has only
+//   one; blue means engrave everywhere and never cuts.
 //
 const fs = require('fs');
 
@@ -619,7 +621,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg"
 
 
   <!-- CUT: every closed path here is waste that drops out -->
-  <g id="cut" fill="none" stroke="#ff0000" stroke-width="0.1">
+  <g id="cut" fill="none" stroke="#000000" stroke-width="0.1">
     <path d="${cutD}"/>
   </g>
 

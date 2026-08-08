@@ -257,7 +257,7 @@ assigns operations by colour rather than by group name.
 
 | Group | Stroke | Purpose |
 |---|---|---|
-| `cut` | **red `#ff0000`** | every closed path is waste that drops out |
+| `cut` | **black `#000000`** | every closed path is waste that drops out |
 | `engrave` | **blue `#0000ff`** | over/under interlace hints (`2*B*(L-1)` lines) **and** rim continuations |
 
 ### Rim continuations

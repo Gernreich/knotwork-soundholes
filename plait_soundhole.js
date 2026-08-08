@@ -475,7 +475,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg"
 
 
   <!-- CUT: every closed path here is waste that drops out -->
-  <g id="cut" fill="none" stroke="#ff0000" stroke-width="0.1">
+  <g id="cut" fill="none" stroke="#000000" stroke-width="0.1">
     <path d="${cutD}"/>
   </g>
 

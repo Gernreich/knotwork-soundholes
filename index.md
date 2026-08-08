@@ -80,8 +80,12 @@ figures against your kerf before choosing a design.
 
 **One layer is not a cut.** Give the blue `#0000ff` `engrave` lines a score or engrave
 operation rather than a cut — they run across the ribbon at every crossing, so cutting
-them takes the rosette apart. Only the red `#ff0000` `cut` layer is meant to go through
+them takes the rosette apart. Only the black `#000000` `cut` layer is meant to go through
 the material. Each writeup has the full table.
+
+Those two colours are the same everywhere in these repositories: blue engraves and never
+cuts, and black is always the last cut, the one that frees the part. A design with more
+stages fills in green → orange → cyan before it; these rosettes need only the one.
 
 ## Every sample, at a glance
 

@@ -69,8 +69,11 @@ soundboard. **There is no continuous rim circle in the cut layer** — the outer
 is a series of arcs between anchors. That is correct; adding a full circle drops the
 rosette on the floor.
 
-The files carry two layers: red `#ff0000` cuts, blue `#0000ff` engraves. Give the blue
-lines a score or engrave operation — cutting them severs the ribbon. The designs are
+The files carry two layers: black `#000000` cuts, blue `#0000ff` engraves. Give the blue
+lines a score or engrave operation — cutting them severs the ribbon. That follows the
+sequence every LaserMadeMusic repository uses — blue engraves, then
+green → orange → cyan → black — where black is always the cut that frees the part. These
+rosettes have a single cut stage, so it is black. The designs are
 very open (38% to 63% of the disc removed across the documented variants). Cut in
 **3mm Baltic birch plywood** — the void-free core matters when the ribbon narrows to a
 couple of millimetres.
