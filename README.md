@@ -76,7 +76,7 @@ green → orange → cyan → black — where black is always the last cut. Thes
 single cut stage, so it is black. Elsewhere that last cut frees the part; **here it must
 not.** What black removes is the waste, and the rosette stays fused to the soundboard by
 its rim anchors. A rosette that comes free has been cut wrong. The designs are
-very open (38% to 63% of the disc removed across the documented variants). Cut in
+very open — **37% to 63%** of the disc removed, measured across the thirteen shipped samples. Cut in
 **3mm Baltic birch plywood** — the void-free core matters when the ribbon narrows to a
 couple of millimetres.
 
