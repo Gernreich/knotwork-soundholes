@@ -84,8 +84,13 @@ them takes the rosette apart. Only the black `#000000` `cut` layer is meant to g
 the material. Each writeup has the full table.
 
 Those two colours are the same everywhere in these repositories: blue engraves and never
-cuts, and black is always the last cut, the one that frees the part. A design with more
-stages fills in green → orange → cyan before it; these rosettes need only the one.
+cuts, and black is always the last cut. A design with more stages fills in
+green → orange → cyan before it; these rosettes need only the one.
+
+In the other repositories that last cut is the one that frees the part. **Here it is not,
+and must not be.** Black removes the waste; the rosette stays attached to the soundboard
+at its rim anchors, which is the whole reason there is no continuous rim circle. If yours
+drops out, the cut was wrong.
 
 ## Every sample, at a glance
 
