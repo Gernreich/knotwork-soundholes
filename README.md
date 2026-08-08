@@ -4,6 +4,10 @@ Two Node generators that produce cut-ready SVG rosettes for an instrument sound 
 Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`height` — so it
 prints and cuts at real size.
 
+**[Read the writeup](https://gernreich.github.io/knotwork-soundholes/)** · plait:
+[`plait_soundhole.md`](plait_soundhole.md) · knot:
+[`knot_soundhole.md`](knot_soundhole.md)
+
 <p>
 <img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60mm hole and running on into the paler surrounding board at three anchors; the cream shapes are the material that drops out" width="46%">
 <img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60mm hole and running on into the paler surrounding board; the cream shapes are the material that drops out" width="46%">
@@ -15,10 +19,6 @@ cream is what drops out.** The ribbon crosses between the two golds without a br
 because the rosette is not a ring sitting in a hole: it is board material, and that is what
 stops it falling through. The cut files carry no fill, so a browser shows them as thin
 lines on a transparency checkerboard. **[See all thirteen](https://gernreich.github.io/knotwork-soundholes/#every-sample-at-a-glance)**.*
-
-**[Read the writeup](https://gernreich.github.io/knotwork-soundholes/)** · plait:
-[`plait_soundhole.md`](plait_soundhole.md) · knot:
-[`knot_soundhole.md`](knot_soundhole.md)
 
 Built for **[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, where the cutting
 and assembly are shown.
