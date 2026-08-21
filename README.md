@@ -23,6 +23,9 @@ lines on a transparency checkerboard. **[See all thirteen](https://gernreich.git
 Built for **[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, where the cutting
 and assembly are shown.
 
+**[The rest of the build files](https://gernreich.github.io/)** — every instrument,
+generator and tool, indexed.
+
 **[Download everything as a ZIP](https://github.com/Gernreich/knotwork-soundholes/archive/refs/heads/main.zip)** — both generators, both writeups, every cut file.
 
 ## Which generator?
