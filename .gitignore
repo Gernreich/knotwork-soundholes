@@ -3,3 +3,8 @@
 
 # Inkscape "save a copy" / autosave artifacts
 *.[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9]_*.svg
+
+# xTool project files. The laser's own working format, written beside the cut
+# files when a sheet is set up to run: large, binary, and regenerated from the
+# SVG every time. The SVG is the source.
+*.xs
