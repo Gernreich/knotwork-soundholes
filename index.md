@@ -173,10 +173,13 @@ carry a caveat.
   four-lead samples, both at 39mm on the same `AMP=9.75 HW=2.6`. A bigger panel alone does
   not fix their narrow cuts — the ribbon has to scale with it, and
   [the writeup shows the numbers](knot_soundhole.md#variants-at-rhole30-60mm-hole).
-- **`5-lead_4-bight_radius60mm`** is a 120mm hole. Five leads stop resolving below about
-  44mm — the rim gaps weld shut and the region count drops from 21 to 17 — but the size
-  shipped is chosen for the *cut*, not for that floor: the narrowest cut is 0.55mm at
-  44mm and 1.29mm at 60mm.
+- **`5-lead_4-bight_radius60mm`** is a 120mm hole. Scaling `AMP` and `HW` in step with
+  `R_HOLE`, five leads stop resolving below about 44mm — the rim gaps weld shut and the
+  region count drops from 21 to 17 — but the size shipped is chosen for the *cut*, not
+  for that floor: the narrowest cut is 0.55mm at 44mm and 1.29mm at 60mm. Hold `AMP` and
+  `HW` at the shipped `15` and `2.4` while shrinking the panel and you get neither
+  number: 21 regions and a 1.29mm cut all the way down to 35mm, and no geometry at all
+  below 34.3mm, where the centre opening falls under the 1mm the generator insists on.
 - **`9-lead_11-bight_radius300mm`** is a **600mm** hole and **not a sound hole at all** —
   read it as a decorative panel. It satisfies every invariant, but only at that scale and
   only away from the defaults;

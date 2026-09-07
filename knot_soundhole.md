@@ -396,9 +396,12 @@ believing the OK lines.
 - `4-lead_5-bight_knot_radius39mm.svg` — 4 leads × 5 bights at the same `R_HOLE = 39`
   and the same `AMP=9.75 HW=2.6`, so the two four-lead samples differ only in bights
 - `5-lead_4-bight_knot_radius60mm.svg` — 5 leads × 4 bights at `R_HOLE = 60`,
-  `AMP=15 HW=2.4` — a 120mm hole. Five leads resolve from about `R_HOLE = 44` on these
-  proportions, not from 60; the panel is sized for the cut instead, which goes from
-  0.55mm at 44 to **1.29mm** here
+  `AMP=15 HW=2.4` — a 120mm hole. Five leads resolve from about `R_HOLE = 44` when `AMP`
+  and `HW` are scaled in step with `R_HOLE`, not from 60; the panel is sized for the cut
+  instead, which goes from 0.55mm at 44 to **1.29mm** here. Those two figures are on the
+  scaled proportions: leaving `AMP=15 HW=2.4` fixed while you shrink the panel holds the
+  cut at 1.29mm and the region count at 21, and refuses below `R_HOLE = 34.3`, where the
+  centre opening falls under the 1mm minimum
 
 - `2-lead_3-bight_knot_radius30mm.svg` — 2 leads × 3 bights
 - `2-lead_5-bight_knot_radius30mm.svg` — 2 leads × 5 bights
