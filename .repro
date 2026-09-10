@@ -51,3 +51,15 @@ previews/9-lead_11-bight_knot_radius300mm.svg :: !
 previews/8-crossing_plait_radius30mm.svg :: !
 previews/10-crossing_plait_radius30mm.svg :: !
 previews/10-crossing_plait_radius50mm.svg :: !
+
+# --- the published pages ---
+# Claimed here since 2026-09-10, when .repro learned to walk *.html. doc-audit
+# checks these too, by rebuilding and comparing, but it pairs a page with a
+# markdown document of the SAME NAME -- so it is the naming that carries the
+# guarantee there, and a page renamed out from under it would go unwatched.
+# This names the source explicitly instead. index.html is built from index.md,
+# not from README.md, which is the case doc-audit's pairing gets right only
+# because index.md happens to exist.
+index.html :: python3 ../lasermade-tools/md2html.py index.md $OUT
+knot_soundhole.html :: python3 ../lasermade-tools/md2html.py knot_soundhole.md $OUT
+plait_soundhole.html :: python3 ../lasermade-tools/md2html.py plait_soundhole.md $OUT
