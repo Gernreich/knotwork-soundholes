@@ -1,0 +1,53 @@
+# How every shipped SVG in this repository is drawn. Checked by
+# lasermade-tools/repro-svg.py; $OUT is where the file must be written.
+#
+# AMP and HW do NOT scale with R_HOLE, and the filename records only leads,
+# bights and radius -- so for everything drawn at a non-default radius the
+# command was unrecoverable from anything in the repository. On 2026-09-10 the
+# four were recovered by reading each SVG's own description (ribbon width is
+# 2*HW, the cosine amplitude is AMP, the rim overrun is BITE) and verified
+# byte-identical. That is why this file exists.
+
+# --- knots at the 30mm default: AMP 7.5, HW 2.0, BITE 1.5 ---
+2-lead_3-bight_knot_radius30mm.svg :: LEADS=2 BIGHTS=3 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+2-lead_5-bight_knot_radius30mm.svg :: LEADS=2 BIGHTS=5 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+2-lead_7-bight_knot_radius30mm.svg :: LEADS=2 BIGHTS=7 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+3-lead_2-bight_knot_radius30mm.svg :: LEADS=3 BIGHTS=2 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+3-lead_4-bight_knot_radius30mm.svg :: LEADS=3 BIGHTS=4 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+3-lead_5-bight_knot_radius30mm.svg :: LEADS=3 BIGHTS=5 R_HOLE=30 OUT=$OUT node knot_soundhole.js
+
+# --- the four whose parameters were recorded nowhere ---
+# above three leads the ribbon must thin and AMP/HW has to grow with LEADS:
+# about 3.75 at four leads, 6.25 at five, 15.6 at nine.
+4-lead_3-bight_knot_radius39mm.svg :: LEADS=4 BIGHTS=3 R_HOLE=39 AMP=9.75 HW=2.6 BITE=1.5 OUT=$OUT node knot_soundhole.js
+4-lead_5-bight_knot_radius39mm.svg :: LEADS=4 BIGHTS=5 R_HOLE=39 AMP=9.75 HW=2.6 BITE=1.5 OUT=$OUT node knot_soundhole.js
+5-lead_4-bight_knot_radius60mm.svg :: LEADS=5 BIGHTS=4 R_HOLE=60 AMP=15 HW=2.4 BITE=1.5 OUT=$OUT node knot_soundhole.js
+# ~40s: nine leads over eleven bights is 99 crossings to resolve.
+9-lead_11-bight_knot_radius300mm.svg :: LEADS=9 BIGHTS=11 R_HOLE=300 AMP=78 HW=5 BITE=1.5 OUT=$OUT node knot_soundhole.js
+
+# --- plaits: N is lobes per ribbon, so 2N crossings ---
+8-crossing_plait_radius30mm.svg :: N=4 R_HOLE=30 OUT=$OUT node plait_soundhole.js
+10-crossing_plait_radius30mm.svg :: N=5 R_HOLE=30 OUT=$OUT node plait_soundhole.js
+# the one plait whose AMP/HW/BITE were in a code comment rather than lost
+10-crossing_plait_radius50mm.svg :: N=5 R_HOLE=50 AMP=10.8 HW=3.3 BITE=2.5 OUT=$OUT node plait_soundhole.js
+
+# --- the previews ship without a generator ---
+# Display renderings only, embedded in README.md and index.md; nothing here
+# cuts them. They are FILLED even-odd in gold and cream, which is not what
+# lasermade-tools/make-preview.py draws -- that thickens the cut stroke -- and
+# no script in either repository produces them. Whatever drew them is gone.
+# Recorded rather than regenerated: replacing them means choosing a new look for
+# the pictures on the front page, which is the author's call and not a gate's.
+previews/2-lead_3-bight_knot_radius30mm.svg :: !
+previews/2-lead_5-bight_knot_radius30mm.svg :: !
+previews/2-lead_7-bight_knot_radius30mm.svg :: !
+previews/3-lead_2-bight_knot_radius30mm.svg :: !
+previews/3-lead_4-bight_knot_radius30mm.svg :: !
+previews/3-lead_5-bight_knot_radius30mm.svg :: !
+previews/4-lead_3-bight_knot_radius39mm.svg :: !
+previews/4-lead_5-bight_knot_radius39mm.svg :: !
+previews/5-lead_4-bight_knot_radius60mm.svg :: !
+previews/9-lead_11-bight_knot_radius300mm.svg :: !
+previews/8-crossing_plait_radius30mm.svg :: !
+previews/10-crossing_plait_radius30mm.svg :: !
+previews/10-crossing_plait_radius50mm.svg :: !
