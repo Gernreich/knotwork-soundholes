@@ -492,8 +492,18 @@ if (OUT) fs.writeFileSync(OUT, svg);
 const discArea = Math.PI * R_HOLE * R_HOLE;
 const signed = simp.map(shoe);
 console.log('-- validation --');
+// AGAINST THE PREDICTION, not just against itself -- the same fault the sibling
+// knot generator carried, and here there was no prediction printed at all.
+// Contours against flood regions is two measurements of one drawing agreeing;
+// it holds whenever the drawing is self-consistent, whether or not it is the
+// plait that was asked for. A plait is the (2, 2N) row of the knot family, so
+// its region count is L*B+1 = 4N+1: one centre, 2N lenses between the passes
+// and 2N gaps at the rim.
+const wantRegions = 4 * N + 1;
+const regionsOK = simp.length === nreg && nreg === wantRegions;
 console.log('closed contours     :', simp.length, ' flood regions:', nreg,
-            simp.length === nreg ? 'OK' : '*** MISMATCH ***');
+            ' expected 4N+1 =', wantRegions,
+            regionsOK ? 'OK' : '*** MISMATCH ***');
 console.log('unclosed chains     :', openChains, openChains === 0 ? 'OK' : '*** LEAK ***');
 console.log('slivers welded shut :', welded,
             '(< ' + MIN_FEATURE + 'mm, unmanufacturable)');
@@ -512,10 +522,28 @@ console.log('open area (mm^2)    :', openArea.toFixed(2));
 console.log('plain hole area     :', discArea.toFixed(2));
 console.log('open fraction       :', (openArea / discArea * 100).toFixed(1) + '%');
 console.log('equiv. round hole dia (mm):', (2 * Math.sqrt(openArea / Math.PI)).toFixed(2));
-console.log('engrave polylines   :', engrave.length);
+// Two edges of the over pass at each of the 2N crossings, so 4N. The count was
+// printed bare, with nothing to compare it to.
+console.log('engrave polylines   :', engrave.length, ' expected 4N =', 4 * N,
+            engrave.length === 4 * N ? 'OK' : 'CHECK');
 console.log('rim continuations   :', rimLines.length, ' (decorative; the ribbons crossing their anchors)');
 console.log('ribbon width (mm)   :', 2 * HW);
-console.log('rim anchors         :', 2 * N);
+// MEASURED, not restated. This printed 2*N, which is the prediction -- a line
+// that cannot disagree with itself. An anchor is one excursion of a ribbon's
+// outer edge past the rim, so count the contiguous runs of sample standing
+// outside R_HOLE, on both ribbons. B is A rotated by pi/N, and sin(N*t - pi) is
+// -sin(N*t), which is the second radius below.
+let anchors = 0;
+{
+  const outside = r => r + HW > R_HOLE;
+  for (const sign of [1, -1]) {
+    const r = i => R_MID + sign * AMP * Math.sin(N * 2 * Math.PI * i / M);
+    for (let i = 0; i < M; i++)
+      if (outside(r(i)) && !outside(r((i + M - 1) % M))) anchors++;
+  }
+}
+console.log('rim anchors         :', anchors, ' expected 2N =', 2 * N,
+            anchors === 2 * N ? 'OK' : 'MISMATCH');
 // ------------------------------------------- does it all fit on the page?
 // Every other line in this report describes geometry the generator computed; none
 // of them look at the document it gets written into. On 2026-08-06 the rim
@@ -538,6 +566,25 @@ console.log('content vs canvas   :', maxAbs.toFixed(2) + 'mm of', halfCanvas.toF
             fits ? `OK (${(halfCanvas - maxAbs).toFixed(2)}mm margin)`
                  : `CLIPPED by ${(maxAbs - halfCanvas).toFixed(2)}mm -- raise PAD`);
 console.log('cut path bytes      :', cutD.length);
+
+// ------------------------------------------- and say so in the exit status
+// The report was written to be read and nothing acted on it: the process exited
+// 0 whatever it said, so anything that RAN this generator rather than reading
+// its output could not tell a good plait from a broken one.
+const invariants = [
+  ['regions are 4N+1',        regionsOK],
+  ['engrave lines are 4N',    engrave.length === 4 * N],
+  ['rim anchors are 2N',      anchors === 2 * N],
+  ['no unclosed chain',       openChains === 0],
+  ['nothing falls out',       signed.every(a => a > 0)],
+  ['content fits the canvas', fits],
+];
+const broken = invariants.filter(([, ok]) => !ok).map(([what]) => what);
+if (broken.length) {
+  console.log('\n*** ' + broken.length + ' invariant(s) failed: ' + broken.join('; '));
+  console.log('    These pin the topology. Do not cut a plait that fails one.');
+}
+process.exitCode = broken.length ? 1 : 0;
 
 if (process.env.DIAG) {
   const info = [];

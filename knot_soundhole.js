@@ -60,10 +60,16 @@
 //   It degrades above that, and the limit is manufacturability rather than
 //   topology. As L rises the lens regions between passes shrink below
 //   MIN_FEATURE and are welded shut, so they never become separate cut
-//   regions. At (4,5) the region count falls short of L*B+1 by exactly the
-//   welded lenses; by (5,3) the crossing detector loses them too. Reducing
-//   AMP and HW does not rescue it -- the passes are close because there are
-//   five of them in one annulus, not because the ribbon is fat.
+//   regions. (5,3) is where that shows: 13 regions against a predicted 16, and
+//   the crossing detector loses them too, finding 4 of 12.
+//
+//   THE (4,5) CLAIM THAT USED TO STAND HERE WAS WRONG. It said the region count
+//   there falls short by the welded lenses. It does not: (4,5) gives 21 of 21
+//   at the defaults and again at the shipped R_HOLE=39 with AMP and HW brought
+//   down, and so do (5,4) and (9,11). All ten shipped knots meet every
+//   invariant. The claim survived because nothing compared the region count
+//   with L*B+1 -- the line printed the two measured counts against each other
+//   and said OK -- so the prose could not be contradicted by a run.
 //
 //   JUDGE BY THE REGION COUNT, NOT THE SLIVER COUNT. Slivers is an artifact
 //   of where the sampling grid falls: the trefoil reports 8 of them at NG=700
@@ -638,8 +644,19 @@ if (OUT) fs.writeFileSync(OUT, svg);
 const discArea = Math.PI * R_HOLE * R_HOLE;
 const signed = simp.map(shoe);
 console.log('-- validation --');
+// AGAINST THE PREDICTION, not just against itself. This compared the contour
+// count with the flood count and stopped there -- two measurements of the same
+// drawing, which agree whenever the drawing is self-consistent whether or not
+// it is the knot that was asked for. The header lists L*B+1 as an invariant and
+// says it is checked in the report; it was printed and never checked. At
+// (5,3) the count comes out 13 against a predicted 16, three lenses having
+// welded shut below the cutting floor, and the line read "13 flood regions: 13
+// OK".
+const wantRegions = L * B + 1;
+const regionsOK = simp.length === nreg && nreg === wantRegions;
 console.log('closed contours     :', simp.length, ' flood regions:', nreg,
-            simp.length === nreg ? 'OK' : '*** MISMATCH ***');
+            ' expected L*B+1 =', wantRegions,
+            regionsOK ? 'OK' : '*** MISMATCH ***');
 console.log('unclosed chains     :', openChains, openChains === 0 ? 'OK' : '*** LEAK ***');
 console.log('slivers welded shut :', welded,
             '(< ' + MIN_FEATURE + 'mm, unmanufacturable)');
@@ -668,7 +685,18 @@ console.log('engrave polylines   :', engrave.length, ' expected 2*B*(L-1) =', 2 
             engrave.length === 2 * B * (L - 1) ? 'OK' : 'CHECK');
 console.log('rim continuations   :', rimLines.length, ' (decorative; the ribbon crossing its anchors)');
 console.log('ribbon width (mm)   :', 2 * HW);
-console.log('rim anchors         :', B);
+// MEASURED, not restated. This printed B, which is the prediction: a line that
+// cannot disagree with itself is not a check, and the header counts it as one
+// of the four. An anchor is one excursion of the ribbon's outer edge past the
+// rim, so count the contiguous runs of centreline sample that stand outside
+// R_HOLE. Cyclic, because the strand closes.
+let anchors = 0;
+{
+  const outside = i => Math.hypot(cx[i], cy[i]) + HW > R_HOLE;
+  for (let i = 0; i < M; i++) if (outside(i) && !outside((i + M - 1) % M)) anchors++;
+}
+console.log('rim anchors         :', anchors, ' expected B =', B,
+            anchors === B ? 'OK' : 'MISMATCH');
 // ------------------------------------------- does it all fit on the page?
 // Every other line in this report describes geometry the generator computed; none
 // of them look at the document it gets written into. On 2026-08-06 the rim
@@ -691,6 +719,28 @@ console.log('content vs canvas   :', maxAbs.toFixed(2) + 'mm of', halfCanvas.toF
             fits ? `OK (${(halfCanvas - maxAbs).toFixed(2)}mm margin)`
                  : `CLIPPED by ${(maxAbs - halfCanvas).toFixed(2)}mm -- raise PAD`);
 console.log('cut path bytes      :', cutD.length);
+
+// ------------------------------------------- and say so in the exit status
+// Every one of these was reported and none of them was acted on: the process
+// exited 0 whatever the report said, so a knot whose weave is wrong looked
+// exactly like a good one to anything that ran the generator rather than read
+// its output. (5,3) prints two MISMATCH lines and used to exit 0.
+const invariants = [
+  ['regions are L*B+1',          regionsOK],
+  ['crossings are B*(L-1)',      crossings === B * (L - 1)],
+  ['engrave lines are 2*B*(L-1)', engrave.length === 2 * B * (L - 1)],
+  ['rim anchors are B',          anchors === B],
+  ['the weave alternates',       weaveOK],
+  ['no unclosed chain',          openChains === 0],
+  ['nothing falls out',          signed.every(a => a > 0)],
+  ['content fits the canvas',    fits],
+];
+const broken = invariants.filter(([, ok]) => !ok).map(([what]) => what);
+if (broken.length) {
+  console.log('\n*** ' + broken.length + ' invariant(s) failed: ' + broken.join('; '));
+  console.log('    These pin the topology. Do not cut a knot that fails one.');
+}
+process.exitCode = broken.length ? 1 : 0;
 
 if (process.env.DIAG) {
   const info = [];
