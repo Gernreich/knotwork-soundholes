@@ -91,6 +91,7 @@ couple of millimetres.
 | `knot_soundhole.js` · `.md` | single-strand knot generator, any coprime leads × bights |
 | `*-bight_knot_radius*.svg` | cut-ready knot samples, named leads × bights × radius |
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
+| `preview.js` | draws `previews/` from the cut files: the cut layer filled in gold and cream |
 | `previews/` | display renderings of every sample — **not** cut files |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
