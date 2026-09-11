@@ -34,23 +34,27 @@
 # --- the previews ship without a generator ---
 # Display renderings only, embedded in README.md and index.md; nothing here
 # cuts them. They are FILLED even-odd in gold and cream, which is not what
-# lasermade-tools/make-preview.py draws -- that thickens the cut stroke -- and
-# no script in either repository produces them. Whatever drew them is gone.
-# Recorded rather than regenerated: replacing them means choosing a new look for
-# the pictures on the front page, which is the author's call and not a gate's.
-previews/2-lead_3-bight_knot_radius30mm.svg :: !
-previews/2-lead_5-bight_knot_radius30mm.svg :: !
-previews/2-lead_7-bight_knot_radius30mm.svg :: !
-previews/3-lead_2-bight_knot_radius30mm.svg :: !
-previews/3-lead_4-bight_knot_radius30mm.svg :: !
-previews/3-lead_5-bight_knot_radius30mm.svg :: !
-previews/4-lead_3-bight_knot_radius39mm.svg :: !
-previews/4-lead_5-bight_knot_radius39mm.svg :: !
-previews/5-lead_4-bight_knot_radius60mm.svg :: !
-previews/9-lead_11-bight_knot_radius300mm.svg :: !
-previews/8-crossing_plait_radius30mm.svg :: !
-previews/10-crossing_plait_radius30mm.svg :: !
-previews/10-crossing_plait_radius50mm.svg :: !
+# lasermade-tools/make-preview.py draws -- that thickens the cut stroke.
+#
+# They carried a "!" until 2026-09-10, meaning "shipped without a generator, we
+# know". That was the wrong mark for them: an acknowledged exception is the right
+# answer for a drawing made by hand, and every one of these is a mechanical
+# transform of a file that is itself generated. preview.js does it now, and all
+# thirteen come out BYTE-IDENTICAL to what was already committed -- so nothing
+# on the front page changed, and thirteen artefacts stopped being unwatched.
+previews/2-lead_3-bight_knot_radius30mm.svg :: node preview.js 2-lead_3-bight_knot_radius30mm.svg $OUT
+previews/2-lead_5-bight_knot_radius30mm.svg :: node preview.js 2-lead_5-bight_knot_radius30mm.svg $OUT
+previews/2-lead_7-bight_knot_radius30mm.svg :: node preview.js 2-lead_7-bight_knot_radius30mm.svg $OUT
+previews/3-lead_2-bight_knot_radius30mm.svg :: node preview.js 3-lead_2-bight_knot_radius30mm.svg $OUT
+previews/3-lead_4-bight_knot_radius30mm.svg :: node preview.js 3-lead_4-bight_knot_radius30mm.svg $OUT
+previews/3-lead_5-bight_knot_radius30mm.svg :: node preview.js 3-lead_5-bight_knot_radius30mm.svg $OUT
+previews/4-lead_3-bight_knot_radius39mm.svg :: node preview.js 4-lead_3-bight_knot_radius39mm.svg $OUT
+previews/4-lead_5-bight_knot_radius39mm.svg :: node preview.js 4-lead_5-bight_knot_radius39mm.svg $OUT
+previews/5-lead_4-bight_knot_radius60mm.svg :: node preview.js 5-lead_4-bight_knot_radius60mm.svg $OUT
+previews/9-lead_11-bight_knot_radius300mm.svg :: node preview.js 9-lead_11-bight_knot_radius300mm.svg $OUT
+previews/8-crossing_plait_radius30mm.svg :: node preview.js 8-crossing_plait_radius30mm.svg $OUT
+previews/10-crossing_plait_radius30mm.svg :: node preview.js 10-crossing_plait_radius30mm.svg $OUT
+previews/10-crossing_plait_radius50mm.svg :: node preview.js 10-crossing_plait_radius50mm.svg $OUT
 
 # --- the published pages ---
 # Claimed here since 2026-09-10, when .repro learned to walk *.html. doc-audit
