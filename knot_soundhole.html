@@ -36,6 +36,9 @@ h3{font-size:1.02rem;font-weight:650;margin:1.7em 0 .45em}
 p{margin:.85em 0}
 ul,ol{margin:.85em 0;padding-left:1.35em}
 li{margin:.3em 0}
+/* A list with blank lines between its items is "loose", and pandoc wraps each item
+   in a <p> as GitHub does. These pages were set tight before pandoc, so they stay so. */
+li>p{margin:0}
 hr{border:0;border-top:1px solid var(--line);margin:2.6em 0}
 figure{margin:1.6em 0}
 /* A paragraph holding two or more images is a gallery. Left to inline layout they
@@ -91,7 +94,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <body>
 <button class="tog" type="button">theme</button>
 <div class="wrap">
-<nav><b>Contents</b><a class="l1" href="#knot-sound-hole--any-coprime-leads--bights">Knot Sound Hole — any coprime leads × bights</a><a class="l2" href="#leads-and-bights-and-why-they-must-be-coprime">Leads and bights, and why they must be coprime</a><a class="l2" href="#the-structural-constraint">The structural constraint</a><a class="l2" href="#usage">Usage</a><a class="l2" href="#variants-at-rhole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</a><a class="l2" href="#invariants--these-pin-the-topology">Invariants — these pin the topology</a><a class="l2" href="#the-tested-envelope-and-where-it-stops">The tested envelope, and where it stops</a><a class="l2" href="#output-layers">Output layers</a><a class="l2" href="#read-the-validation-report">Read the validation report</a><a class="l2" href="#how-the-overunder-is-decided">How the over/under is decided</a><a class="l2" href="#run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</a><a class="l2" href="#traps-already-sprung-here">Traps already sprung here</a><a class="l2" href="#caveats">Caveats</a><a class="l2" href="#generated-files">Generated files</a></nav>
+<nav><b>Contents</b><a class="l1" href="#knot-sound-hole--any-coprime-leads--bights">Knot Sound Hole — any coprime leads × bights</a><a class="l2" href="#leads-and-bights-and-why-they-must-be-coprime">Leads and bights, and why they must be coprime</a><a class="l2" href="#the-structural-constraint">The structural constraint</a><a class="l2" href="#usage">Usage</a><a class="l2" href="#variants-at-r_hole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</a><a class="l2" href="#invariants--these-pin-the-topology">Invariants — these pin the topology</a><a class="l2" href="#the-tested-envelope-and-where-it-stops">The tested envelope, and where it stops</a><a class="l2" href="#output-layers">Output layers</a><a class="l2" href="#read-the-validation-report">Read the validation report</a><a class="l2" href="#how-the-overunder-is-decided">How the over/under is decided</a><a class="l2" href="#run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</a><a class="l2" href="#traps-already-sprung-here">Traps already sprung here</a><a class="l2" href="#caveats">Caveats</a><a class="l2" href="#generated-files">Generated files</a></nav>
 <main>
 <h1 id="knot-sound-hole--any-coprime-leads--bights">Knot Sound Hole — any coprime leads × bights</h1>
 <p>Generator: <code>knot_soundhole.js</code></p>
@@ -103,11 +106,46 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <h2 id="leads-and-bights-and-why-they-must-be-coprime">Leads and bights, and why they must be coprime</h2>
 <p>The strand closes into <strong>one</strong> piece iff <code>gcd(L, B) = 1</code>. That is not a convention, it is what the curve does: <code>gcd(L, B)</code> counts the separate closed pieces you end up with. Ask for 3 leads and 6 bights and you get three loops lying alongside each other, with no single ribbon to trace and no interlace to alternate over. The generator refuses, and lists the coprime bight counts near the leads you asked for.</p>
 <p>The plait and the generator this replaced are both the <code>L = 2</code> row of one table:</p>
-<div class='tw'><table><thead><tr><th>generator</th><th>leads</th><th>bights</th><th><code>gcd</code></th><th>strands</th></tr></thead><tbody><tr><td>the retired knot generator</td><td>2</td><td><code>Q</code>, odd</td><td>1</td><td>1 — a knot</td></tr><tr><td><a href="plait_soundhole.html">plait</a></td><td>2</td><td><code>2N</code>, even</td><td>2</td><td>2 — a plait</td></tr><tr><td>this one</td><td>any <code>L</code></td><td>any <code>B</code> coprime to <code>L</code></td><td>1</td><td>1</td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>generator</th>
+<th>leads</th>
+<th>bights</th>
+<th><code>gcd</code></th>
+<th>strands</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the retired knot generator</td>
+<td>2</td>
+<td><code>Q</code>, odd</td>
+<td>1</td>
+<td>1 — a knot</td>
+</tr>
+<tr>
+<td><a href="plait_soundhole.html">plait</a></td>
+<td>2</td>
+<td><code>2N</code>, even</td>
+<td>2</td>
+<td>2 — a plait</td>
+</tr>
+<tr>
+<td>this one</td>
+<td>any <code>L</code></td>
+<td>any <code>B</code> coprime to <code>L</code></td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="the-structural-constraint">The structural constraint</h2>
 <p>Same as both companions. This is a <strong>cut-out</strong>: the removed material is the open area and the ribbon is what stays. A ribbon ring floating inside a round hole would drop out when the last cut closes, so the ribbon peaks deliberately overrun the rim by <code>BITE</code> mm and fuse the rosette into the soundboard at <code>B</code> anchor points. <strong>There is no continuous rim circle in the cut layer</strong> — the outer boundary is <code>B</code> arcs. That is correct; adding a full circle drops the rosette on the floor.</p>
 <h2 id="usage">Usage</h2>
-<pre><code>node knot_soundhole.js --help                   # every setting and its default
+<pre class="bash"><code>node knot_soundhole.js --help                   # every setting and its default
 node knot_soundhole.js                          # report only, writes nothing
 LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg node knot_soundhole.js
 LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg node knot_soundhole.js
@@ -117,7 +155,74 @@ DIAG=1 node knot_soundhole.js                   # per-region dump</code></pre>
 <p><strong>The file that lands is not ready for the laser yet.</strong> Its geometry is, but it carries two layers and only one of them is a cut. See <a href="#output-layers">Output layers</a> before you send it: the blue <code>engrave</code> lines must be given anything other than a cut.</p>
 <p><code>--help</code> prints this same table, so you do not need the document to hand.</p>
 <p><strong><code>OUT</code> overwrites without asking</strong> — there is no force flag and no prompt. The two <code>OUT=</code> lines above name shipped sample files, so running them in this directory rewrites those files; at these parameters the bytes come back identical, but change a number and reuse the same command line and you have replaced a sample with different geometry and nothing will have said so. Write somewhere else while experimenting. The companion CLI in the living-hinge repository refuses by default, so the habits do not transfer.</p>
-<div class='tw'><table><thead><tr><th>Var</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>LEADS</code></td><td><code>3</code></td><td>times round before the strand closes</td></tr><tr><td><code>BIGHTS</code></td><td><code>5</code></td><td>scallops at the rim; must be coprime to <code>LEADS</code></td></tr><tr><td><code>R_HOLE</code></td><td><code>30</code></td><td>sound hole radius, mm</td></tr><tr><td><code>AMP</code></td><td><code>7.5</code></td><td>radial swing of the weave</td></tr><tr><td><code>HW</code></td><td><code>2.0</code></td><td>ribbon half-width → ribbon is <code>2*HW</code> mm wide</td></tr><tr><td><code>BITE</code></td><td><code>1.5</code></td><td>rim overrun; this is what anchors the rosette</td></tr><tr><td><code>NG</code></td><td><code>1400</code></td><td>sampling grid resolution</td></tr><tr><td><code>MIN_FEATURE</code></td><td><code>0.25</code></td><td>gaps narrower than this are welded to solid material</td></tr><tr><td><code>OUT</code></td><td>unset</td><td>output path — <strong>nothing is written unless set</strong></td></tr><tr><td><code>SELFTEST</code></td><td>unset</td><td>verify spatial hash against brute force, then exit</td></tr><tr><td><code>DIAG</code></td><td>unset</td><td>verbose per-region report</td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Var</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LEADS</code></td>
+<td><code>3</code></td>
+<td>times round before the strand closes</td>
+</tr>
+<tr>
+<td><code>BIGHTS</code></td>
+<td><code>5</code></td>
+<td>scallops at the rim; must be coprime to <code>LEADS</code></td>
+</tr>
+<tr>
+<td><code>R_HOLE</code></td>
+<td><code>30</code></td>
+<td>sound hole radius, mm</td>
+</tr>
+<tr>
+<td><code>AMP</code></td>
+<td><code>7.5</code></td>
+<td>radial swing of the weave</td>
+</tr>
+<tr>
+<td><code>HW</code></td>
+<td><code>2.0</code></td>
+<td>ribbon half-width → ribbon is <code>2*HW</code> mm wide</td>
+</tr>
+<tr>
+<td><code>BITE</code></td>
+<td><code>1.5</code></td>
+<td>rim overrun; this is what anchors the rosette</td>
+</tr>
+<tr>
+<td><code>NG</code></td>
+<td><code>1400</code></td>
+<td>sampling grid resolution</td>
+</tr>
+<tr>
+<td><code>MIN_FEATURE</code></td>
+<td><code>0.25</code></td>
+<td>gaps narrower than this are welded to solid material</td>
+</tr>
+<tr>
+<td><code>OUT</code></td>
+<td>unset</td>
+<td>output path — <strong>nothing is written unless set</strong></td>
+</tr>
+<tr>
+<td><code>SELFTEST</code></td>
+<td>unset</td>
+<td>verify spatial hash against brute force, then exit</td>
+</tr>
+<tr>
+<td><code>DIAG</code></td>
+<td>unset</td>
+<td>verbose per-region report</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Neither <code>AMP</code> nor <code>HW</code> auto-scales with <code>R_HOLE</code>; roughly <code>AMP ≈ 0.25*R_HOLE</code> and <code>HW ≈ 0.067*R_HOLE</code>. More leads pack more ribbon into the same annulus, so expect to reduce both as <code>LEADS</code> goes up — though see the envelope below, because that is not enough to rescue the crowded cases.</p>
 <p><code>Q</code> is not a setting. It was the bight count of the retired two-lead generator, and because ignoring it would quietly hand back the defaults instead — <code>Q=5</code> giving a 3 × 5, not a cinquefoil — it is refused with the <code>LEADS=2 BIGHTS=5</code> form to type instead.</p>
 <h3 id="the-centre-opening-is-derived-and-it-can-abort-the-run">The centre opening is derived, and it can abort the run</h3>
@@ -126,11 +231,125 @@ DIAG=1 node knot_soundhole.js                   # per-region dump</code></pre>
 <p>This one depends on <code>AMP</code>, <code>HW</code>, <code>BITE</code> and <code>R_HOLE</code> alone — leads and bights do not enter it.</p>
 <h3 id="sampling-and-the-error-floor">Sampling and the error floor</h3>
 <p>The centreline is sampled at a fixed <code>M = 20000</code> points — not exposed as a variable — and distance is measured to those samples, so it <strong>overestimates</strong> by up to half the sample spacing. Those <code>M</code> points now cover <code>L</code> turns rather than two, so the spacing grows with leads as well as with bights and the <code>AMP*B/L</code> radial derivative. It stays an order of magnitude under the 0.25mm <code>MIN_FEATURE</code> floor across the tested range, but the margin narrows as either number rises — and long before sampling becomes the limit, <code>MIN_FEATURE</code> does. See the envelope below.</p>
-<h2 id="variants-at-rhole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</h2>
-<div class='tw'><table><thead><tr><th><code>L</code> × <code>B</code></th><th>Regions</th><th>Crossings</th><th>Anchors</th><th>Engrave</th><th>Open area</th><th>Equiv. plain hole</th><th>Narrowest cut</th></tr></thead><tbody><tr><td>2 × 3</td><td>7</td><td>3</td><td>3</td><td>6</td><td>63.3%</td><td>47.73mm</td><td>5.51mm</td></tr><tr><td>3 × 2</td><td>7</td><td>4</td><td>2</td><td>8</td><td>50.7%</td><td>42.72mm</td><td>2.21mm</td></tr><tr><td><strong>3 × 4</strong></td><td><strong>13</strong></td><td><strong>8</strong></td><td><strong>4</strong></td><td><strong>16</strong></td><td><strong>49.2%</strong></td><td><strong>42.10mm</strong></td><td><strong>2.07mm</strong></td></tr><tr><td><strong>3 × 5</strong></td><td><strong>16</strong></td><td><strong>10</strong></td><td><strong>5</strong></td><td><strong>20</strong></td><td><strong>48.2%</strong></td><td><strong>41.64mm</strong></td><td><strong>2.01mm</strong></td></tr><tr><td>4 × 3</td><td>13</td><td>9</td><td>3</td><td>18</td><td>39.4%</td><td>37.66mm</td><td><strong>0.66mm</strong></td></tr><tr><td>4 × 5</td><td>21</td><td>15</td><td>5</td><td>30</td><td>38.2%</td><td>37.07mm</td><td><strong>0.61mm</strong></td></tr></tbody></table></div>
+<h2 id="variants-at-r_hole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</h2>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th><code>L</code> × <code>B</code></th>
+<th>Regions</th>
+<th>Crossings</th>
+<th>Anchors</th>
+<th>Engrave</th>
+<th>Open area</th>
+<th>Equiv. plain hole</th>
+<th>Narrowest cut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 × 3</td>
+<td>7</td>
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>63.3%</td>
+<td>47.73mm</td>
+<td>5.51mm</td>
+</tr>
+<tr>
+<td>3 × 2</td>
+<td>7</td>
+<td>4</td>
+<td>2</td>
+<td>8</td>
+<td>50.7%</td>
+<td>42.72mm</td>
+<td>2.21mm</td>
+</tr>
+<tr>
+<td><strong>3 × 4</strong></td>
+<td><strong>13</strong></td>
+<td><strong>8</strong></td>
+<td><strong>4</strong></td>
+<td><strong>16</strong></td>
+<td><strong>49.2%</strong></td>
+<td><strong>42.10mm</strong></td>
+<td><strong>2.07mm</strong></td>
+</tr>
+<tr>
+<td><strong>3 × 5</strong></td>
+<td><strong>16</strong></td>
+<td><strong>10</strong></td>
+<td><strong>5</strong></td>
+<td><strong>20</strong></td>
+<td><strong>48.2%</strong></td>
+<td><strong>41.64mm</strong></td>
+<td><strong>2.01mm</strong></td>
+</tr>
+<tr>
+<td>4 × 3</td>
+<td>13</td>
+<td>9</td>
+<td>3</td>
+<td>18</td>
+<td>39.4%</td>
+<td>37.66mm</td>
+<td><strong>0.66mm</strong></td>
+</tr>
+<tr>
+<td>4 × 5</td>
+<td>21</td>
+<td>15</td>
+<td>5</td>
+<td>30</td>
+<td>38.2%</td>
+<td>37.07mm</td>
+<td><strong>0.61mm</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><code>2 × 3</code> is the trefoil, reproduced here to show the generalisation is faithful. <code>4 × 3</code> and <code>4 × 5</code> are included as warnings as much as options: both satisfy every invariant, but a 0.66mm — or 0.61mm — narrowest cut is delicate against a kerf of 0.1–0.2mm. Neither ships at this size; both ship at 39mm for the reason below.</p>
 <p><strong>A bigger panel alone does not fix that</strong> — and this is the trap the rules of thumb exist to prevent. The same <code>4 × 3</code> at <code>R_HOLE = 39</code> with default tuning gives 0.67mm, essentially unchanged, because the ribbon did not grow with the panel and the weave got relatively tighter. Scale <code>AMP</code> and <code>HW</code> with the radius and the same knot at the same size gives <strong>1.27mm</strong>, near enough double. That is what the shipped <code>4-lead_3-bight_knot_radius39mm.svg</code> uses.</p>
-<div class='tw'><table><thead><tr><th><code>R_HOLE</code></th><th><code>AMP</code> · <code>HW</code></th><th>Narrowest</th><th>Open</th></tr></thead><tbody><tr><td>30</td><td>7.5 · 2.0</td><td>0.66mm</td><td>39.4%</td></tr><tr><td>39</td><td>7.5 · 2.0</td><td>0.67mm</td><td>49.4%</td></tr><tr><td><strong>39</strong></td><td><strong>9.75 · 2.6</strong></td><td><strong>1.27mm</strong></td><td><strong>38.6%</strong></td></tr><tr><td>39</td><td>11 · 1.8</td><td>1.64mm</td><td>55.4%</td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th><code>R_HOLE</code></th>
+<th><code>AMP</code> · <code>HW</code></th>
+<th>Narrowest</th>
+<th>Open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>7.5 · 2.0</td>
+<td>0.66mm</td>
+<td>39.4%</td>
+</tr>
+<tr>
+<td>39</td>
+<td>7.5 · 2.0</td>
+<td>0.67mm</td>
+<td>49.4%</td>
+</tr>
+<tr>
+<td><strong>39</strong></td>
+<td><strong>9.75 · 2.6</strong></td>
+<td><strong>1.27mm</strong></td>
+<td><strong>38.6%</strong></td>
+</tr>
+<tr>
+<td>39</td>
+<td>11 · 1.8</td>
+<td>1.64mm</td>
+<td>55.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>All four satisfy every invariant. The last is the most open and cuts widest, on a 3.6mm ribbon — thinner material spanning more air. The shipped file takes the middle, as the sturdiest of them.</p>
 <p><code>4 × 5</code> is shipped at the same 39mm on the same <code>AMP=9.75 HW=2.6</code>, and lands at <strong>1.25mm</strong> — within 0.02mm of what <code>4 × 3</code> gets from that tuning, despite carrying six more crossings. Adding bights at fixed leads costs the narrowest cut very little here; it is the <em>lead</em> count that drives it down.</p>
 <p>More leads means less open area, because more ribbon is packed into the same ring.</p>
@@ -144,20 +363,95 @@ engrave lines == 2*B*(L-1)   (two edges of the over pass per crossing)</code></p
 <p>Verified against every invariant at <code>(2,3) (2,5) (2,9) (3,2) (3,4) (3,5) (4,3)</code> and, on larger panels, <code>(5,4)</code> and <code>(9,11)</code>. <code>(2,3)</code> reproduced the retired two-lead generator exactly — identical validation block, areas and sliver count, only the report wording differs. That equivalence is the evidence the generalisation is faithful rather than plausible.</p>
 <p><strong>The limit is manufacturability, not topology</strong>, and it is worth being precise about what that means, because it is easy to mistake for a ceiling on leads. As leads rise, two things shrink: the lens regions between passes, and the rim gaps between anchors. Either falling under <code>MIN_FEATURE</code> gets it welded shut, and a welded region is one the count never sees.</p>
 <p>At a fixed 30mm panel that looks like a hard stop. <code>(5,2)</code> reports 2 crossings against 8; <code>(7,2)</code> reports zero at default tuning; <code>(5,4)</code> caps at 17 regions against 21. But the shortfall is almost always exactly <code>B</code> — the rim gaps — and those scale with the panel:</p>
-<ul><li><code>(5,4)</code> is four regions short at 30mm and <strong>exact at 60mm</strong>.</li><li><code>(9,11)</code> is eleven short at 100mm and <strong>exact at 300mm</strong>.</li></ul>
+<ul>
+<li><code>(5,4)</code> is four regions short at 30mm and <strong>exact at 60mm</strong>.</li>
+<li><code>(9,11)</code> is eleven short at 100mm and <strong>exact at 300mm</strong>.</li>
+</ul>
 <p>So five leads and nine leads both work; they simply do not fit in a 30mm hole. What the tested envelope really describes is a relationship between lead count and panel size, not a maximum lead count.</p>
 <p>Two things still need attention as leads rise:</p>
-<ul><li><strong>The ribbon must thin.</strong> <code>L</code> passes need room to separate, so the <code>AMP/HW</code> ratio has to grow with <code>L</code>: the three shipped off-default files sit at <strong>3.8</strong> at four leads, <strong>6.3</strong> at five and <strong>15.6</strong> at nine. Setting <code>AMP = L × HW</code> is not enough on its own — at nine leads that is <code>AMP = 45</code> against a working 78, and it returns 80 regions against 100. The <code>AMP ≈ 0.25*R_HOLE</code> rule of thumb above is for two or three leads and gets crowded beyond that.</li><li><strong>The shortfall is not always <code>B</code>.</strong> It is exactly <code>B</code> at five leads — <code>(5,3)</code> short by 3, <code>(5,4)</code> by 4, <code>(5,7)</code> by 7 — which is the rim-gap account above. At seven it is larger: <code>(7,3)</code> is 9 short and <code>(7,4)</code> is 12, so lenses are going as well as rim gaps. Size still recovers them, <code>(7,3)</code> being exact at <code>R_HOLE = 100</code>, but rim gaps stop being the whole story above five leads.</li></ul>
+<ul>
+<li><strong>The ribbon must thin.</strong> <code>L</code> passes need room to separate, so the <code>AMP/HW</code> ratio has to grow with <code>L</code>: the three shipped off-default files sit at <strong>3.8</strong> at four leads, <strong>6.3</strong> at five and <strong>15.6</strong> at nine. Setting <code>AMP = L × HW</code> is not enough on its own — at nine leads that is <code>AMP = 45</code> against a working 78, and it returns 80 regions against 100. The <code>AMP ≈ 0.25*R_HOLE</code> rule of thumb above is for two or three leads and gets crowded beyond that.</li>
+<li><strong>The shortfall is not always <code>B</code>.</strong> It is exactly <code>B</code> at five leads — <code>(5,3)</code> short by 3, <code>(5,4)</code> by 4, <code>(5,7)</code> by 7 — which is the rim-gap account above. At seven it is larger: <code>(7,3)</code> is 9 short and <code>(7,4)</code> is 12, so lenses are going as well as rim gaps. Size still recovers them, <code>(7,3)</code> being exact at <code>R_HOLE = 100</code>, but rim gaps stop being the whole story above five leads.</li>
+</ul>
 <p><strong>Judge by the region and crossing counts, not by the sliver count</strong> — see <a href="#read-the-validation-report">the validation report</a> for why.</p>
 <h3 id="size-is-the-other-lever-and-it-works">Size is the other lever, and it works</h3>
 <p><code>(9,11)</code> satisfies every invariant — but only on a large enough panel, and that is worth understanding because it is the clearest evidence for the claim above.</p>
 <p>At the 30mm default it fails completely: 23 regions against 100, <strong>zero</strong> crossings found, 18.3% open. Nine passes of 4mm ribbon do not fit that annulus at all. A finer ribbon fixes the crossings — every working row below runs <code>AMP/HW</code> between 15 and 26, far above the <code>L × HW</code> figure — and from 30mm up the crossing count is a correct 88.</p>
 <p>The region count is what stays wrong, and it stays wrong by exactly <strong>11</strong>, which is <code>B</code>. The eleven rim gaps were forming below <code>MIN_FEATURE</code> and being welded shut. They scale with the panel, so at <code>R_HOLE = 300</code> they clear the floor and survive:</p>
-<div class='tw'><table><thead><tr><th><code>R_HOLE</code></th><th><code>AMP</code></th><th><code>HW</code></th><th>regions (want 100)</th><th>crossings (want 88)</th><th>open</th></tr></thead><tbody><tr><td>30</td><td>7.5</td><td>2.0</td><td>23</td><td>0</td><td>18.3%</td></tr><tr><td>30</td><td>7</td><td>0.3</td><td>78</td><td>88</td><td>79.1%</td></tr><tr><td>100</td><td>26</td><td>1.0</td><td>89</td><td>88</td><td>76.3%</td></tr><tr><td><strong>300</strong></td><td><strong>78</strong></td><td><strong>5.0</strong></td><td><strong>100</strong></td><td><strong>88</strong></td><td><strong>61.1%</strong></td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th><code>R_HOLE</code></th>
+<th><code>AMP</code></th>
+<th><code>HW</code></th>
+<th>regions (want 100)</th>
+<th>crossings (want 88)</th>
+<th>open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>7.5</td>
+<td>2.0</td>
+<td>23</td>
+<td>0</td>
+<td>18.3%</td>
+</tr>
+<tr>
+<td>30</td>
+<td>7</td>
+<td>0.3</td>
+<td>78</td>
+<td>88</td>
+<td>79.1%</td>
+</tr>
+<tr>
+<td>100</td>
+<td>26</td>
+<td>1.0</td>
+<td>89</td>
+<td>88</td>
+<td>76.3%</td>
+</tr>
+<tr>
+<td><strong>300</strong></td>
+<td><strong>78</strong></td>
+<td><strong>5.0</strong></td>
+<td><strong>100</strong></td>
+<td><strong>88</strong></td>
+<td><strong>61.1%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>So the ceiling on leads is not a property of the curve. It is the cutting floor meeting features that shrink as leads rise — and making the panel bigger moves those features back above it. Note also that the region count was the only line telling the truth at 100mm: crossings, engrave and anchors all read <code>OK</code> while eleven regions were quietly missing.</p>
 <h2 id="output-layers">Output layers</h2>
 <p>Two groups, told apart by <strong>stroke colour</strong> as well as by <code>id</code>. Colour is the one that survives the trip: many SVG importers flatten groups, and most laser software assigns operations by colour rather than by group name.</p>
-<div class='tw'><table><thead><tr><th>Group</th><th>Stroke</th><th>Purpose</th></tr></thead><tbody><tr><td><code>cut</code></td><td><strong>black <code>#000000</code></strong></td><td>every closed path is waste that drops out</td></tr><tr><td><code>engrave</code></td><td><strong>blue <code>#0000ff</code></strong></td><td>over/under interlace hints (<code>2*B*(L-1)</code> lines) <strong>and</strong> rim continuations</td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Stroke</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cut</code></td>
+<td><strong>black <code>#000000</code></strong></td>
+<td>every closed path is waste that drops out</td>
+</tr>
+<tr>
+<td><code>engrave</code></td>
+<td><strong>blue <code>#0000ff</code></strong></td>
+<td>over/under interlace hints (<code>2*B*(L-1)</code> lines) <strong>and</strong> rim continuations</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h3 id="rim-continuations">Rim continuations</h3>
 <p>The engrave layer carries a second, purely decorative set of lines. Where the ribbon overruns the rim it fuses into the soundboard, and the cut layer stops dead at <code>R_HOLE</code> — beyond the rim there is nothing to cut. That leaves each anchor reading as a flat pad, and the rosette looking sliced off by a circle.</p>
 <p>The ribbon's own edges do carry on out there, as far as <code>R_HOLE + BITE</code>. These lines put that outline back across the anchor, so the eye reads the ribbon as passing into the board rather than being truncated. On the trefoil they occupy radii <strong>30.0 to 31.5mm</strong> — exactly the overrun band — while the interlace lines sit at 19.7 to 24.2mm.</p>
@@ -166,7 +460,54 @@ engrave lines == 2*B*(L-1)   (two edges of the over pass per crossing)</code></p
 <p><strong>The blue lines must not be cut.</strong> Give them a score or engrave operation, or delete the layer. They run straight across the ribbon at every crossing, so cutting them severs it and the rosette comes apart as it leaves the machine.</p>
 <p>Give every colour you keep an explicit operation. A per-colour job <strong>silently skips any colour you leave unmapped</strong>: leave <code>cut</code> unmapped and you get an engraved picture of a sound hole and no hole.</p>
 <h2 id="read-the-validation-report">Read the validation report</h2>
-<div class='tw'><table><thead><tr><th>Line</th><th>Must be</th></tr></thead><tbody><tr><td>closed contours vs flood regions</td><td>equal, else loops were lost</td></tr><tr><td>unclosed chains</td><td><code>0</code>, else a contour leaked</td></tr><tr><td>crossings vs <code>B*(L-1)</code></td><td>equal — printed and checked on every run</td></tr><tr><td>engrave polylines vs <code>2*B*(L-1)</code></td><td>equal — the second half of the crossing check, and the one that separates a pair which merely <em>looks</em> right from one that is. <code>9 × 10</code> and <code>9 × 11</code> pass it; <code>9 × 4</code>, <code>9 × 7</code> and <code>9 × 8</code> get their regions and crossings right and fail here</td></tr><tr><td>weave alternates</td><td><code>OK</code>, else the engrave layer is suppressed</td></tr><tr><td>slivers welded shut</td><td>informational only — not a pass/fail, and not normally <code>0</code></td></tr><tr><td>loose islands (CW)</td><td><code>0</code> — else material falls out when cut</td></tr><tr><td>contour area vs flood area</td><td>delta ≤ ~0.1%</td></tr><tr><td>content vs canvas</td><td><code>OK</code> — every emitted point inside the viewBox, with the margin shown</td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Must be</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closed contours vs flood regions</td>
+<td>equal, else loops were lost</td>
+</tr>
+<tr>
+<td>unclosed chains</td>
+<td><code>0</code>, else a contour leaked</td>
+</tr>
+<tr>
+<td>crossings vs <code>B*(L-1)</code></td>
+<td>equal — printed and checked on every run</td>
+</tr>
+<tr>
+<td>engrave polylines vs <code>2*B*(L-1)</code></td>
+<td>equal — the second half of the crossing check, and the one that separates a pair which merely <em>looks</em> right from one that is. <code>9 × 10</code> and <code>9 × 11</code> pass it; <code>9 × 4</code>, <code>9 × 7</code> and <code>9 × 8</code> get their regions and crossings right and fail here</td>
+</tr>
+<tr>
+<td>weave alternates</td>
+<td><code>OK</code>, else the engrave layer is suppressed</td>
+</tr>
+<tr>
+<td>slivers welded shut</td>
+<td>informational only — not a pass/fail, and not normally <code>0</code></td>
+</tr>
+<tr>
+<td>loose islands (CW)</td>
+<td><code>0</code> — else material falls out when cut</td>
+</tr>
+<tr>
+<td>contour area vs flood area</td>
+<td>delta ≤ ~0.1%</td>
+</tr>
+<tr>
+<td>content vs canvas</td>
+<td><code>OK</code> — every emitted point inside the viewBox, with the margin shown</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><code>slivers welded shut</code> counts whole air regions narrower than <code>MIN_FEATURE</code> that were filled back to material. <strong>Its value is an artifact of where the sampling grid falls</strong>, not a property of the design: the trefoil reports 8 at <code>NG=700</code>, 6 at 1000, 4 at 1400 and 8 at 2000, while its contour count, open fraction and area hold steady. The <strong>region count</strong> is the number that means something — it is stable across resolutions, and when welding does eat a real lens it says so and keeps saying so at any grid.</p>
 <p><code>content vs canvas</code> is the newest line and the only one that looks at the <strong>document</strong> rather than the geometry. Every other check describes what the generator computed; none of them noticed when the rim continuations reached 1mm past a canvas sized for the cut layer alone, and files were shipped clipped while every invariant passed. It measures the emitted points against the viewBox and names the shortfall if there is one.</p>
 <h2 id="how-the-overunder-is-decided">How the over/under is decided</h2>
@@ -175,22 +516,49 @@ engrave lines == 2*B*(L-1)   (two edges of the over pass per crossing)</code></p
 <p>Everything else — signed distance field, flood fill, sliver welding, marching squares, chaining, RDP, SVG emit — is carried over unchanged, including the spatial hash for distance.</p>
 <h2 id="run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</h2>
 <p>The expanding-ring stopping bound fails <strong>silently</strong> if wrong — it just returns distances that are too large, which reads as phantom extra "cut" area and quietly changes the shape without any validation line firing.</p>
-<pre><code>LEADS=3 BIGHTS=5 SELFTEST=1 node knot_soundhole.js</code></pre>
+<pre class="bash"><code>LEADS=3 BIGHTS=5 SELFTEST=1 node knot_soundhole.js</code></pre>
 <p>The code's pass gate is <code>&lt; 1e-9</code>, but the error should be <strong>exactly <code>0</code></strong>: both paths minimise the same expression over the same sample set, so they return bit-identical floats. Any nonzero value at all means the ring search missed a sample — do not read a small error as rounding. It is <code>0</code> at <code>(2,3)</code>, <code>(3,5)</code> and <code>(4,3)</code>.</p>
 <h2 id="traps-already-sprung-here">Traps already sprung here</h2>
-<ul><li><strong>The engrave seam, and why it is gone.</strong> The retired two-lead generator had to offset its engrave scan, because crossings sat at odd multiples of <code>M/(4Q)</code> and starting exactly on one split its run, yielding <code>2Q+2</code> lines instead of <code>2Q</code>. This generator starts its scan at the sample <strong>furthest from any other pass</strong>, so no run can straddle the start. The hazard is designed out rather than offset around.</li><li><strong>Chaining on rounded float coordinates.</strong> Shared cell edges compute to slightly different values from each neighbouring cell, so loops fragment. Contours are keyed on integer grid-edge IDs instead.</li><li><strong>Plain RDP on a closed loop.</strong> <code>pts[0] == pts[last]</code> makes the baseline zero-length, every perpendicular distance zero, and the whole loop collapses to two points. See <code>rdpClosed</code>.</li><li>The marching-squares table has a load-bearing invariant: segments are oriented <strong>inside-on-left</strong>. Chaining depends on it, and so does the loose-island check.</li></ul>
+<ul>
+<li><strong>The engrave seam, and why it is gone.</strong> The retired two-lead generator had to offset its engrave scan, because crossings sat at odd multiples of <code>M/(4Q)</code> and starting exactly on one split its run, yielding <code>2Q+2</code> lines instead of <code>2Q</code>. This generator starts its scan at the sample <strong>furthest from any other pass</strong>, so no run can straddle the start. The hazard is designed out rather than offset around.</li>
+<li><strong>Chaining on rounded float coordinates.</strong> Shared cell edges compute to slightly different values from each neighbouring cell, so loops fragment. Contours are keyed on integer grid-edge IDs instead.</li>
+<li><strong>Plain RDP on a closed loop.</strong> <code>pts[0] == pts[last]</code> makes the baseline zero-length, every perpendicular distance zero, and the whole loop collapses to two points. See <code>rdpClosed</code>.</li>
+<li>The marching-squares table has a load-bearing invariant: segments are oriented <strong>inside-on-left</strong>. Chaining depends on it, and so does the loose-island check.</li>
+</ul>
 <h2 id="caveats">Caveats</h2>
-<ul><li>Polylines only — no arc/bezier fitting, no kerf compensation, no DXF.</li><li><code>MIN_FEATURE</code> guards minimum <strong>air</strong> width, not material width.</li><li>The envelope above is a tested range, not a proof. <code>(4,7)</code> has since been run and passes every invariant — 29 regions, 21 crossings, 42 engrave lines, 7 anchors — but see the warning below about what that does <em>not</em> tell you.</li><li>Cut in 3mm Baltic birch plywood, whose void-free core matters as the ribbon narrows. The narrowest cut falls fast as leads rise — 5.51mm at <code>2 × 3</code>, 0.66mm at <code>4 × 3</code>, 0.61mm at <code>4 × 5</code>, <strong>0.56mm at <code>4 × 7</code></strong>.</li></ul>
+<ul>
+<li>Polylines only — no arc/bezier fitting, no kerf compensation, no DXF.</li>
+<li><code>MIN_FEATURE</code> guards minimum <strong>air</strong> width, not material width.</li>
+<li>The envelope above is a tested range, not a proof. <code>(4,7)</code> has since been run and passes every invariant — 29 regions, 21 crossings, 42 engrave lines, 7 anchors — but see the warning below about what that does <em>not</em> tell you.</li>
+<li>Cut in 3mm Baltic birch plywood, whose void-free core matters as the ribbon narrows. The narrowest cut falls fast as leads rise — 5.51mm at <code>2 × 3</code>, 0.66mm at <code>4 × 3</code>, 0.61mm at <code>4 × 5</code>, <strong>0.56mm at <code>4 × 7</code></strong>.</li>
+</ul>
 <p><strong>Passing the invariants is not the same as being cuttable.</strong> <code>(4,7)</code> satisfies both counts and still comes out finer than <code>4 × 3</code>, which is flagged above as delicate. The region and crossing counts tell you the <em>topology</em> survived; they say nothing about whether a laser can make it. Read <code>tightest region inradius</code> from the report as well — double it for the narrowest cut, and compare that against your kerf before believing the OK lines.</p>
 <h2 id="generated-files">Generated files</h2>
-<ul><li><code>3-lead_2-bight_knot_radius30mm.svg</code> — 3 leads × 2 bights</li><li><code>3-lead_4-bight_knot_radius30mm.svg</code> — 3 leads × 4 bights</li><li><code>3-lead_5-bight_knot_radius30mm.svg</code> — 3 leads × 5 bights</li><li><code>4-lead_3-bight_knot_radius39mm.svg</code> — 4 leads × 3 bights at <code>R_HOLE = 39</code>, <code>AMP=9.75 HW=2.6</code> — off default tuning, for the reason set out above</li><li><code>4-lead_5-bight_knot_radius39mm.svg</code> — 4 leads × 5 bights at the same <code>R_HOLE = 39</code> and the same <code>AMP=9.75 HW=2.6</code>, so the two four-lead samples differ only in bights</li><li><code>5-lead_4-bight_knot_radius60mm.svg</code> — 5 leads × 4 bights at <code>R_HOLE = 60</code>, <code>AMP=15 HW=2.4</code> — a 120mm hole. Five leads resolve from about <code>R_HOLE = 44</code> when <code>AMP</code> and <code>HW</code> are scaled in step with <code>R_HOLE</code>, not from 60; the panel is sized for the cut instead, which goes from 0.55mm at 44 to <strong>1.29mm</strong> here. Those two figures are on the scaled proportions: leaving <code>AMP=15 HW=2.4</code> fixed while you shrink the panel holds the cut at 1.29mm and the region count at 21, and refuses below <code>R_HOLE = 34.3</code>, where the centre opening falls under the 1mm minimum</li></ul>
-<ul><li><code>2-lead_3-bight_knot_radius30mm.svg</code> — 2 leads × 3 bights</li><li><code>2-lead_5-bight_knot_radius30mm.svg</code> — 2 leads × 5 bights</li><li><code>2-lead_7-bight_knot_radius30mm.svg</code> — 2 leads × 7 bights</li></ul>
+<ul>
+<li><p><code>3-lead_2-bight_knot_radius30mm.svg</code> — 3 leads × 2 bights</p></li>
+<li><p><code>3-lead_4-bight_knot_radius30mm.svg</code> — 3 leads × 4 bights</p></li>
+<li><p><code>3-lead_5-bight_knot_radius30mm.svg</code> — 3 leads × 5 bights</p></li>
+<li><p><code>4-lead_3-bight_knot_radius39mm.svg</code> — 4 leads × 3 bights at <code>R_HOLE = 39</code>, <code>AMP=9.75 HW=2.6</code> — off default tuning, for the reason set out above</p></li>
+<li><p><code>4-lead_5-bight_knot_radius39mm.svg</code> — 4 leads × 5 bights at the same <code>R_HOLE = 39</code> and the same <code>AMP=9.75 HW=2.6</code>, so the two four-lead samples differ only in bights</p></li>
+<li><p><code>5-lead_4-bight_knot_radius60mm.svg</code> — 5 leads × 4 bights at <code>R_HOLE = 60</code>, <code>AMP=15 HW=2.4</code> — a 120mm hole. Five leads resolve from about <code>R_HOLE = 44</code> when <code>AMP</code> and <code>HW</code> are scaled in step with <code>R_HOLE</code>, not from 60; the panel is sized for the cut instead, which goes from 0.55mm at 44 to <strong>1.29mm</strong> here. Those two figures are on the scaled proportions: leaving <code>AMP=15 HW=2.4</code> fixed while you shrink the panel holds the cut at 1.29mm and the region count at 21, and refuses below <code>R_HOLE = 34.3</code>, where the centre opening falls under the 1mm minimum</p></li>
+<li><p><code>2-lead_3-bight_knot_radius30mm.svg</code> — 2 leads × 3 bights</p></li>
+<li><p><code>2-lead_5-bight_knot_radius30mm.svg</code> — 2 leads × 5 bights</p></li>
+<li><p><code>2-lead_7-bight_knot_radius30mm.svg</code> — 2 leads × 7 bights</p></li>
+</ul>
 <p><code>3 × 2</code> has only <strong>two rim anchors</strong>, the fewest any of these designs can have. It removes half the disc and holds the result on two 4mm tabs. Three anchors are described above as a kinematic minimum rather than a stiffness one; two is below that, so treat it as the most fragile thing here that still passes every invariant.</p>
 <p>Two-lead knots also carry folk names, which you will meet in knot literature even though the generator does not use them: <strong>trefoil</strong> at 3 bights, <strong>cinquefoil</strong> at 5, <strong>septafoil</strong> at 7, <strong>nonafoil</strong> at 9. Everything here is named by leads and bights instead, in the report, in the SVG <code>&lt;title&gt;</code> and in the filename, so the three always agree.</p>
 <h3 id="one-that-is-not-a-sound-hole">One that is not a sound hole</h3>
-<ul><li><code>9-lead_11-bight_knot_radius300mm.svg</code> — 9 leads × 11 bights, <code>AMP=78 HW=5.0</code></li></ul>
+<ul>
+<li><code>9-lead_11-bight_knot_radius300mm.svg</code> — 9 leads × 11 bights, <code>AMP=78 HW=5.0</code></li>
+</ul>
 <p><strong>This is a 600mm hole. Nothing has a sound hole that size</strong> — it is a decorative panel, a screen, a table inlay, and it is committed as a demonstration rather than as something to fit an instrument. Read the caveats before cutting it:</p>
-<ul><li><strong>Every invariant passes</strong> — 100 regions, 88 crossings, 176 engrave lines, 11 anchors, no loose islands — which is why it earns a place here. Not the only nine-lead pair that manages it: at this same size and tuning <code>9 × 10</code> passes everything too, and <code>9 × 4</code>, <code>9 × 7</code> and <code>9 × 8</code> get their regions and crossings right but overshoot the engrave count. <code>9 × 2</code> and <code>9 × 5</code> miss on regions.</li><li><strong>It needs the size.</strong> The same knot at <code>R_HOLE = 100</code> comes out eleven regions short, and at the 30mm default it does not resolve at all. See <a href="#size-is-the-other-lever-and-it-works">the envelope</a>.</li><li><strong>It is not at default settings.</strong> <code>AMP=78 HW=5.0</code> — a ratio of 15.6, not the <code>L</code> that the <code>AMP = L × HW</code> rule of thumb would suggest. <code>AMP = 45</code> at this <code>HW</code> returns 80 regions against 100. The shipped defaults produce nothing usable at nine leads.</li><li><strong>61% of the disc is removed</strong>, held by eleven 10mm-wide anchors, across 600mm. That is a large, open, fragile object and nothing here has been cut to find out how it behaves. Treat the span as the risk, not the cut width — the narrowest cut is a comfortable 2.90mm.</li><li><strong>148 slivers were welded.</strong> With the region count correct those are grazing artifacts rather than lost structure, but fine detail has been rewritten in places.</li></ul>
+<ul>
+<li><strong>Every invariant passes</strong> — 100 regions, 88 crossings, 176 engrave lines, 11 anchors, no loose islands — which is why it earns a place here. Not the only nine-lead pair that manages it: at this same size and tuning <code>9 × 10</code> passes everything too, and <code>9 × 4</code>, <code>9 × 7</code> and <code>9 × 8</code> get their regions and crossings right but overshoot the engrave count. <code>9 × 2</code> and <code>9 × 5</code> miss on regions.</li>
+<li><strong>It needs the size.</strong> The same knot at <code>R_HOLE = 100</code> comes out eleven regions short, and at the 30mm default it does not resolve at all. See <a href="#size-is-the-other-lever-and-it-works">the envelope</a>.</li>
+<li><strong>It is not at default settings.</strong> <code>AMP=78 HW=5.0</code> — a ratio of 15.6, not the <code>L</code> that the <code>AMP = L × HW</code> rule of thumb would suggest. <code>AMP = 45</code> at this <code>HW</code> returns 80 regions against 100. The shipped defaults produce nothing usable at nine leads.</li>
+<li><strong>61% of the disc is removed</strong>, held by eleven 10mm-wide anchors, across 600mm. That is a large, open, fragile object and nothing here has been cut to find out how it behaves. Treat the span as the risk, not the cut width — the narrowest cut is a comfortable 2.90mm.</li>
+<li><strong>148 slivers were welded.</strong> With the region count correct those are grazing artifacts rather than lost structure, but fine detail has been rewritten in places.</li>
+</ul>
 </main>
 </div>
 <script>

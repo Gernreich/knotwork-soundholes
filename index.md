@@ -174,7 +174,7 @@ carry a caveat.
 - **`4-lead_3-bight_radius39mm`** and **`4-lead_5-bight_radius39mm`** are the two
   four-lead samples, both at 39mm on the same `AMP=9.75 HW=2.6`. A bigger panel alone does
   not fix their narrow cuts — the ribbon has to scale with it, and
-  [the writeup shows the numbers](knot_soundhole.md#variants-at-rhole30-60mm-hole).
+  [the writeup shows the numbers](knot_soundhole.md#variants-at-r_hole30-60mm-hole).
 - **`5-lead_4-bight_radius60mm`** is a 120mm hole. Scaling `AMP` and `HW` in step with
   `R_HOLE`, five leads stop resolving below about 44mm — the rim gaps weld shut and the
   region count drops from 21 to 17 — but the size shipped is chosen for the *cut*, not

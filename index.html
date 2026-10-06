@@ -36,6 +36,9 @@ h3{font-size:1.02rem;font-weight:650;margin:1.7em 0 .45em}
 p{margin:.85em 0}
 ul,ol{margin:.85em 0;padding-left:1.35em}
 li{margin:.3em 0}
+/* A list with blank lines between its items is "loose", and pandoc wraps each item
+   in a <p> as GitHub does. These pages were set tight before pandoc, so they stay so. */
+li>p{margin:0}
 hr{border:0;border-top:1px solid var(--line);margin:2.6em 0}
 figure{margin:1.6em 0}
 /* A paragraph holding two or more images is a gallery. Left to inline layout they
@@ -97,17 +100,99 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p><strong><a href="https://github.com/Gernreich/knotwork-soundholes">Read the README</a></strong></p>
 <p>Two generators that produce cut-ready SVG rosettes for an instrument sound hole, millimetre-true at <code>1 user unit = 1mm</code>. Both emit a validation report on every run, and that report — not the picture — is the point of the tools.</p>
 <p>They differ in one thing, and it is not cosmetic: <strong>whether the ribbon is one strand or two.</strong> An alternating over/under interlace has to close up when you return to your start, and that constraint decides which curve you need.</p>
-<div class='tw'><table><thead><tr><th></th><th><a href="plait_soundhole.html">Two ribbons</a></th><th><a href="knot_soundhole.html">One strand</a></th></tr></thead><tbody><tr><td>Look</td><td>plait, braided</td><td>one continuous self-crossing strand</td></tr><tr><td>Sized by</td><td><code>N</code> lobes → <code>2N</code> crossings</td><td><code>LEADS</code> × <code>BIGHTS</code></td></tr><tr><td>Named forms</td><td>6, 8, <strong>10</strong>, 12 crossings</td><td><strong>trefoil</strong>, cinquefoil, septafoil, and any coprime pair</td></tr><tr><td>Generator</td><td><code>plait_soundhole.js</code></td><td><code>knot_soundhole.js</code></td></tr><tr><td>Open area at radius 30mm</td><td>52.4% at the default <code>N = 5</code></td><td>63.3% at 2 × 3, 48.2% at 3 × 5</td></tr><tr><td>Rim anchors</td><td><code>2N</code></td><td><code>BIGHTS</code></td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><a href="plait_soundhole.html">Two ribbons</a></th>
+<th><a href="knot_soundhole.html">One strand</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Look</td>
+<td>plait, braided</td>
+<td>one continuous self-crossing strand</td>
+</tr>
+<tr>
+<td>Sized by</td>
+<td><code>N</code> lobes → <code>2N</code> crossings</td>
+<td><code>LEADS</code> × <code>BIGHTS</code></td>
+</tr>
+<tr>
+<td>Named forms</td>
+<td>6, 8, <strong>10</strong>, 12 crossings</td>
+<td><strong>trefoil</strong>, cinquefoil, septafoil, and any coprime pair</td>
+</tr>
+<tr>
+<td>Generator</td>
+<td><code>plait_soundhole.js</code></td>
+<td><code>knot_soundhole.js</code></td>
+</tr>
+<tr>
+<td>Open area at radius 30mm</td>
+<td>52.4% at the default <code>N = 5</code></td>
+<td>63.3% at 2 × 3, 48.2% at 3 × 5</td>
+</tr>
+<tr>
+<td>Rim anchors</td>
+<td><code>2N</code></td>
+<td><code>BIGHTS</code></td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="why-there-are-two-leads-bights-and-one-rule">Why there are two: leads, bights, and one rule</h2>
 <p>Both are described the same way: <strong><code>L</code> leads by <code>B</code> bights</strong>, where the strand travels round <code>L</code> times and shows <code>B</code> scallops at the rim. Everything follows from one fact — <code>gcd(L, B)</code> is the number of separate closed pieces you end up with.</p>
-<div class='tw'><table><thead><tr><th></th><th>leads</th><th>bights</th><th><code>gcd</code></th><th>strands</th><th>it is a…</th></tr></thead><tbody><tr><td><a href="plait_soundhole.html">plait</a></td><td>2</td><td><code>2N</code>, even</td><td>2</td><td>2</td><td><strong>link</strong></td></tr><tr><td><a href="knot_soundhole.html">one strand</a></td><td>any <code>L</code></td><td>any <code>B</code> coprime to <code>L</code></td><td>1</td><td>1</td><td><strong>knot</strong></td></tr></tbody></table></div>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>leads</th>
+<th>bights</th>
+<th><code>gcd</code></th>
+<th>strands</th>
+<th>it is a…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="plait_soundhole.html">plait</a></td>
+<td>2</td>
+<td><code>2N</code>, even</td>
+<td>2</td>
+<td>2</td>
+<td><strong>link</strong></td>
+</tr>
+<tr>
+<td><a href="knot_soundhole.html">one strand</a></td>
+<td>any <code>L</code></td>
+<td>any <code>B</code> coprime to <code>L</code></td>
+<td>1</td>
+<td>1</td>
+<td><strong>knot</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>A knot is a <em>single</em> closed curve. Two woven ribbons are two curves, so the plait has never been a knot in the strict sense, whatever the decorative tradition calls it — and the coprime one is the design that earns the word.</p>
 <p>That is why neither can produce the other's shapes. In the plait each strand meets every crossing once, so its crossing count is even by construction; a self-crossing strand visits each crossing twice, which is why a 3-crossing trefoil is a valid alternating knot. Ask the coprime generator for a non-coprime pair and it refuses, listing the bight counts that would work.</p>
 <p>This reading is the mathematics set against the writeups' own descriptions, not something measured out of the emitted geometry. The <code>gcd</code> argument is the load-bearing part, and each writeup derives it independently.</p>
 <h2 id="which-one-do-i-want">Which one do I want?</h2>
-<ul><li><strong>"A woven rosette, braided look, 12 crossings"</strong> → <a href="plait_soundhole.html">the plait</a>.</li><li><strong>"A trefoil sound hole"</strong>, or one continuous ribbon you can trace with a finger → <a href="knot_soundhole.html">the coprime generator</a> at <code>LEADS=2 BIGHTS=3</code>.</li><li><strong>"A 3-lead 5-bight knot"</strong>, or anything named in leads and bights → <a href="knot_soundhole.html">the coprime generator</a>.</li><li><strong>"N crossings"</strong> where you named the number → an even count is the plait; an odd one is the coprime generator at 2 leads.</li></ul>
+<ul>
+<li><strong>"A woven rosette, braided look, 12 crossings"</strong> → <a href="plait_soundhole.html">the plait</a>.</li>
+<li><strong>"A trefoil sound hole"</strong>, or one continuous ribbon you can trace with a finger → <a href="knot_soundhole.html">the coprime generator</a> at <code>LEADS=2 BIGHTS=3</code>.</li>
+<li><strong>"A 3-lead 5-bight knot"</strong>, or anything named in leads and bights → <a href="knot_soundhole.html">the coprime generator</a>.</li>
+<li><strong>"N crossings"</strong> where you named the number → an even count is the plait; an odd one is the coprime generator at 2 leads.</li>
+</ul>
 <h2 id="get-the-files">Get the files</h2>
-<ul><li><strong><a href="https://github.com/Gernreich/knotwork-soundholes/archive/refs/heads/main.zip">Every design as a ZIP</a></strong> — both generators, both writeups, every cut file.</li><li><strong><a href="https://github.com/Gernreich/knotwork-soundholes">Repository</a></strong> — the code, if you want to change a parameter or read how it works.</li><li>Or click any picture above to download that one cut file.</li></ul>
+<ul>
+<li><strong><a href="https://github.com/Gernreich/knotwork-soundholes/archive/refs/heads/main.zip">Every design as a ZIP</a></strong> — both generators, both writeups, every cut file.</li>
+<li><strong><a href="https://github.com/Gernreich/knotwork-soundholes">Repository</a></strong> — the code, if you want to change a parameter or read how it works.</li>
+<li>Or click any picture above to download that one cut file.</li>
+</ul>
 <p>Released under CC0 1.0 — do what you like with them, no attribution needed. Built for <strong><a href="https://www.youtube.com/@LaserMadeMusic">LaserMadeMusic</a></strong>.</p>
 <p><strong><a href="https://gernreich.github.io/">The rest of the build files</a></strong> — every instrument, generator and tool, indexed.</p>
 <h2 id="before-you-cut">Before you cut</h2>
@@ -171,9 +256,15 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 </tr>
 </table>
 </div>
+
 <h2 id="four-worth-a-note">Four worth a note</h2>
 <p>Most of the samples above need no explanation: pick the crossing count you like. Four carry a caveat.</p>
-<ul><li><strong><code>3-lead_2-bight</code></strong> is held on <strong>two rim anchors</strong>, the fewest these designs can have. It removes half the disc and holds the result on two 4mm tabs.</li><li><strong><code>4-lead_3-bight_radius39mm</code></strong> and <strong><code>4-lead_5-bight_radius39mm</code></strong> are the two four-lead samples, both at 39mm on the same <code>AMP=9.75 HW=2.6</code>. A bigger panel alone does not fix their narrow cuts — the ribbon has to scale with it, and <a href="knot_soundhole.html#variants-at-rhole30-60mm-hole">the writeup shows the numbers</a>.</li><li><strong><code>5-lead_4-bight_radius60mm</code></strong> is a 120mm hole. Scaling <code>AMP</code> and <code>HW</code> in step with <code>R_HOLE</code>, five leads stop resolving below about 44mm — the rim gaps weld shut and the region count drops from 21 to 17 — but the size shipped is chosen for the <em>cut</em>, not for that floor: the narrowest cut is 0.55mm at 44mm and 1.29mm at 60mm. Hold <code>AMP</code> and <code>HW</code> at the shipped <code>15</code> and <code>2.4</code> while shrinking the panel and you get neither number: 21 regions and a 1.29mm cut all the way down to 35mm, and no geometry at all below 34.3mm, where the centre opening falls under the 1mm the generator insists on.</li><li><strong><code>9-lead_11-bight_radius300mm</code></strong> is a <strong>600mm</strong> hole and <strong>not a sound hole at all</strong> — read it as a decorative panel. It satisfies every invariant, but only at that scale and only away from the defaults; <a href="knot_soundhole.html#size-is-the-other-lever-and-it-works">the writeup explains why</a>.</li></ul>
+<ul>
+<li><strong><code>3-lead_2-bight</code></strong> is held on <strong>two rim anchors</strong>, the fewest these designs can have. It removes half the disc and holds the result on two 4mm tabs.</li>
+<li><strong><code>4-lead_3-bight_radius39mm</code></strong> and <strong><code>4-lead_5-bight_radius39mm</code></strong> are the two four-lead samples, both at 39mm on the same <code>AMP=9.75 HW=2.6</code>. A bigger panel alone does not fix their narrow cuts — the ribbon has to scale with it, and <a href="knot_soundhole.html#variants-at-r_hole30-60mm-hole">the writeup shows the numbers</a>.</li>
+<li><strong><code>5-lead_4-bight_radius60mm</code></strong> is a 120mm hole. Scaling <code>AMP</code> and <code>HW</code> in step with <code>R_HOLE</code>, five leads stop resolving below about 44mm — the rim gaps weld shut and the region count drops from 21 to 17 — but the size shipped is chosen for the <em>cut</em>, not for that floor: the narrowest cut is 0.55mm at 44mm and 1.29mm at 60mm. Hold <code>AMP</code> and <code>HW</code> at the shipped <code>15</code> and <code>2.4</code> while shrinking the panel and you get neither number: 21 regions and a 1.29mm cut all the way down to 35mm, and no geometry at all below 34.3mm, where the centre opening falls under the 1mm the generator insists on.</li>
+<li><strong><code>9-lead_11-bight_radius300mm</code></strong> is a <strong>600mm</strong> hole and <strong>not a sound hole at all</strong> — read it as a decorative panel. It satisfies every invariant, but only at that scale and only away from the defaults; <a href="knot_soundhole.html#size-is-the-other-lever-and-it-works">the writeup explains why</a>.</li>
+</ul>
 <p>Every sample is cut-ready geometry, but the layers still need the treatment described above: the blue engrave lines must be given a non-cutting operation before you send the file. Requires Node, and neither generator writes anything unless you set <code>OUT</code>.</p>
 </main>
 </div>
