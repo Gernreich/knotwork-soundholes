@@ -1,12 +1,12 @@
 # Knotwork Sound Holes
 
-Two Node generators that produce cut-ready SVG rosettes for an instrument sound hole.
-Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`height` — so it
-prints and cuts at real size.
-
 **[Read the writeup](https://gernreich.github.io/knotwork-soundholes/)** · plait:
 [`plait_soundhole.md`](plait_soundhole.md) · knot:
 [`knot_soundhole.md`](knot_soundhole.md)
+
+Two Node generators that produce cut-ready SVG rosettes for an instrument sound hole.
+Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`height` — so it
+prints and cuts at real size.
 
 <p>
 <img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60mm hole and running on into the paler surrounding board at three anchors; the cream shapes are the material that drops out" width="46%">

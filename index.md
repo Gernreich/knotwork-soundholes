@@ -1,5 +1,7 @@
 # Knotwork Sound Holes
 
+**[Read the README](https://github.com/Gernreich/knotwork-soundholes)**
+
 Two generators that produce cut-ready SVG rosettes for an instrument sound hole,
 millimetre-true at `1 user unit = 1mm`. Both emit a validation report on every run,
 and that report — not the picture — is the point of the tools.
