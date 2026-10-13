@@ -9,13 +9,13 @@ Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`heig
 prints and cuts at real size.
 
 <p>
-<img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60mm hole and running on into the paler surrounding board at three anchors; the cream shapes are the material that drops out" width="46%">
-<img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60mm hole and running on into the paler surrounding board; the cream shapes are the material that drops out" width="46%">
+<img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60mm hole and running on into the paler surrounding board at three anchors; the white shapes are the material that drops out" width="46%">
+<img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60mm hole and running on into the paler surrounding board; the white shapes are the material that drops out" width="46%">
 </p>
 
 *Left: one strand, 2 leads × 3 bights. Right: two ribbons, 10 crossings. Both at a 60mm
 hole. Display renderings — **deep gold is the rosette, pale gold the board it fuses into,
-cream is what drops out.** The ribbon crosses between the two golds without a break,
+white is what drops out.** The ribbon crosses between the two golds without a break,
 because the rosette is not a ring sitting in a hole: it is board material, and that is what
 stops it falling through. The cut files carry no fill, so a browser shows them as thin
 lines on a transparency checkerboard. **[See all thirteen](https://gernreich.github.io/knotwork-soundholes/#every-sample-at-a-glance)**.*
@@ -91,7 +91,7 @@ couple of millimetres.
 | `knot_soundhole.js` · `.md` | single-strand knot generator, any coprime leads × bights |
 | `*-bight_knot_radius*.svg` | cut-ready knot samples, named leads × bights × radius |
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
-| `preview.js` | draws `previews/` from the cut files: the cut layer filled in gold and cream |
+| `preview.js` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 

@@ -33,7 +33,7 @@
 
 # --- the previews ship without a generator ---
 # Display renderings only, embedded in README.md and index.md; nothing here
-# cuts them. They are FILLED even-odd in gold and cream, which is not what
+# cuts them. They are FILLED even-odd in gold and white, which is not what
 # lasermade-tools/make-preview.py draws -- that thickens the cut stroke.
 #
 # They carried a "!" until 2026-09-10, meaning "shipped without a generator, we

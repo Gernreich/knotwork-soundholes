@@ -21,7 +21,7 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 
-const GROUND = '#faf7f0';   // cream: the waste that drops out
+const GROUND = '#ffffff';   // white: the waste that drops out (cream until 2026-10-13)
 const BOARD  = '#e6d9ae';   // pale gold: the soundboard the ribbon fuses into
 const ROSETTE = '#c9a227';  // deep gold: the ribbon itself, inside the rim
 
@@ -48,7 +48,7 @@ function build(src, srcName) {
 
   // An even-odd fill needs something to be outside-of. The frame is that
   // something: every closed contour inside it reverses the parity, so the waste
-  // comes out cream and the ribbon comes out gold without either being named.
+  // comes out white and the ribbon comes out gold without either being named.
   const f1 = n => n.toFixed(1);
   const frame = `M${f1(x)} ${f1(y)}H${f1(x + w)}V${f1(y + h)}H${f1(x)}Z`;
   const body = frame + paths.join('');
@@ -65,11 +65,11 @@ function build(src, srcName) {
     ` height="${mm(h)}mm" viewBox="${vb[1]}">
   <title>${title} — display only</title>
   <!-- DISPLAY ONLY - not a cut file. The cut layer of ${srcName}, filled even-odd.
-       Deep gold is the rosette, pale gold the board it fuses into, cream the waste
+       Deep gold is the rosette, pale gold the board it fuses into, white the waste
        that drops out. The ribbon overruns the rim by BITE (${bite[1]}mm here) and becomes
        board, so the two golds part at r=${rim}mm with the ribbon running straight on
        through - bounding the fill at R_HOLE instead sliced every lobe tip flat along a
-       circle and showed a rosette that does not exist. The cream is painted, not
+       circle and showed a rosette that does not exist. The white is painted, not
        transparent, so the picture reads the same on a light or a dark page.
        Cut files carry no fill; browsing one shows a transparency checkerboard. -->
   <defs><clipPath id="rosette"><circle cx="0" cy="0" r="${rim}"/></clipPath></defs>
