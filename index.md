@@ -1,5 +1,7 @@
 # Knotwork Sound Holes
 
+**[← All projects](https://gernreich.github.io/)**
+
 **[Read the README](https://github.com/Gernreich/knotwork-soundholes)**
 
 Two generators that produce cut-ready SVG rosettes for an instrument sound hole,
@@ -62,7 +64,7 @@ part, and each writeup derives it independently.
 Released under CC0 1.0 — do what you like with them, no attribution needed. Built for
 **[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**.
 
-**[The rest of the build files](https://gernreich.github.io/)** — every instrument,
+**[The rest of the build files](https://gernreich.github.io/lasermademusic.html)** — every instrument,
 generator and tool, indexed.
 
 ## Before you cut
