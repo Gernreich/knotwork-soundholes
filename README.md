@@ -6,6 +6,8 @@
 [`plait_soundhole.md`](plait_soundhole.md) · knot:
 [`knot_soundhole.md`](knot_soundhole.md)
 
+**[Turn it in 3D](https://gernreich.github.io/knotwork-soundholes/turn.html)**
+
 Two Node generators that produce cut-ready SVG rosettes for an instrument sound hole.
 Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`height` — so it
 prints and cuts at real size.
@@ -95,6 +97,8 @@ couple of millimetres.
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
 | `preview.js` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
+| `turn.html` | every sample in 3D, its waste taken out of a square of 3mm plywood — drag to turn |
+| `viewer.py` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
 Requires Node. No dependencies. Released under [CC0 1.0](LICENSE).

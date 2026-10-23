@@ -4,6 +4,10 @@
 
 **[Read the README](https://github.com/Gernreich/knotwork-soundholes)**
 
+**[Turn it in 3D](https://gernreich.github.io/knotwork-soundholes/turn.html)**
+
+<iframe src="turn.html?embed" title="Each rosette cut through a square of 3mm plywood soundboard, as a solid you can drag to turn, with a button for each of the thirteen samples" style="width:100%;height:560px;border:0"></iframe>
+
 Two generators that produce cut-ready SVG rosettes for an instrument sound hole,
 millimetre-true at `1 user unit = 1mm`. Both emit a validation report on every run,
 and that report — not the picture — is the point of the tools.

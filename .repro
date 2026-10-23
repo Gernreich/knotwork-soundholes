@@ -56,6 +56,11 @@ previews/8-crossing_plait_radius30mm.svg :: node preview.js 8-crossing_plait_rad
 previews/10-crossing_plait_radius30mm.svg :: node preview.js 10-crossing_plait_radius30mm.svg $OUT
 previews/10-crossing_plait_radius50mm.svg :: node preview.js 10-crossing_plait_radius50mm.svg $OUT
 
+# --- the 3D view: every sample's waste taken out of a square of 3mm ply ---
+# viewer.py imports turn3d.py from lasermade-tools, so it expects that
+# checkout beside this one.
+turn.html :: python3 viewer.py --out=$OUT
+
 # --- the published pages ---
 # Claimed here since 2026-09-10, when .repro learned to walk *.html. doc-audit
 # checks these too, by rebuilding and comparing, but it pairs a page with a
