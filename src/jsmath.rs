@@ -5,9 +5,20 @@
 //! src/base/ieee754.cc (Node builds V8 without its glibc trig option, so these
 //! are the ones `Math.sin` and friends run). macOS's libm and the `libm` crate
 //! (a musl port, whose __kernel_cos was rewritten) disagree with it in the
-//! last bit on a few percent of inputs, enough to move a coordinate across a
-//! rounding boundary in a cut file. hypot is V8's Torque builtin: scale by
+//! last bit on a few percent of inputs. hypot is V8's Torque builtin: scale by
 //! the largest argument, Kahan-sum the squares, take the square root.
+//!
+//! WHY THIS AND NOT std, MEASURED 2026-11-02 rather than assumed. Graded
+//! against a 512-bit reference on 400,000 inputs, none of these is more
+//! accurate than the platform's: cos and sin are within 0.80 ulp everywhere,
+//! atan2 1.22 ulp and hypot 1.84 ulp, where macOS manages 0.65 and 1.18. And
+//! swapping in std for all four changes NONE of the 13 shipped cut files --
+//! not one of their 39,886 numbers. The output only starts to move when the
+//! maths is off by about 1e-7, nine orders of magnitude above a last-bit
+//! difference. So this module is not what makes the files reproduce today.
+//! It is kept because it removes the question: with it the generators compute
+//! what Node computed, bit for bit, for ANY settings and on any machine, so a
+//! difference from a JavaScript-era drawing can only ever mean a code change.
 //!
 //! FUSED MULTIPLY-ADD. Node for Apple silicon is compiled by clang, whose
 //! default -ffp-contract=on turns `a*b + c` WITHIN ONE C EXPRESSION into a

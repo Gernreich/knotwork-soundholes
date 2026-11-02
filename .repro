@@ -10,10 +10,11 @@
 #
 # RUST SINCE 2026-11-02. The three generators were JavaScript run by Node; they
 # are now knot_soundhole.rs, plait_soundhole.rs and preview.rs, and every file
-# below redrew byte-identically from the port before the .js went. That takes
-# Node's own arithmetic, not just the same formulas: src/jsmath.rs is V8's
-# fdlibm sin/cos/atan2 with clang's fused multiply-adds, and src/jsfmt.rs is
-# JavaScript's number-to-text. repro-svg.py runs `cargo build --release` once
+# below redrew byte-identically from the port before the .js went.
+# src/jsfmt.rs (JavaScript's number-to-text) is what that takes. src/jsmath.rs
+# (V8's fdlibm sin/cos/atan2 with clang's fused multiply-adds) goes further than
+# these files need -- the platform maths gives the same 13 -- and pins the port
+# to Node's exact arithmetic for any settings; its header has the measurements. repro-svg.py runs `cargo build --release` once
 # before any line here, so these always test the code as it stands. (They were
 # `cargo run` for an hour: in parallel, one cargo re-linking the binary could
 # pull it out from under another that was starting it.)
