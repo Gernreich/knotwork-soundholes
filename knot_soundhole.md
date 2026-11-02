@@ -1,6 +1,6 @@
 # Knot Sound Hole — any coprime leads × bights
 
-Generator: `knot_soundhole.js`
+Generator: `knot_soundhole.rs` (Rust; JavaScript until 2026-11-02)
 
 Companion: [`plait_soundhole.md`](plait_soundhole.md) (two ribbons,
 even crossings)
@@ -50,13 +50,14 @@ That is correct; adding a full circle drops the rosette on the floor.
 ## Usage
 
 ```bash
-node knot_soundhole.js --help                   # every setting and its default
-node knot_soundhole.js                          # report only, writes nothing
-LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg node knot_soundhole.js
-LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg node knot_soundhole.js
-LEADS=2 BIGHTS=3 node knot_soundhole.js         # 2 leads: the classic trefoil
-SELFTEST=1 node knot_soundhole.js               # check the hash, exit
-DIAG=1 node knot_soundhole.js                   # per-region dump
+cargo build --release                           # once, and after any change to the source
+target/release/knot_soundhole --help            # every setting and its default
+target/release/knot_soundhole                   # report only, writes nothing
+LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole
+LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg target/release/knot_soundhole
+LEADS=2 BIGHTS=3 target/release/knot_soundhole  # 2 leads: the classic trefoil
+SELFTEST=1 target/release/knot_soundhole        # check the hash, exit
+DIAG=1 target/release/knot_soundhole            # per-region dump
 ```
 
 **The file that lands is not ready for the laser yet.** Its geometry is, but it
@@ -343,7 +344,7 @@ distances that are too large, which reads as phantom extra "cut" area and quietl
 changes the shape without any validation line firing.
 
 ```bash
-LEADS=3 BIGHTS=5 SELFTEST=1 node knot_soundhole.js
+LEADS=3 BIGHTS=5 SELFTEST=1 target/release/knot_soundhole
 ```
 
 The code's pass gate is `< 1e-9`, but the error should be **exactly `0`**: both

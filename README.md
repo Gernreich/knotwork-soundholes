@@ -8,7 +8,7 @@
 
 **[Turn it in 3D](https://gernreich.github.io/knotwork-soundholes/turn.html)**
 
-Two Node generators that produce cut-ready SVG rosettes for an instrument sound hole.
+Two Rust generators that produce cut-ready SVG rosettes for an instrument sound hole.
 Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`height` — so it
 prints and cuts at real size.
 
@@ -44,7 +44,7 @@ interlace has to close up when you return to your start, and that is what decide
 | Look | two-ribbon plait, braided | one continuous self-crossing strand |
 | Sized by | `N` lobes → `2N` crossings | `LEADS` × `BIGHTS`, coprime |
 | Named forms | 6, 8, **10**, 12 crossings | **trefoil**, cinquefoil, septafoil, any coprime pair |
-| Script | `plait_soundhole.js` | `knot_soundhole.js` |
+| Program | `plait_soundhole.rs` | `knot_soundhole.rs` |
 | Open area at radius 30mm | 52.4% (default `N = 5`) | 63.3% at 2 × 3, 48.2% at 3 × 5 |
 | Rim anchors | `2N` | `BIGHTS` |
 
@@ -56,9 +56,10 @@ leads/bights pair that is not coprime is refused with an error.
 ## Quick start
 
 ```
-node plait_soundhole.js                          # report only, writes nothing
-OUT=10-crossing_plait_radius30mm.svg node plait_soundhole.js  # 10-crossing plait, 60mm hole
-LEADS=2 BIGHTS=5 OUT=2-lead_5-bight_knot_radius30mm.svg node knot_soundhole.js
+cargo build --release                                                # once; programs land in target/release/
+target/release/plait_soundhole                                       # report only, writes nothing
+OUT=10-crossing_plait_radius30mm.svg target/release/plait_soundhole  # 10-crossing plait, 60mm hole
+LEADS=2 BIGHTS=5 OUT=2-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole
 ```
 
 **Nothing is written unless you set `OUT`.** A bare run prints the validation report and
@@ -91,14 +92,17 @@ couple of millimetres.
 
 | | |
 |---|---|
-| `plait_soundhole.js` · `.md` | even-crossing plait generator and its writeup |
-| `knot_soundhole.js` · `.md` | single-strand knot generator, any coprime leads × bights |
+| `plait_soundhole.rs` · `.md` | even-crossing plait generator and its writeup |
+| `knot_soundhole.rs` · `.md` | single-strand knot generator, any coprime leads × bights |
+| `src/contour.rs` | what both generators share: flood fill, sliver welding, marching squares, chaining, simplification |
+| `src/jsmath.rs` · `src/jsfmt.rs` | Node's own sin, cos, atan2 and hypot, and JavaScript's number-to-text, so every SVG drawn while the generators were JavaScript redraws byte for byte |
+| `src/lib.rs` · `Cargo.toml` · `Cargo.lock` | the Rust package: three programs and the library above, no outside crates |
 | `*-bight_knot_radius*.svg` | cut-ready knot samples, named leads × bights × radius |
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
-| `preview.js` | draws `previews/` from the cut files: the cut layer filled in gold and white |
+| `preview.rs` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
 | `turn.html` | every sample in 3D, its waste taken out of a square of 3mm plywood — drag to turn |
 | `viewer.py` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
-Requires Node. No dependencies. Released under [CC0 1.0](LICENSE).
+Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under [CC0 1.0](LICENSE).

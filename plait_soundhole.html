@@ -102,7 +102,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <nav><b>Contents</b><a class="l1" href="#plait-sound-hole--even-crossings-two-woven-ribbons">Plait Sound Hole — even crossings (two woven ribbons)</a><a class="l2" href="#the-constraint-that-shapes-the-design">The constraint that shapes the design</a><a class="l2" href="#why-the-crossing-count-is-always-even">Why the crossing count is always even</a><a class="l2" href="#usage">Usage</a><a class="l2" href="#variants-at-r_hole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</a><a class="l2" href="#output-layers">Output layers</a><a class="l2" href="#how-it-works">How it works</a><a class="l2" href="#read-the-validation-report">Read the validation report</a><a class="l2" href="#traps-already-sprung-here">Traps already sprung here</a><a class="l2" href="#caveats">Caveats</a><a class="l2" href="#generated-files">Generated files</a></nav>
 <main>
 <h1 id="plait-sound-hole--even-crossings-two-woven-ribbons">Plait Sound Hole — even crossings (two woven ribbons)</h1>
-<p>Generator: <code>plait_soundhole.js</code></p>
+<p>Generator: <code>plait_soundhole.rs</code> (Rust; JavaScript until 2026-11-02)</p>
 <p>Companion (one strand, any coprime leads × bights): <a href="knot_soundhole.html"><code>knot_soundhole.md</code></a></p>
 <p>Produces a cut-ready SVG of a circular plait sized for an instrument sound hole. Two identical sinusoidal ribbons weave around a ring; ribbon B is ribbon A rotated by <code>pi/N</code>.</p>
 <p>Output is millimetre-true: <code>1 user unit = 1mm</code>, with a physical <code>width</code>/ <code>height</code> in mm, so it prints and cuts at real size.</p>
@@ -116,12 +116,13 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p>Both ribbons are polar graphs <code>r(theta)</code>, and a point in the plane has a unique <code>(r, theta)</code>, so they can only meet where <code>rA(theta) = rB(theta)</code>. That difference is <code>2*AMP*sin(N*theta)</code> — exactly <code>2N</code> zeros per turn.</p>
 <p>No parameter changes this. There is also a topological reason: each strand meets every crossing once, and alternating over/under only closes up over an even number. <strong>For an odd crossing count — or any coprime leads × bights, odd or even — use the companion generator.</strong></p>
 <h2 id="usage">Usage</h2>
-<pre class="bash"><code>node plait_soundhole.js --help                               # every setting and its default
-node plait_soundhole.js                                      # report only, writes nothing
-OUT=10-crossing_plait_radius30mm.svg node plait_soundhole.js # N=5, the default
-N=4 OUT=8-crossing_plait_radius30mm.svg node plait_soundhole.js
-R_HOLE=50 AMP=10.8 HW=3.3 BITE=2.5 OUT=10-crossing_plait_radius50mm.svg node plait_soundhole.js
-DIAG=1 node plait_soundhole.js                               # per-region dump</code></pre>
+<pre class="bash"><code>cargo build --release                                                # once, and after any change to the source
+target/release/plait_soundhole --help                                # every setting and its default
+target/release/plait_soundhole                                       # report only, writes nothing
+OUT=10-crossing_plait_radius30mm.svg target/release/plait_soundhole  # N=5, the default
+N=4 OUT=8-crossing_plait_radius30mm.svg target/release/plait_soundhole
+R_HOLE=50 AMP=10.8 HW=3.3 BITE=2.5 OUT=10-crossing_plait_radius50mm.svg target/release/plait_soundhole
+DIAG=1 target/release/plait_soundhole                                # per-region dump</code></pre>
 <p><code>--help</code> prints this same table, so you do not need the document to hand.</p>
 <p><strong><code>OUT</code> overwrites without asking</strong> — there is no force flag and no prompt. All three <code>OUT=</code> lines above name shipped sample files, so running them in this directory rewrites those files; at these parameters the bytes come back identical, but change a number and reuse the same command line and you have replaced a sample with different geometry and nothing will have said so. Write somewhere else while experimenting.</p>
 <div class="tw">

@@ -136,8 +136,8 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 </tr>
 <tr>
 <td>Generator</td>
-<td><code>plait_soundhole.js</code></td>
-<td><code>knot_soundhole.js</code></td>
+<td><code>plait_soundhole.rs</code></td>
+<td><code>knot_soundhole.rs</code></td>
 </tr>
 <tr>
 <td>Open area at radius 30mm</td>
@@ -274,7 +274,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <li><strong><code>5-lead_4-bight_radius60mm</code></strong> is a 120mm hole. Scaling <code>AMP</code> and <code>HW</code> in step with <code>R_HOLE</code>, five leads stop resolving below about 44mm — the rim gaps weld shut and the region count drops from 21 to 17 — but the size shipped is chosen for the <em>cut</em>, not for that floor: the narrowest cut is 0.55mm at 44mm and 1.29mm at 60mm. Hold <code>AMP</code> and <code>HW</code> at the shipped <code>15</code> and <code>2.4</code> while shrinking the panel and you get neither number: 21 regions and a 1.29mm cut all the way down to 35mm, and no geometry at all below 34.3mm, where the centre opening falls under the 1mm the generator insists on.</li>
 <li><strong><code>9-lead_11-bight_radius300mm</code></strong> is a <strong>600mm</strong> hole and <strong>not a sound hole at all</strong> — read it as a decorative panel. It satisfies every invariant, but only at that scale and only away from the defaults; <a href="knot_soundhole.html#size-is-the-other-lever-and-it-works">the writeup explains why</a>.</li>
 </ul>
-<p>Every sample is cut-ready geometry, but the layers still need the treatment described above: the blue engrave lines must be given a non-cutting operation before you send the file. Requires Node, and neither generator writes anything unless you set <code>OUT</code>.</p>
+<p>Every sample is cut-ready geometry, but the layers still need the treatment described above: the blue engrave lines must be given a non-cutting operation before you send the file. Requires Rust (<a href="https://rustup.rs">rustup</a>), and neither generator writes anything unless you set <code>OUT</code>.</p>
 </main>
 </div>
 <script>

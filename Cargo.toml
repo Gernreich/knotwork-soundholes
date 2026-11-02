@@ -1,0 +1,27 @@
+[package]
+name = "knotwork-soundholes"
+version = "0.1.0"
+edition = "2021"
+description = "Knotwork sound-hole generators: cut-ready SVG rosettes for laser-cut instruments"
+license-file = "LICENSE"
+publish = false
+autobins = false
+
+[lib]
+name = "soundhole"
+path = "src/lib.rs"
+
+[[bin]]
+name = "knot_soundhole"
+path = "knot_soundhole.rs"
+
+[[bin]]
+name = "plait_soundhole"
+path = "plait_soundhole.rs"
+
+[[bin]]
+name = "preview"
+path = "preview.rs"
+
+[profile.release]
+overflow-checks = true

@@ -44,7 +44,7 @@ def board(svg):
     # out with it -- the one thing these designs are built not to do
     assert all(not w['h'] for w in waste), svg
     root = t.ET.parse(svg).getroot()
-    reach = float(root.get('viewBox').split()[2]) / 2   # rim + bite + 0.5, as preview.js reads it
+    reach = float(root.get('viewBox').split()[2]) / 2   # rim + bite + 0.5, as preview.rs reads it
     s = round(reach + max(MARGIN, reach / 5))
     engr = [[(x, -y) for x, y in pts] for c, pts, _ in t.fpc.collect(root) if c == t.ENGRAVE]
     return {'o': [(-s, -s), (s, -s), (s, s), (-s, s)], 'h': [w['o'] for w in waste],

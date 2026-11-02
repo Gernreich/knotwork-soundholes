@@ -21,7 +21,7 @@ start, and that constraint decides which curve you need.
 | Look | plait, braided | one continuous self-crossing strand |
 | Sized by | `N` lobes → `2N` crossings | `LEADS` × `BIGHTS` |
 | Named forms | 6, 8, **10**, 12 crossings | **trefoil**, cinquefoil, septafoil, and any coprime pair |
-| Generator | `plait_soundhole.js` | `knot_soundhole.js` |
+| Generator | `plait_soundhole.rs` | `knot_soundhole.rs` |
 | Open area at radius 30mm | 52.4% at the default `N = 5` | 63.3% at 2 × 3, 48.2% at 3 × 5 |
 | Rim anchors | `2N` | `BIGHTS` |
 
@@ -195,4 +195,4 @@ carry a caveat.
 
 Every sample is cut-ready geometry, but the layers still need the treatment described
 above: the blue engrave lines must be given a non-cutting operation before you send the
-file. Requires Node, and neither generator writes anything unless you set `OUT`.
+file. Requires Rust ([rustup](https://rustup.rs)), and neither generator writes anything unless you set `OUT`.

@@ -1,6 +1,6 @@
 # Plait Sound Hole — even crossings (two woven ribbons)
 
-Generator: `plait_soundhole.js`
+Generator: `plait_soundhole.rs` (Rust; JavaScript until 2026-11-02)
 
 Companion (one strand, any coprime leads × bights):
 [`knot_soundhole.md`](knot_soundhole.md)
@@ -48,12 +48,13 @@ even — use the companion generator.**
 ## Usage
 
 ```bash
-node plait_soundhole.js --help                               # every setting and its default
-node plait_soundhole.js                                      # report only, writes nothing
-OUT=10-crossing_plait_radius30mm.svg node plait_soundhole.js # N=5, the default
-N=4 OUT=8-crossing_plait_radius30mm.svg node plait_soundhole.js
-R_HOLE=50 AMP=10.8 HW=3.3 BITE=2.5 OUT=10-crossing_plait_radius50mm.svg node plait_soundhole.js
-DIAG=1 node plait_soundhole.js                               # per-region dump
+cargo build --release                                                # once, and after any change to the source
+target/release/plait_soundhole --help                                # every setting and its default
+target/release/plait_soundhole                                       # report only, writes nothing
+OUT=10-crossing_plait_radius30mm.svg target/release/plait_soundhole  # N=5, the default
+N=4 OUT=8-crossing_plait_radius30mm.svg target/release/plait_soundhole
+R_HOLE=50 AMP=10.8 HW=3.3 BITE=2.5 OUT=10-crossing_plait_radius50mm.svg target/release/plait_soundhole
+DIAG=1 target/release/plait_soundhole                                # per-region dump
 ```
 
 `--help` prints this same table, so you do not need the document to hand.

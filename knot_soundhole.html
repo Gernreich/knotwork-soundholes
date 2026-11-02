@@ -102,7 +102,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <nav><b>Contents</b><a class="l1" href="#knot-sound-hole--any-coprime-leads--bights">Knot Sound Hole — any coprime leads × bights</a><a class="l2" href="#leads-and-bights-and-why-they-must-be-coprime">Leads and bights, and why they must be coprime</a><a class="l2" href="#the-structural-constraint">The structural constraint</a><a class="l2" href="#usage">Usage</a><a class="l2" href="#variants-at-r_hole30-60mm-hole">Variants at R_HOLE=30 (60mm hole)</a><a class="l2" href="#invariants--these-pin-the-topology">Invariants — these pin the topology</a><a class="l2" href="#the-tested-envelope-and-where-it-stops">The tested envelope, and where it stops</a><a class="l2" href="#output-layers">Output layers</a><a class="l2" href="#read-the-validation-report">Read the validation report</a><a class="l2" href="#how-the-overunder-is-decided">How the over/under is decided</a><a class="l2" href="#run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</a><a class="l2" href="#traps-already-sprung-here">Traps already sprung here</a><a class="l2" href="#caveats">Caveats</a><a class="l2" href="#generated-files">Generated files</a></nav>
 <main>
 <h1 id="knot-sound-hole--any-coprime-leads--bights">Knot Sound Hole — any coprime leads × bights</h1>
-<p>Generator: <code>knot_soundhole.js</code></p>
+<p>Generator: <code>knot_soundhole.rs</code> (Rust; JavaScript until 2026-11-02)</p>
 <p>Companion: <a href="plait_soundhole.html"><code>plait_soundhole.md</code></a> (two ribbons, even crossings)</p>
 <p>Replaces an earlier two-lead-only generator. Set <code>LEADS=2</code> and this reproduces its output exactly — verified file by file, cut layer byte-identical and the same set of engrave subpaths.</p>
 <p>Produces a cut-ready SVG rosette for an instrument sound hole, sized in the terms a knot-tyer already uses: <strong>L leads by B bights</strong>. The strand travels round <code>L</code> times before it closes, and shows <code>B</code> scallops at the rim. Millimetre-true output, <code>1 user unit = 1mm</code>.</p>
@@ -150,13 +150,14 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <h2 id="the-structural-constraint">The structural constraint</h2>
 <p>Same as both companions. This is a <strong>cut-out</strong>: the removed material is the open area and the ribbon is what stays. A ribbon ring floating inside a round hole would drop out when the last cut closes, so the ribbon peaks deliberately overrun the rim by <code>BITE</code> mm and fuse the rosette into the soundboard at <code>B</code> anchor points. <strong>There is no continuous rim circle in the cut layer</strong> — the outer boundary is <code>B</code> arcs. That is correct; adding a full circle drops the rosette on the floor.</p>
 <h2 id="usage">Usage</h2>
-<pre class="bash"><code>node knot_soundhole.js --help                   # every setting and its default
-node knot_soundhole.js                          # report only, writes nothing
-LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg node knot_soundhole.js
-LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg node knot_soundhole.js
-LEADS=2 BIGHTS=3 node knot_soundhole.js         # 2 leads: the classic trefoil
-SELFTEST=1 node knot_soundhole.js               # check the hash, exit
-DIAG=1 node knot_soundhole.js                   # per-region dump</code></pre>
+<pre class="bash"><code>cargo build --release                           # once, and after any change to the source
+target/release/knot_soundhole --help            # every setting and its default
+target/release/knot_soundhole                   # report only, writes nothing
+LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole
+LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg target/release/knot_soundhole
+LEADS=2 BIGHTS=3 target/release/knot_soundhole  # 2 leads: the classic trefoil
+SELFTEST=1 target/release/knot_soundhole        # check the hash, exit
+DIAG=1 target/release/knot_soundhole            # per-region dump</code></pre>
 <p><strong>The file that lands is not ready for the laser yet.</strong> Its geometry is, but it carries two layers and only one of them is a cut. See <a href="#output-layers">Output layers</a> before you send it: the blue <code>engrave</code> lines must be given anything other than a cut.</p>
 <p><code>--help</code> prints this same table, so you do not need the document to hand.</p>
 <p><strong><code>OUT</code> overwrites without asking</strong> — there is no force flag and no prompt. The two <code>OUT=</code> lines above name shipped sample files, so running them in this directory rewrites those files; at these parameters the bytes come back identical, but change a number and reuse the same command line and you have replaced a sample with different geometry and nothing will have said so. Write somewhere else while experimenting. The companion CLI in the living-hinge repository refuses by default, so the habits do not transfer.</p>
@@ -521,7 +522,7 @@ engrave lines == 2*B*(L-1)   (two edges of the over pass per crossing)</code></p
 <p>Everything else — signed distance field, flood fill, sliver welding, marching squares, chaining, RDP, SVG emit — is carried over unchanged, including the spatial hash for distance.</p>
 <h2 id="run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</h2>
 <p>The expanding-ring stopping bound fails <strong>silently</strong> if wrong — it just returns distances that are too large, which reads as phantom extra "cut" area and quietly changes the shape without any validation line firing.</p>
-<pre class="bash"><code>LEADS=3 BIGHTS=5 SELFTEST=1 node knot_soundhole.js</code></pre>
+<pre class="bash"><code>LEADS=3 BIGHTS=5 SELFTEST=1 target/release/knot_soundhole</code></pre>
 <p>The code's pass gate is <code>&lt; 1e-9</code>, but the error should be <strong>exactly <code>0</code></strong>: both paths minimise the same expression over the same sample set, so they return bit-identical floats. Any nonzero value at all means the ring search missed a sample — do not read a small error as rounding. It is <code>0</code> at <code>(2,3)</code>, <code>(3,5)</code> and <code>(4,3)</code>.</p>
 <h2 id="traps-already-sprung-here">Traps already sprung here</h2>
 <ul>
