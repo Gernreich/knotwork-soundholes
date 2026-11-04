@@ -196,3 +196,7 @@ carry a caveat.
 Every sample is cut-ready geometry, but the layers still need the treatment described
 above: the blue engrave lines must be given a non-cutting operation before you send the
 file. Requires Rust ([rustup](https://rustup.rs)), and neither generator writes anything unless you set `OUT`.
+
+## Credits
+
+Made by Michael Gernreich with [Claude](https://www.anthropic.com/claude) (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a `Co-Authored-By: Claude` line.

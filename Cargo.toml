@@ -2,6 +2,7 @@
 name = "knotwork-soundholes"
 version = "0.1.0"
 edition = "2021"
+authors = ["Michael Gernreich", "Claude (Anthropic) <noreply@anthropic.com>"]
 description = "Knotwork sound-hole generators: cut-ready SVG rosettes for laser-cut instruments"
 license-file = "LICENSE"
 publish = false

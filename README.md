@@ -106,3 +106,7 @@ couple of millimetres.
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
 Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under [CC0 1.0](LICENSE).
+
+## Credits
+
+Made by Michael Gernreich with [Claude](https://www.anthropic.com/claude) (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a `Co-Authored-By: Claude` line.
