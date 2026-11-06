@@ -13,11 +13,11 @@ Output is millimetre-true — `1 user unit = 1mm`, with a physical `width`/`heig
 prints and cuts at real size.
 
 <p>
-<img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60mm hole and running on into the paler surrounding board at three anchors; the white shapes are the material that drops out" width="46%">
-<img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60mm hole and running on into the paler surrounding board; the white shapes are the material that drops out" width="46%">
+<img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60 mm hole and running on into the paler surrounding board at three anchors; the white shapes are the material that drops out" width="46%">
+<img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60 mm hole and running on into the paler surrounding board; the white shapes are the material that drops out" width="46%">
 </p>
 
-*Left: one strand, 2 leads × 3 bights. Right: two ribbons, 10 crossings. Both at a 60mm
+*Left: one strand, 2 leads × 3 bights. Right: two ribbons, 10 crossings. Both at a 60 mm
 hole. Display renderings — **deep gold is the rosette, pale gold the board it fuses into,
 white is what drops out.** The ribbon crosses between the two golds without a break,
 because the rosette is not a ring sitting in a hole: it is board material, and that is what
@@ -45,7 +45,7 @@ interlace has to close up when you return to your start, and that is what decide
 | Sized by | `N` lobes → `2N` crossings | `LEADS` × `BIGHTS`, coprime |
 | Named forms | 6, 8, **10**, 12 crossings | **trefoil**, cinquefoil, septafoil, any coprime pair |
 | Program | `plait_soundhole.rs` | `knot_soundhole.rs` |
-| Open area at radius 30mm | 52.4% (default `N = 5`) | 63.3% at 2 × 3, 48.2% at 3 × 5 |
+| Open area at radius 30 mm | 52.4% (default `N = 5`) | 63.3% at 2 × 3, 48.2% at 3 × 5 |
 | Rim anchors | `2N` | `BIGHTS` |
 
 In the plait each strand meets every crossing once, so the count is even by
@@ -85,7 +85,7 @@ single cut stage, so it is black. Elsewhere that last cut frees the part; **here
 not.** What black removes is the waste, and the rosette stays fused to the soundboard by
 its rim anchors. A rosette that comes free has been cut wrong. The designs are
 very open — **37% to 63%** of the disc removed, measured across the thirteen shipped samples. Cut in
-**3mm Baltic birch plywood** — the void-free core matters when the ribbon narrows to a
+**3 mm Baltic birch plywood** — the void-free core matters when the ribbon narrows to a
 couple of millimetres.
 
 ## Files
@@ -101,7 +101,7 @@ couple of millimetres.
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
 | `preview.rs` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
-| `turn.html` | every sample in 3D, its waste taken out of a square of 3mm plywood — drag to turn |
+| `turn.html` | every sample in 3D, its waste taken out of a square of 3 mm plywood — drag to turn |
 | `viewer.py` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 

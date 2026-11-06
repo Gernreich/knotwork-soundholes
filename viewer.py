@@ -66,7 +66,7 @@ def main(argv):
             'Drag to turn; right-drag, shift-drag or move two fingers to slide the view; '
             'scroll or pinch to zoom in on whatever is under the pointer; double-click to turn '
             'round that point, and Reset view to go back. Pick a rosette above. Each is its cut '
-            'file’s waste taken out of a square of 3mm plywood soundboard, with the engrave lines '
+            'file’s waste taken out of a square of 3 mm plywood soundboard, with the engrave lines '
             'that mark the over/under on the face. The ribbon is the board that is left, and it '
             'runs on into the board round the rim at every anchor.',
             'knotwork-soundholes/viewer.py')

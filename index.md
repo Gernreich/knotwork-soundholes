@@ -6,7 +6,7 @@
 
 **[Turn it in 3D](https://gernreich.github.io/knotwork-soundholes/turn.html)**
 
-<iframe src="turn.html?embed" title="Each rosette cut through a square of 3mm plywood soundboard, as a solid you can drag to turn, with a button for each of the thirteen samples" style="width:100%;height:560px;border:0"></iframe>
+<iframe src="turn.html?embed" title="Each rosette cut through a square of 3 mm plywood soundboard, as a solid you can drag to turn, with a button for each of the thirteen samples" style="width:100%;height:560px;border:0"></iframe>
 
 Two generators that produce cut-ready SVG rosettes for an instrument sound hole,
 millimetre-true at `1 user unit = 1mm`. Both emit a validation report on every run,
@@ -22,7 +22,7 @@ start, and that constraint decides which curve you need.
 | Sized by | `N` lobes → `2N` crossings | `LEADS` × `BIGHTS` |
 | Named forms | 6, 8, **10**, 12 crossings | **trefoil**, cinquefoil, septafoil, and any coprime pair |
 | Generator | `plait_soundhole.rs` | `knot_soundhole.rs` |
-| Open area at radius 30mm | 52.4% at the default `N = 5` | 63.3% at 2 × 3, 48.2% at 3 × 5 |
+| Open area at radius 30 mm | 52.4% at the default `N = 5` | 63.3% at 2 × 3, 48.2% at 3 × 5 |
 | Rim anchors | `2N` | `BIGHTS` |
 
 ## Why there are two: leads, bights, and one rule
@@ -85,7 +85,7 @@ thirteen shipped samples, and 48% (the knot at its `3 × 5` default) and 52% (th
 run either generator without arguments. More leads means less open area, so the sparser
 end of that range is where the knots get busy, not where they get tame. Three anchors are
 enough to fix a trefoil's plane, but that is a kinematic statement, not a stiffness one.
-These are cut in **3mm Baltic birch plywood** — its void-free core matters here, because a
+These are cut in **3 mm Baltic birch plywood** — its void-free core matters here, because a
 void landing in a 2mm-wide ribbon is a break waiting to happen. Compare the narrowest-cut
 figures against your kerf before choosing a design.
 
@@ -112,10 +112,10 @@ separate ring sitting in a hole: it is board material, continuous with the board
 it, which is what keeps it from falling through. The cut files themselves carry no fill,
 so a browser shows them as thin lines on a transparency checkerboard.
 
-**Every sample is a 30mm radius — a 60mm hole — unless its label says otherwise.** Five
-do: `4 × 3` and `4 × 5` at 39mm, `5 × 4` at 60mm, `9 × 11` at 300mm, and the plait at
-50mm last. The pictures are all scaled to the same width here, so a 300mm rosette and a
-30mm one look the same size on the page; only the label tells you which is which.
+**Every sample is a 30 mm radius — a 60 mm hole — unless its label says otherwise.** Five
+do: `4 × 3` and `4 × 5` at 39 mm, `5 × 4` at 60 mm, `9 × 11` at 300 mm, and the plait at
+50 mm last. The pictures are all scaled to the same width here, so a 300 mm rosette and a
+30 mm one look the same size on the page; only the label tells you which is which.
 
 <div class="tw">
 <table>
@@ -134,35 +134,35 @@ do: `4 × 3` and `4 × 5` at 39mm, `5 × 4` at 60mm, `9 × 11` at 300mm, and the
 <tr>
 <td align="center"><a href="3-lead_4-bight_knot_radius30mm.svg"><img src="previews/3-lead_4-bight_knot_radius30mm.svg" alt="A three-lead four-bight knot" width="150"></a></td>
 <td align="center"><a href="3-lead_5-bight_knot_radius30mm.svg"><img src="previews/3-lead_5-bight_knot_radius30mm.svg" alt="A three-lead five-bight knot" width="150"></a></td>
-<td align="center"><a href="4-lead_3-bight_knot_radius39mm.svg"><img src="previews/4-lead_3-bight_knot_radius39mm.svg" alt="A four-lead three-bight knot at 39mm radius" width="150"></a></td>
-<td align="center"><a href="4-lead_5-bight_knot_radius39mm.svg"><img src="previews/4-lead_5-bight_knot_radius39mm.svg" alt="A four-lead five-bight knot at 39mm radius" width="150"></a></td>
+<td align="center"><a href="4-lead_3-bight_knot_radius39mm.svg"><img src="previews/4-lead_3-bight_knot_radius39mm.svg" alt="A four-lead three-bight knot at 39 mm radius" width="150"></a></td>
+<td align="center"><a href="4-lead_5-bight_knot_radius39mm.svg"><img src="previews/4-lead_5-bight_knot_radius39mm.svg" alt="A four-lead five-bight knot at 39 mm radius" width="150"></a></td>
 </tr>
 <tr>
 <td align="center"><sub>3 × 4</sub></td>
 <td align="center"><sub>3 × 5</sub></td>
-<td align="center"><sub>4 × 3 &middot; 39mm</sub></td>
-<td align="center"><sub>4 × 5 &middot; 39mm</sub></td>
+<td align="center"><sub>4 × 3 &middot; 39 mm</sub></td>
+<td align="center"><sub>4 × 5 &middot; 39 mm</sub></td>
 </tr>
 <tr>
-<td align="center"><a href="5-lead_4-bight_knot_radius60mm.svg"><img src="previews/5-lead_4-bight_knot_radius60mm.svg" alt="A five-lead four-bight knot at 60mm radius" width="150"></a></td>
-<td align="center"><a href="9-lead_11-bight_knot_radius300mm.svg"><img src="previews/9-lead_11-bight_knot_radius300mm.svg" alt="A nine-lead eleven-bight knot at 300mm radius" width="150"></a></td>
+<td align="center"><a href="5-lead_4-bight_knot_radius60mm.svg"><img src="previews/5-lead_4-bight_knot_radius60mm.svg" alt="A five-lead four-bight knot at 60 mm radius" width="150"></a></td>
+<td align="center"><a href="9-lead_11-bight_knot_radius300mm.svg"><img src="previews/9-lead_11-bight_knot_radius300mm.svg" alt="A nine-lead eleven-bight knot at 300 mm radius" width="150"></a></td>
 <td align="center"><a href="8-crossing_plait_radius30mm.svg"><img src="previews/8-crossing_plait_radius30mm.svg" alt="An eight-crossing plait" width="150"></a></td>
 <td align="center"><a href="10-crossing_plait_radius30mm.svg"><img src="previews/10-crossing_plait_radius30mm.svg" alt="A ten-crossing plait, two ribbons woven around a ring" width="150"></a></td>
 </tr>
 <tr>
-<td align="center"><sub>5 × 4 &middot; 60mm</sub></td>
-<td align="center"><sub>9 × 11 &middot; 300mm</sub></td>
+<td align="center"><sub>5 × 4 &middot; 60 mm</sub></td>
+<td align="center"><sub>9 × 11 &middot; 300 mm</sub></td>
 <td align="center"><sub>plait &middot; 8 crossings</sub></td>
 <td align="center"><sub>plait &middot; 10 crossings</sub></td>
 </tr>
 <tr>
-<td align="center"><a href="10-crossing_plait_radius50mm.svg"><img src="previews/10-crossing_plait_radius50mm.svg" alt="A ten-crossing plait at 50mm radius" width="150"></a></td>
+<td align="center"><a href="10-crossing_plait_radius50mm.svg"><img src="previews/10-crossing_plait_radius50mm.svg" alt="A ten-crossing plait at 50 mm radius" width="150"></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td align="center"><sub>plait &middot; 10 crossings &middot; 50mm</sub></td>
+<td align="center"><sub>plait &middot; 10 crossings &middot; 50 mm</sub></td>
 <td></td>
 <td></td>
 <td></td>
@@ -176,19 +176,19 @@ Most of the samples above need no explanation: pick the crossing count you like.
 carry a caveat.
 
 - **`3-lead_2-bight`** is held on **two rim anchors**, the fewest these designs can have.
-  It removes half the disc and holds the result on two 4mm tabs.
+  It removes half the disc and holds the result on two 4 mm tabs.
 - **`4-lead_3-bight_radius39mm`** and **`4-lead_5-bight_radius39mm`** are the two
-  four-lead samples, both at 39mm on the same `AMP=9.75 HW=2.6`. A bigger panel alone does
+  four-lead samples, both at 39 mm on the same `AMP=9.75 HW=2.6`. A bigger panel alone does
   not fix their narrow cuts — the ribbon has to scale with it, and
   [the writeup shows the numbers](knot_soundhole.md#variants-at-r_hole30-60mm-hole).
-- **`5-lead_4-bight_radius60mm`** is a 120mm hole. Scaling `AMP` and `HW` in step with
-  `R_HOLE`, five leads stop resolving below about 44mm — the rim gaps weld shut and the
+- **`5-lead_4-bight_radius60mm`** is a 120 mm hole. Scaling `AMP` and `HW` in step with
+  `R_HOLE`, five leads stop resolving below about 44 mm — the rim gaps weld shut and the
   region count drops from 21 to 17 — but the size shipped is chosen for the *cut*, not
-  for that floor: the narrowest cut is 0.55mm at 44mm and 1.29mm at 60mm. Hold `AMP` and
+  for that floor: the narrowest cut is 0.55 mm at 44 mm and 1.29 mm at 60 mm. Hold `AMP` and
   `HW` at the shipped `15` and `2.4` while shrinking the panel and you get neither
-  number: 21 regions and a 1.29mm cut all the way down to 35mm, and no geometry at all
-  below 34.3mm, where the centre opening falls under the 1mm the generator insists on.
-- **`9-lead_11-bight_radius300mm`** is a **600mm** hole and **not a sound hole at all** —
+  number: 21 regions and a 1.29 mm cut all the way down to 35 mm, and no geometry at all
+  below 34.3 mm, where the centre opening falls under the 1 mm the generator insists on.
+- **`9-lead_11-bight_radius300mm`** is a **600 mm** hole and **not a sound hole at all** —
   read it as a decorative panel. It satisfies every invariant, but only at that scale and
   only away from the defaults;
   [the writeup explains why](knot_soundhole.md#size-is-the-other-lever-and-it-works).

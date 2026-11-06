@@ -86,14 +86,14 @@ given anything other than a cut.
 `AMP ≈ 0.217*R_HOLE` and `HW ≈ 0.067*R_HOLE` reproduces these proportions;
 a guard refuses geometry that cannot close and suggests values.
 
-## Variants at R_HOLE=30 (60mm hole)
+## Variants at R_HOLE=30 (60 mm hole)
 
 | `N` | Crossings | Regions | Open area | Equiv. plain hole | Narrowest cut | Slivers welded |
 |---|---|---|---|---|---|---|
-| 3 | 6 | 13 | 59.0% | 46.10mm | 4.03mm | 4 |
-| 4 | 8 | 17 | 55.9% | 44.85mm | 3.54mm | 12 |
-| **5** | **10** | **21** | **52.4%** | **43.45mm** | **3.10mm** | **0** |
-| 6 | 12 | 25 | 48.9% | 41.96mm | 2.70mm | 0 |
+| 3 | 6 | 13 | 59.0% | 46.10 mm | 4.03 mm | 4 |
+| 4 | 8 | 17 | 55.9% | 44.85 mm | 3.54 mm | 12 |
+| **5** | **10** | **21** | **52.4%** | **43.45 mm** | **3.10 mm** | **0** |
+| 6 | 12 | 25 | 48.9% | 41.96 mm | 2.70 mm | 0 |
 
 Regions are always `4N + 1` — one centre star, plus a lens and a rim opening for
 each of the `2N` crossings. (The count keys on
@@ -105,8 +105,8 @@ lace-like, with less open area.
 **Above the table.** `4N + 1` keeps holding — checked at `N` = 7, 8, 10 and 12, all
 exact. Unlike the companion, this design does not lose regions as it gets busier,
 because two ribbons stay a fixed `2*HW` apart however many lobes they have. What
-does move is the narrowest cut: **2.34mm** at `N=7`, 2.03 at 8, 1.49 at 10 and
-**1.06mm** at `N=12`. That is the number to watch rather than the region count —
+does move is the narrowest cut: **2.34 mm** at `N=7`, 2.03 at 8, 1.49 at 10 and
+**1.06 mm** at `N=12`. That is the number to watch rather than the region count —
 compare it against your kerf, and remember it is the *drawn* width, before the beam
 takes its share.
 
@@ -131,7 +131,7 @@ flat pad and the rosette looking sliced off by a circle.
 The ribbon edges do carry on out there, as far as `R_HOLE + BITE`. These lines put
 that outline back across the anchor, so the eye reads the ribbon as passing into the
 board. Both ribbons get them, A directly and B through the same `pi/N` rotation the
-weave itself uses. At defaults they occupy radii **30.0 to 31.5mm** — exactly the
+weave itself uses. At defaults they occupy radii **30.0 to 31.5 mm** — exactly the
 overrun band — while the interlace lines stay inside the rim.
 
 Reported separately as `rim continuations`, and deliberately not folded into the `4N`
@@ -144,8 +144,8 @@ measured rather than guaranteed; it is decoration, not topology.
 strengthens the effect, at the cost of how firmly the rosette is anchored.
 
 **The blue lines must not be cut.** Give them a score or engrave operation, or delete the
-layer. They run straight across the ribbon — at defaults they span radii 19.2 to 26.2mm
-against a ribbon band of 21 to 25mm — so cutting them severs the ribbon at all `2N`
+layer. They run straight across the ribbon — at defaults they span radii 19.2 to 26.2 mm
+against a ribbon band of 21 to 25 mm — so cutting them severs the ribbon at all `2N`
 crossings, through exactly the material that holds the rosette together. It comes apart
 as it leaves the machine.
 
@@ -203,7 +203,7 @@ not bring them back.
 
 `content vs canvas` is the newest line and the only one that looks at the **document**
 rather than the geometry. Every other check describes what the generator computed; none
-of them noticed when the rim continuations reached 1mm past a canvas sized for the cut
+of them noticed when the rim continuations reached 1 mm past a canvas sized for the cut
 layer alone, and files were shipped clipped while every invariant passed. It measures
 the emitted points against the viewBox and names the shortfall if there is one.
 
@@ -232,14 +232,14 @@ re-derive rather than trust it.
   nothing verifies a thin material neck.
 - Open area is large (≈52% at defaults). For a real soundboard consider what
   that removes structurally.
-- Cut in 3mm Baltic birch plywood. Ribbon width has not been swept against other stock,
+- Cut in 3 mm Baltic birch plywood. Ribbon width has not been swept against other stock,
   so treat the narrowest-cut column as the number to check against your kerf.
 
 ## Generated files
 
 - `8-crossing_plait_radius30mm.svg` — 8 crossings (N=4)
 - `10-crossing_plait_radius30mm.svg` — 10 crossings (N=5, default)
-- `10-crossing_plait_radius50mm.svg` — the same 10 crossings at `R_HOLE = 50`, a 100mm
+- `10-crossing_plait_radius50mm.svg` — the same 10 crossings at `R_HOLE = 50`, a 100 mm
   hole, on `AMP=10.8 HW=3.3 BITE=2.5` — the scaling worked in the Usage section above,
   committed so the example names a file you have. Open area 52.9%, within half a point
-  of the 30mm original, which is what scaling all three together is supposed to preserve.
+  of the 30 mm original, which is what scaling all three together is supposed to preserve.

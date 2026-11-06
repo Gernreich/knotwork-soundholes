@@ -105,12 +105,12 @@ instead.
 R_CENTRE = R_HOLE + BITE - 2*(AMP + HW)
 ```
 
-The generator **exits 1** if that drops below 1mm. So shrinking `R_HOLE` while
+The generator **exits 1** if that drops below 1 mm. So shrinking `R_HOLE` while
 leaving `AMP`/`HW` at their defaults does not give you a tighter knot, it refuses to
 run — at defaults it aborts below `R_HOLE ≈ 18.5`. Scale both with the rules of
 thumb above and `R_CENTRE ≈ 0.37*R_HOLE + BITE`. The `BITE` term does not scale, so
-the ratio is not constant: **0.42** at the 30mm default, 0.40 at 50mm, 0.38 at
-100mm, approaching 0.37 only well above that.
+the ratio is not constant: **0.42** at the 30 mm default, 0.40 at 50 mm, 0.38 at
+100 mm, approaching 0.37 only well above that.
 
 This one depends on `AMP`, `HW`, `BITE` and `R_HOLE` alone — leads and bights do not
 enter it.
@@ -121,46 +121,46 @@ The centreline is sampled at a fixed `M = 20000` points — not exposed as a var
 — and distance is measured to those samples, so it **overestimates** by up to half
 the sample spacing. Those `M` points now cover `L` turns rather than two, so the
 spacing grows with leads as well as with bights and the `AMP*B/L` radial derivative.
-It stays an order of magnitude under the 0.25mm `MIN_FEATURE` floor across the
+It stays an order of magnitude under the 0.25 mm `MIN_FEATURE` floor across the
 tested range, but the margin narrows as either number rises — and long before
 sampling becomes the limit, `MIN_FEATURE` does. See the envelope below.
 
-## Variants at R_HOLE=30 (60mm hole)
+## Variants at R_HOLE=30 (60 mm hole)
 
 | `L` × `B` | Regions | Crossings | Anchors | Engrave | Open area | Equiv. plain hole | Narrowest cut |
 |---|---|---|---|---|---|---|---|
-| 2 × 3 | 7 | 3 | 3 | 6 | 63.3% | 47.73mm | 5.51mm |
-| 3 × 2 | 7 | 4 | 2 | 8 | 50.7% | 42.72mm | 2.21mm |
-| **3 × 4** | **13** | **8** | **4** | **16** | **49.2%** | **42.10mm** | **2.07mm** |
-| **3 × 5** | **16** | **10** | **5** | **20** | **48.2%** | **41.64mm** | **2.01mm** |
-| 4 × 3 | 13 | 9 | 3 | 18 | 39.4% | 37.66mm | **0.66mm** |
-| 4 × 5 | 21 | 15 | 5 | 30 | 38.2% | 37.07mm | **0.61mm** |
+| 2 × 3 | 7 | 3 | 3 | 6 | 63.3% | 47.73 mm | 5.51 mm |
+| 3 × 2 | 7 | 4 | 2 | 8 | 50.7% | 42.72 mm | 2.21 mm |
+| **3 × 4** | **13** | **8** | **4** | **16** | **49.2%** | **42.10 mm** | **2.07 mm** |
+| **3 × 5** | **16** | **10** | **5** | **20** | **48.2%** | **41.64 mm** | **2.01 mm** |
+| 4 × 3 | 13 | 9 | 3 | 18 | 39.4% | 37.66 mm | **0.66 mm** |
+| 4 × 5 | 21 | 15 | 5 | 30 | 38.2% | 37.07 mm | **0.61 mm** |
 
 `2 × 3` is the trefoil, reproduced here to show the generalisation is faithful.
 `4 × 3` and `4 × 5` are included as warnings as much as options: both satisfy every
-invariant, but a 0.66mm — or 0.61mm — narrowest cut is delicate against a kerf of
-0.1–0.2mm. Neither ships at this size; both ship at 39mm for the reason below.
+invariant, but a 0.66 mm — or 0.61 mm — narrowest cut is delicate against a kerf of
+0.1–0.2 mm. Neither ships at this size; both ship at 39 mm for the reason below.
 
 **A bigger panel alone does not fix that** — and this is the trap the rules of thumb
-exist to prevent. The same `4 × 3` at `R_HOLE = 39` with default tuning gives 0.67mm,
+exist to prevent. The same `4 × 3` at `R_HOLE = 39` with default tuning gives 0.67 mm,
 essentially unchanged, because the ribbon did not grow with the panel and the weave
 got relatively tighter. Scale `AMP` and `HW` with the radius and the same knot at the
-same size gives **1.27mm**, near enough double. That is what the shipped
+same size gives **1.27 mm**, near enough double. That is what the shipped
 `4-lead_3-bight_knot_radius39mm.svg` uses.
 
 | `R_HOLE` | `AMP` · `HW` | Narrowest | Open |
 |---|---|---|---|
-| 30 | 7.5 · 2.0 | 0.66mm | 39.4% |
-| 39 | 7.5 · 2.0 | 0.67mm | 49.4% |
-| **39** | **9.75 · 2.6** | **1.27mm** | **38.6%** |
-| 39 | 11 · 1.8 | 1.64mm | 55.4% |
+| 30 | 7.5 · 2.0 | 0.66 mm | 39.4% |
+| 39 | 7.5 · 2.0 | 0.67 mm | 49.4% |
+| **39** | **9.75 · 2.6** | **1.27 mm** | **38.6%** |
+| 39 | 11 · 1.8 | 1.64 mm | 55.4% |
 
 All four satisfy every invariant. The last is the most open and cuts widest, on a
-3.6mm ribbon — thinner material spanning more air. The shipped file takes the middle,
+3.6 mm ribbon — thinner material spanning more air. The shipped file takes the middle,
 as the sturdiest of them.
 
-`4 × 5` is shipped at the same 39mm on the same `AMP=9.75 HW=2.6`, and lands at
-**1.25mm** — within 0.02mm of what `4 × 3` gets from that tuning, despite carrying six
+`4 × 5` is shipped at the same 39 mm on the same `AMP=9.75 HW=2.6`, and lands at
+**1.25 mm** — within 0.02 mm of what `4 × 3` gets from that tuning, despite carrying six
 more crossings. Adding bights at fixed leads costs the narrowest cut very little here;
 it is the *lead* count that drives it down.
 
@@ -194,15 +194,15 @@ two things shrink: the lens regions between passes, and the rim gaps between anc
 Either falling under `MIN_FEATURE` gets it welded shut, and a welded region is one
 the count never sees.
 
-At a fixed 30mm panel that looks like a hard stop. `(5,2)` reports 2 crossings
+At a fixed 30 mm panel that looks like a hard stop. `(5,2)` reports 2 crossings
 against 8; `(7,2)` reports zero at default tuning; `(5,4)` caps at 17 regions
 against 21. But the shortfall is almost always exactly `B` — the rim gaps — and
 those scale with the panel:
 
-- `(5,4)` is four regions short at 30mm and **exact at 60mm**.
-- `(9,11)` is eleven short at 100mm and **exact at 300mm**.
+- `(5,4)` is four regions short at 30 mm and **exact at 60 mm**.
+- `(9,11)` is eleven short at 100 mm and **exact at 300 mm**.
 
-So five leads and nine leads both work; they simply do not fit in a 30mm hole. What
+So five leads and nine leads both work; they simply do not fit in a 30 mm hole. What
 the tested envelope really describes is a relationship between lead count and panel
 size, not a maximum lead count.
 
@@ -228,10 +228,10 @@ Two things still need attention as leads rise:
 `(9,11)` satisfies every invariant — but only on a large enough panel, and that is
 worth understanding because it is the clearest evidence for the claim above.
 
-At the 30mm default it fails completely: 23 regions against 100, **zero** crossings
-found, 18.3% open. Nine passes of 4mm ribbon do not fit that annulus at all. A finer
+At the 30 mm default it fails completely: 23 regions against 100, **zero** crossings
+found, 18.3% open. Nine passes of 4 mm ribbon do not fit that annulus at all. A finer
 ribbon fixes the crossings — every working row below runs `AMP/HW` between 15 and 26,
-far above the `L × HW` figure — and from 30mm up the crossing count is a correct 88.
+far above the `L × HW` figure — and from 30 mm up the crossing count is a correct 88.
 
 The region count is what stays wrong, and it stays wrong by exactly **11**, which is
 `B`. The eleven rim gaps were forming below `MIN_FEATURE` and being welded shut. They
@@ -247,7 +247,7 @@ scale with the panel, so at `R_HOLE = 300` they clear the floor and survive:
 So the ceiling on leads is not a property of the curve. It is the cutting floor
 meeting features that shrink as leads rise — and making the panel bigger moves those
 features back above it. Note also that the region count was the only line telling the
-truth at 100mm: crossings, engrave and anchors all read `OK` while eleven regions were
+truth at 100 mm: crossings, engrave and anchors all read `OK` while eleven regions were
 quietly missing.
 
 ## Output layers
@@ -271,8 +271,8 @@ a flat pad, and the rosette looking sliced off by a circle.
 The ribbon's own edges do carry on out there, as far as `R_HOLE + BITE`. These lines
 put that outline back across the anchor, so the eye reads the ribbon as passing into
 the board rather than being truncated. On the trefoil they occupy radii **30.0 to
-31.5mm** — exactly the overrun band — while the interlace lines sit at 19.7 to
-24.2mm.
+31.5 mm** — exactly the overrun band — while the interlace lines sit at 19.7 to
+24.2 mm.
 
 They are reported separately, as `rim continuations`, and deliberately not folded
 into the `2*B*(L-1)` count: that number is derived from crossings and is a
@@ -317,7 +317,7 @@ saying so at any grid.
 
 `content vs canvas` is the newest line and the only one that looks at the **document**
 rather than the geometry. Every other check describes what the generator computed; none
-of them noticed when the rim continuations reached 1mm past a canvas sized for the cut
+of them noticed when the rim continuations reached 1 mm past a canvas sized for the cut
 layer alone, and files were shipped clipped while every invariant passed. It measures
 the emitted points against the viewBox and names the shortfall if there is one.
 
@@ -376,9 +376,9 @@ bit-identical floats. Any nonzero value at all means the ring search missed a sa
 - The envelope above is a tested range, not a proof. `(4,7)` has since been run and
   passes every invariant — 29 regions, 21 crossings, 42 engrave lines, 7 anchors —
   but see the warning below about what that does *not* tell you.
-- Cut in 3mm Baltic birch plywood, whose void-free core matters as the ribbon narrows.
-  The narrowest cut falls fast as leads rise — 5.51mm at `2 × 3`, 0.66mm at `4 × 3`,
-  0.61mm at `4 × 5`, **0.56mm at `4 × 7`**.
+- Cut in 3 mm Baltic birch plywood, whose void-free core matters as the ribbon narrows.
+  The narrowest cut falls fast as leads rise — 5.51 mm at `2 × 3`, 0.66 mm at `4 × 3`,
+  0.61 mm at `4 × 5`, **0.56 mm at `4 × 7`**.
 
 **Passing the invariants is not the same as being cuttable.** `(4,7)` satisfies both
 counts and still comes out finer than `4 × 3`, which is flagged above as delicate.
@@ -397,19 +397,19 @@ believing the OK lines.
 - `4-lead_5-bight_knot_radius39mm.svg` — 4 leads × 5 bights at the same `R_HOLE = 39`
   and the same `AMP=9.75 HW=2.6`, so the two four-lead samples differ only in bights
 - `5-lead_4-bight_knot_radius60mm.svg` — 5 leads × 4 bights at `R_HOLE = 60`,
-  `AMP=15 HW=2.4` — a 120mm hole. Five leads resolve from about `R_HOLE = 44` when `AMP`
+  `AMP=15 HW=2.4` — a 120 mm hole. Five leads resolve from about `R_HOLE = 44` when `AMP`
   and `HW` are scaled in step with `R_HOLE`, not from 60; the panel is sized for the cut
-  instead, which goes from 0.55mm at 44 to **1.29mm** here. Those two figures are on the
+  instead, which goes from 0.55 mm at 44 to **1.29 mm** here. Those two figures are on the
   scaled proportions: leaving `AMP=15 HW=2.4` fixed while you shrink the panel holds the
-  cut at 1.29mm and the region count at 21, and refuses below `R_HOLE = 34.3`, where the
-  centre opening falls under the 1mm minimum
+  cut at 1.29 mm and the region count at 21, and refuses below `R_HOLE = 34.3`, where the
+  centre opening falls under the 1 mm minimum
 
 - `2-lead_3-bight_knot_radius30mm.svg` — 2 leads × 3 bights
 - `2-lead_5-bight_knot_radius30mm.svg` — 2 leads × 5 bights
 - `2-lead_7-bight_knot_radius30mm.svg` — 2 leads × 7 bights
 
 `3 × 2` has only **two rim anchors**, the fewest any of these designs can have. It
-removes half the disc and holds the result on two 4mm tabs. Three anchors are
+removes half the disc and holds the result on two 4 mm tabs. Three anchors are
 described above as a kinematic minimum rather than a stiffness one; two is below
 that, so treat it as the most fragile thing here that still passes every invariant.
 
@@ -423,7 +423,7 @@ three always agree.
 
 - `9-lead_11-bight_knot_radius300mm.svg` — 9 leads × 11 bights, `AMP=78 HW=5.0`
 
-**This is a 600mm hole. Nothing has a sound hole that size** — it is a decorative
+**This is a 600 mm hole. Nothing has a sound hole that size** — it is a decorative
 panel, a screen, a table inlay, and it is committed as a demonstration rather than as
 something to fit an instrument. Read the caveats before cutting it:
 
@@ -433,14 +433,14 @@ something to fit an instrument. Read the caveats before cutting it:
   `9 × 4`, `9 × 7` and `9 × 8` get their regions and crossings right but overshoot the
   engrave count. `9 × 2` and `9 × 5` miss on regions.
 - **It needs the size.** The same knot at `R_HOLE = 100` comes out eleven regions
-  short, and at the 30mm default it does not resolve at all. See
+  short, and at the 30 mm default it does not resolve at all. See
   [the envelope](#size-is-the-other-lever-and-it-works).
 - **It is not at default settings.** `AMP=78 HW=5.0` — a ratio of 15.6, not the `L`
   that the `AMP = L × HW` rule of thumb would suggest. `AMP = 45` at this `HW` returns
   80 regions against 100. The shipped defaults produce nothing usable at nine leads.
-- **61% of the disc is removed**, held by eleven 10mm-wide anchors, across 600mm.
+- **61% of the disc is removed**, held by eleven 10mm-wide anchors, across 600 mm.
   That is a large, open, fragile object and nothing here has been cut to find out how
   it behaves. Treat the span as the risk, not the cut width — the narrowest cut is a
-  comfortable 2.90mm.
+  comfortable 2.90 mm.
 - **148 slivers were welded.** With the region count correct those are grazing
   artifacts rather than lost structure, but fine detail has been rewritten in places.
