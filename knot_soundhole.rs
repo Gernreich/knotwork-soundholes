@@ -40,7 +40,7 @@
 //   cargo run --release --bin knot_soundhole               report only
 //   LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg cargo run --release --bin knot_soundhole
 //   LEADS=2 BIGHTS=3 cargo run --release --bin knot_soundhole   2 leads: the classic trefoil
-//   SELFTEST=1 cargo run --release --bin knot_soundhole    check the spatial hash, exit
+//   SELFTEST=1 cargo run --release --bin knot_soundhole    check the k-d tree, exit
 //   DIAG=1 cargo run --release --bin knot_soundhole        per-region dump
 //
 //   LEADS BIGHTS R_HOLE AMP HW BITE NG MIN_FEATURE OUT DIAG SELFTEST
@@ -111,7 +111,7 @@ const PARAMS: [(&str, &str, &str); 8] = [
 ];
 const FLAGS: [(&str, &str); 3] = [
     ("OUT", "output path -- NOTHING IS WRITTEN unless this is set"),
-    ("SELFTEST", "verify the spatial hash against brute force, then exit"),
+    ("SELFTEST", "verify the k-d tree against brute force, then exit"),
     ("DIAG", "verbose per-region report"),
 ];
 
@@ -251,65 +251,68 @@ fn run() -> i32 {
         cy[i] = r * sin(t);
     }
 
-    // ----------------------------------------------- spatial hash for dist
-    // Two radii per angle here, so no angular-window shortcut. Bucket the
-    // centreline samples into a uniform grid and do an expanding-ring search.
+    // ------------------------------------------------- k-d tree for dist
+    // The nearest centreline sample to each grid point, exactly. Until
+    // 2026-11-06 this was a uniform bucket grid of 1.5mm cells searched in
+    // expanding square rings, which is quick where the ribbon is near and
+    // hopeless where it is not: the 9x11 knot at R_HOLE=300 leaves a centre
+    // opening 135mm in radius, and every grid point there walked thousands of
+    // empty buckets -- 1.7 billion bucket visits for 1.96 million points, 36s.
+    // The tree is the samples' index sorted in place, each range split at
+    // its median on x and y in turn. A query takes the near half first and
+    // the far half only while the splitting line is nearer than the best so
+    // far. The answer is the same bits as before: it is the least of the
+    // same dx*dx + dy*dy, and the order they are compared in cannot change a
+    // minimum. SELFTEST below checks it against brute force.
     let ext = r_hole + 2.0;
-    // CELL trades bucket count against points-per-bucket. Correctness does not
-    // depend on it -- the ring search is exact for any positive CELL -- only
-    // speed does. ~1.5mm keeps buckets to a handful of samples while the
-    // typical query still terminates within a ring or two.
-    const CELL: f64 = 1.5;
-    let ncx = ((2.0 * ext) / CELL).ceil() as i64;
-    let cell_of = |v: f64| -> i64 {
-        let c = ((v + ext) / CELL).floor();
-        (c.min((ncx - 1) as f64)).max(0.0) as i64
-    };
-    let mut buckets: Vec<Vec<usize>> = vec![Vec::new(); (ncx * ncx) as usize];
-    for i in 0..M {
-        buckets[(cell_of(cy[i]) * ncx + cell_of(cx[i])) as usize].push(i);
+    let mut tree: Vec<usize> = (0..M).collect();
+    fn build(t: &mut [usize], cx: &[f64], cy: &[f64], axis: usize) {
+        if t.len() <= 8 {
+            return;
+        }
+        let mid = t.len() / 2;
+        let key = |i: &usize| if axis == 0 { cx[*i] } else { cy[*i] };
+        t.select_nth_unstable_by(mid, |a, b| key(a).total_cmp(&key(b)));
+        let (lo, hi) = t.split_at_mut(mid);
+        build(lo, cx, cy, 1 - axis);
+        build(&mut hi[1..], cx, cy, 1 - axis);
+    }
+    build(&mut tree, &cx, &cy, 0);
+    fn near(t: &[usize], cx: &[f64], cy: &[f64], axis: usize, x: f64, y: f64, best: &mut f64) {
+        if t.len() <= 8 {
+            for &i in t {
+                let (dx, dy) = (x - cx[i], y - cy[i]);
+                let s = dx * dx + dy * dy;
+                if s < *best {
+                    *best = s;
+                }
+            }
+            return;
+        }
+        let mid = t.len() / 2;
+        let i = t[mid];
+        let (dx, dy) = (x - cx[i], y - cy[i]);
+        let s = dx * dx + dy * dy;
+        if s < *best {
+            *best = s;
+        }
+        let d = if axis == 0 { dx } else { dy };
+        let (first, second) = if d < 0.0 { (&t[..mid], &t[mid + 1..]) } else { (&t[mid + 1..], &t[..mid]) };
+        near(first, cx, cy, 1 - axis, x, y, best);
+        // A sample past the splitting line is at least |d| away on that
+        // axis alone, so it cannot beat best once d*d >= best.
+        if d * d < *best {
+            near(second, cx, cy, 1 - axis, x, y, best);
+        }
     }
     let dist_curve = |x: f64, y: f64| -> f64 {
-        let (ci, cj) = (cell_of(x), cell_of(y));
         let mut best = f64::INFINITY; // squared
-        for ring in 0..ncx {
-            for dj in -ring..=ring {
-                let bb = cj + dj;
-                if bb < 0 || bb >= ncx {
-                    continue;
-                }
-                let edge = dj.abs() == ring;
-                for di in -ring..=ring {
-                    // only the shell at Chebyshev distance == ring
-                    if !edge && di.abs() != ring {
-                        continue;
-                    }
-                    let a = ci + di;
-                    if a < 0 || a >= ncx {
-                        continue;
-                    }
-                    for &i in &buckets[(bb * ncx + a) as usize] {
-                        let (dx, dy) = (x - cx[i], y - cy[i]);
-                        let s = dx * dx + dy * dy;
-                        if s < best {
-                            best = s;
-                        }
-                    }
-                }
-            }
-            // A point in an unvisited cell (Chebyshev ring >= ring+1) is at
-            // least ring*CELL away, so once best beats that no further ring
-            // can improve it.
-            let bound = ring as f64 * CELL;
-            if best <= bound * bound {
-                break;
-            }
-        }
+        near(&tree, &cx, &cy, 0, x, y, &mut best);
         best.sqrt()
     };
 
-    // SELFTEST=1 checks the hash against brute force. The expanding-ring
-    // stopping bound is the one thing here that fails SILENTLY if it is wrong
+    // SELFTEST=1 checks the tree against brute force. Its pruning bound is
+    // the one thing here that fails SILENTLY if it is wrong
     // -- it would just return distances that are too large, i.e. phantom
     // extra "cut" area.
     if env_flag("SELFTEST").is_some() {
@@ -346,7 +349,7 @@ fn run() -> i32 {
             n += 1;
         }
         println!(
-            "SELFTEST spatial hash vs brute force: {} points, max error {}mm {}",
+            "SELFTEST k-d tree vs brute force: {} points, max error {}mm {}",
             n,
             exponential(worst, 3),
             if worst < 1e-9 { "OK" } else { "*** HASH IS WRONG ***" }

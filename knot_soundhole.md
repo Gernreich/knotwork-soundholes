@@ -56,7 +56,7 @@ target/release/knot_soundhole                   # report only, writes nothing
 LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole
 LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg target/release/knot_soundhole
 LEADS=2 BIGHTS=3 target/release/knot_soundhole  # 2 leads: the classic trefoil
-SELFTEST=1 target/release/knot_soundhole        # check the hash, exit
+SELFTEST=1 target/release/knot_soundhole        # check the k-d tree, exit
 DIAG=1 target/release/knot_soundhole            # per-region dump
 ```
 
@@ -86,7 +86,7 @@ transfer.
 | `NG` | `1400` | sampling grid resolution |
 | `MIN_FEATURE` | `0.25` | gaps narrower than this are welded to solid material |
 | `OUT` | unset | output path — **nothing is written unless set** |
-| `SELFTEST` | unset | verify spatial hash against brute force, then exit |
+| `SELFTEST` | unset | verify the k-d tree against brute force, then exit |
 | `DIAG` | unset | verbose per-region report |
 
 Neither `AMP` nor `HW` auto-scales with `R_HOLE`; roughly `AMP ≈ 0.25*R_HOLE` and
@@ -335,11 +335,14 @@ that lies about itself.
 
 Everything else — signed distance field, flood fill, sliver welding, marching
 squares, chaining, RDP, SVG emit — is carried over unchanged, including the spatial
-hash for distance.
+hash for distance. That hash became a k-d tree on 2026-11-06: searching outward in
+rings of 1.5 mm cells, it took 36 seconds over the 9 × 11 knot at 300 mm, whose
+135 mm centre opening made every point there walk thousands of empty cells. The tree
+takes under a second and draws the same file byte for byte.
 
 ## Run SELFTEST if you touch the distance code
 
-The expanding-ring stopping bound fails **silently** if wrong — it just returns
+The k-d tree's pruning bound fails **silently** if wrong — it just returns
 distances that are too large, which reads as phantom extra "cut" area and quietly
 changes the shape without any validation line firing.
 
@@ -349,7 +352,7 @@ LEADS=3 BIGHTS=5 SELFTEST=1 target/release/knot_soundhole
 
 The code's pass gate is `< 1e-9`, but the error should be **exactly `0`**: both
 paths minimise the same expression over the same sample set, so they return
-bit-identical floats. Any nonzero value at all means the ring search missed a sample
+bit-identical floats. Any nonzero value at all means the tree pruned away a sample
 — do not read a small error as rounding. It is `0` at `(2,3)`, `(3,5)` and `(4,3)`.
 
 ## Traps already sprung here

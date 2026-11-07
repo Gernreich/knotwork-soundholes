@@ -156,7 +156,7 @@ target/release/knot_soundhole                   # report only, writes nothing
 LEADS=3 BIGHTS=5 OUT=3-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole
 LEADS=3 BIGHTS=4 OUT=3-lead_4-bight_knot_radius30mm.svg target/release/knot_soundhole
 LEADS=2 BIGHTS=3 target/release/knot_soundhole  # 2 leads: the classic trefoil
-SELFTEST=1 target/release/knot_soundhole        # check the hash, exit
+SELFTEST=1 target/release/knot_soundhole        # check the k-d tree, exit
 DIAG=1 target/release/knot_soundhole            # per-region dump</code></pre>
 <p><strong>The file that lands is not ready for the laser yet.</strong> Its geometry is, but it carries two layers and only one of them is a cut. See <a href="#output-layers">Output layers</a> before you send it: the blue <code>engrave</code> lines must be given anything other than a cut.</p>
 <p><code>--help</code> prints this same table, so you do not need the document to hand.</p>
@@ -219,7 +219,7 @@ DIAG=1 target/release/knot_soundhole            # per-region dump</code></pre>
 <tr>
 <td><code>SELFTEST</code></td>
 <td>unset</td>
-<td>verify spatial hash against brute force, then exit</td>
+<td>verify the k-d tree against brute force, then exit</td>
 </tr>
 <tr>
 <td><code>DIAG</code></td>
@@ -519,11 +519,11 @@ engrave lines == 2*B*(L-1)   (two edges of the over pass per crossing)</code></p
 <h2 id="how-the-overunder-is-decided">How the over/under is decided</h2>
 <p>The retired two-lead generator could use a closed form — "over if <code>m</code> is even" — because with two leads the single other pass sits exactly half the sample array away. With <code>L</code> leads a point has <code>L-1</code> other passes, at offsets <code>k*M/L</code>, so that shortcut is gone.</p>
 <p>Instead the crossing events are found numerically, ordered along the strand and labelled alternately, and then <strong>the pairing is verified</strong>: each crossing must receive one over and one under. It has held at every pair tested. If it ever fails, the engrave layer is dropped and the report says so, rather than drawing a weave that lies about itself.</p>
-<p>Everything else — signed distance field, flood fill, sliver welding, marching squares, chaining, RDP, SVG emit — is carried over unchanged, including the spatial hash for distance.</p>
+<p>Everything else — signed distance field, flood fill, sliver welding, marching squares, chaining, RDP, SVG emit — is carried over unchanged, including the spatial hash for distance. That hash became a k-d tree on 2026-11-06: searching outward in rings of 1.5 mm cells, it took 36 seconds over the 9 × 11 knot at 300 mm, whose 135 mm centre opening made every point there walk thousands of empty cells. The tree takes under a second and draws the same file byte for byte.</p>
 <h2 id="run-selftest-if-you-touch-the-distance-code">Run SELFTEST if you touch the distance code</h2>
-<p>The expanding-ring stopping bound fails <strong>silently</strong> if wrong — it just returns distances that are too large, which reads as phantom extra "cut" area and quietly changes the shape without any validation line firing.</p>
+<p>The k-d tree's pruning bound fails <strong>silently</strong> if wrong — it just returns distances that are too large, which reads as phantom extra "cut" area and quietly changes the shape without any validation line firing.</p>
 <pre class="bash"><code>LEADS=3 BIGHTS=5 SELFTEST=1 target/release/knot_soundhole</code></pre>
-<p>The code's pass gate is <code>&lt; 1e-9</code>, but the error should be <strong>exactly <code>0</code></strong>: both paths minimise the same expression over the same sample set, so they return bit-identical floats. Any nonzero value at all means the ring search missed a sample — do not read a small error as rounding. It is <code>0</code> at <code>(2,3)</code>, <code>(3,5)</code> and <code>(4,3)</code>.</p>
+<p>The code's pass gate is <code>&lt; 1e-9</code>, but the error should be <strong>exactly <code>0</code></strong>: both paths minimise the same expression over the same sample set, so they return bit-identical floats. Any nonzero value at all means the tree pruned away a sample — do not read a small error as rounding. It is <code>0</code> at <code>(2,3)</code>, <code>(3,5)</code> and <code>(4,3)</code>.</p>
 <h2 id="traps-already-sprung-here">Traps already sprung here</h2>
 <ul>
 <li><strong>The engrave seam, and why it is gone.</strong> The retired two-lead generator had to offset its engrave scan, because crossings sat at odd multiples of <code>M/(4Q)</code> and starting exactly on one split its run, yielding <code>2Q+2</code> lines instead of <code>2Q</code>. This generator starts its scan at the sample <strong>furthest from any other pass</strong>, so no run can straddle the start. The hazard is designed out rather than offset around.</li>
