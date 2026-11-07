@@ -24,5 +24,14 @@ path = "plait_soundhole.rs"
 name = "preview"
 path = "preview.rs"
 
+# The 3D page's builder. It reads the cut files with lasermade-tools' turn3d
+# module, so it expects that checkout beside this one.
+[[bin]]
+name = "viewer"
+path = "viewer.rs"
+
+[dependencies]
+lasermade-tools = { path = "../lasermade-tools" }
+
 [profile.release]
 overflow-checks = true

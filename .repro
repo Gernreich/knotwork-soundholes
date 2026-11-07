@@ -68,9 +68,9 @@ previews/10-crossing_plait_radius30mm.svg :: target/release/preview 10-crossing_
 previews/10-crossing_plait_radius50mm.svg :: target/release/preview 10-crossing_plait_radius50mm.svg $OUT
 
 # --- the 3D view: every sample's waste taken out of a square of 3mm ply ---
-# viewer.py imports turn3d.py from lasermade-tools, so it expects that
-# checkout beside this one.
-turn.html :: python3 viewer.py --out=$OUT
+# viewer.rs reads the cut files with lasermade-tools' turn3d module, so it
+# expects that checkout beside this one.
+turn.html :: target/release/viewer --out=$OUT
 
 # --- the published pages ---
 # Claimed here since 2026-09-10, when .repro learned to walk *.html. doc-audit

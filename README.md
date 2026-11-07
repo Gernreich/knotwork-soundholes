@@ -96,13 +96,13 @@ couple of millimetres.
 | `knot_soundhole.rs` · `.md` | single-strand knot generator, any coprime leads × bights |
 | `src/contour.rs` | what both generators share: flood fill, sliver welding, marching squares, chaining, simplification |
 | `src/jsmath.rs` · `src/jsfmt.rs` | Node's own sin, cos, atan2 and hypot, and JavaScript's number-to-text, so every SVG drawn while the generators were JavaScript redraws byte for byte |
-| `src/lib.rs` · `Cargo.toml` · `Cargo.lock` | the Rust package: three programs and the library above, no outside crates |
+| `src/lib.rs` · `Cargo.toml` · `Cargo.lock` | the Rust package: four programs and the library above; only `viewer.rs` needs another crate, lasermade-tools, from the checkout beside this one |
 | `*-bight_knot_radius*.svg` | cut-ready knot samples, named leads × bights × radius |
 | `*-crossing_plait_radius*.svg` | cut-ready plait samples |
 | `preview.rs` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
 | `turn.html` | every sample in 3D, its waste taken out of a square of 3 mm plywood — drag to turn |
-| `viewer.py` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
+| `viewer.rs` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
 Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under [CC0 1.0](LICENSE).
