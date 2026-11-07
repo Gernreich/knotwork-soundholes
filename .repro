@@ -1,5 +1,5 @@
 # How every shipped SVG in this repository is drawn. Checked by
-# lasermade-tools/repro-svg.py; $OUT is where the file must be written.
+# lasermade-tools' repro-svg; $OUT is where the file must be written.
 #
 # AMP and HW do NOT scale with R_HOLE, and the filename records only leads,
 # bights and radius -- so for everything drawn at a non-default radius the
@@ -14,7 +14,7 @@
 # src/jsfmt.rs (JavaScript's number-to-text) is what that takes. src/jsmath.rs
 # (V8's fdlibm sin/cos/atan2 with clang's fused multiply-adds) goes further than
 # these files need -- the platform maths gives the same 13 -- and pins the port
-# to Node's exact arithmetic for any settings; its header has the measurements. repro-svg.py runs `cargo build --release` once
+# to Node's exact arithmetic for any settings; its header has the measurements. repro-svg runs `cargo build --release` once
 # before any line here, so these always test the code as it stands. (They were
 # `cargo run` for an hour: in parallel, one cargo re-linking the binary could
 # pull it out from under another that was starting it.)
@@ -45,7 +45,7 @@
 # --- the previews ship without a generator ---
 # Display renderings only, embedded in README.md and index.md; nothing here
 # cuts them. They are FILLED even-odd in gold and white, which is not what
-# lasermade-tools/make-preview.py draws -- that thickens the cut stroke.
+# lasermade-tools' make-preview draws -- that thickens the cut stroke.
 #
 # They carried a "!" until 2026-09-10, meaning "shipped without a generator, we
 # know". That was the wrong mark for them: an acknowledged exception is the right
@@ -80,6 +80,6 @@ turn.html :: python3 viewer.py --out=$OUT
 # This names the source explicitly instead. index.html is built from index.md,
 # not from README.md, which is the case doc-audit's pairing gets right only
 # because index.md happens to exist.
-index.html :: python3 ../lasermade-tools/md2html.py index.md $OUT
-knot_soundhole.html :: python3 ../lasermade-tools/md2html.py knot_soundhole.md $OUT
-plait_soundhole.html :: python3 ../lasermade-tools/md2html.py plait_soundhole.md $OUT
+index.html :: ../lasermade-tools/target/release/md2html index.md $OUT
+knot_soundhole.html :: ../lasermade-tools/target/release/md2html knot_soundhole.md $OUT
+plait_soundhole.html :: ../lasermade-tools/target/release/md2html plait_soundhole.md $OUT
