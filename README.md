@@ -107,6 +107,18 @@ couple of millimetres.
 
 Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under [CC0 1.0](LICENSE).
 
+## STEP files
+
+`step/` holds the 3D view as STEP files, one per design, to open or import in a
+CAD program such as SolidCraft, Fusion or FreeCAD: one solid body per part, in
+millimetres, assembled as the view shows it. Every face is flat, so a curve comes
+in as short straight runs; engraving has no depth and is left out. They are written
+from `turn.html` by lasermade-tools' `step-export`, and `.repro` checks them:
+
+```
+../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes
+```
+
 ## Credits
 
 Made by Michael Gernreich with [Claude](https://www.anthropic.com/claude) (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a `Co-Authored-By: Claude` line.
