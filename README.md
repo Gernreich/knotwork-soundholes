@@ -119,6 +119,22 @@ from `turn.html` by lasermade-tools' `step-export`, and `.repro` checks them:
 ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes
 ```
 
+The files:
+
+- `step/knotwork-soundholes-2-3-trefoil.step`
+- `step/knotwork-soundholes-2-5-cinquefoil.step`
+- `step/knotwork-soundholes-2-7-septafoil.step`
+- `step/knotwork-soundholes-3-2.step`
+- `step/knotwork-soundholes-3-4.step`
+- `step/knotwork-soundholes-3-5.step`
+- `step/knotwork-soundholes-4-3-39mm.step`
+- `step/knotwork-soundholes-4-5-39mm.step`
+- `step/knotwork-soundholes-5-4-60mm.step`
+- `step/knotwork-soundholes-9-11-300mm.step`
+- `step/knotwork-soundholes-plait-10-50mm.step`
+- `step/knotwork-soundholes-plait-10.step`
+- `step/knotwork-soundholes-plait-8.step`
+
 ## Credits
 
 Made by Michael Gernreich with [Claude](https://www.anthropic.com/claude) (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a `Co-Authored-By: Claude` line.
