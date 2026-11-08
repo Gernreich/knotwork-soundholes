@@ -84,18 +84,44 @@ index.html :: ../lasermade-tools/target/release/md2html index.md $OUT
 knot_soundhole.html :: ../lasermade-tools/target/release/md2html knot_soundhole.md $OUT
 plait_soundhole.html :: ../lasermade-tools/target/release/md2html plait_soundhole.md $OUT
 
-# --- the STEP files: the 3D view's parts as solids for a CAD program, one
-# file per design, written from the page by lasermade-tools' step-export ---
-step/knotwork-soundholes-2-3-trefoil.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-2-5-cinquefoil.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-2-7-septafoil.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-3-2.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-3-4.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-3-5.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-4-3-39mm.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-4-5-39mm.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-5-4-60mm.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-9-11-300mm.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-plait-8.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-plait-10.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
-step/knotwork-soundholes-plait-10-50mm.step :: ../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes --out=$(dirname $OUT)
+# --- the SolidCraft designs: each board's script, the design (slimmed by
+# sc-slim so it is the same every run), and the STEP file SolidCraft builds ---
+solidcraft/knotwork-soundholes-2-3-trefoil.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-2-3-trefoil.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-3-trefoil.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-2-3-trefoil.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-3-trefoil.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-2-5-cinquefoil.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-2-5-cinquefoil.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-5-cinquefoil.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-2-5-cinquefoil.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-5-cinquefoil.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-2-7-septafoil.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-2-7-septafoil.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-7-septafoil.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-2-7-septafoil.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-2-7-septafoil.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-3-2.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-3-2.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-2.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-3-2.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-2.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-3-4.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-3-4.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-4.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-3-4.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-4.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-3-5.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-3-5.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-5.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-3-5.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-3-5.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-4-3-39mm.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-4-3-39mm.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-4-3-39mm.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-4-3-39mm.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-4-3-39mm.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-4-5-39mm.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-4-5-39mm.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-4-5-39mm.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-4-5-39mm.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-4-5-39mm.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-5-4-60mm.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-5-4-60mm.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-5-4-60mm.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-5-4-60mm.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-5-4-60mm.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-9-11-300mm.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-9-11-300mm.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-9-11-300mm.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-9-11-300mm.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-9-11-300mm.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-plait-10.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-plait-10.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-10.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-plait-10.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-10.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-plait-10-50mm.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-plait-10-50mm.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-10-50mm.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-plait-10-50mm.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-10-50mm.solidcraft.json --out $OUT --quiet
+solidcraft/knotwork-soundholes-plait-8.solidcraft.json :: target/release/viewer --solidcraft=$(dirname $OUT)
+solidcraft/knotwork-soundholes-plait-8.sc :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-8.solidcraft.json --save $OUT --quiet && ../lasermade-tools/target/release/sc-slim $OUT
+step/knotwork-soundholes-plait-8.step :: target/release/viewer --solidcraft=$(dirname $OUT) && solidcraft-cli run $(dirname $OUT)/knotwork-soundholes-plait-8.solidcraft.json --out $OUT --quiet

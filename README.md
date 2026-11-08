@@ -102,21 +102,61 @@ couple of millimetres.
 | `preview.rs` | draws `previews/` from the cut files: the cut layer filled in gold and white |
 | `previews/` | display renderings of every sample — **not** cut files |
 | `turn.html` | every sample in 3D, its waste taken out of a square of 3 mm plywood — drag to turn |
-| `viewer.rs` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools |
+| `viewer.rs` | builds `turn.html` from the cut files, with the turn3d module in lasermade-tools, and the SolidCraft designs (`--solidcraft=DIR`) |
+| `solidcraft/` | each sample's soundboard as a SolidCraft design, and the script it was built from |
 | `index.md` · `*.html` | the published pages; the markdown is the source |
 
 Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under [CC0 1.0](LICENSE).
 
+## SolidCraft designs
+
+`target/release/viewer --solidcraft=DIR` writes each rosette's soundboard as a
+SolidCraft design, one per sample: a square of board with the cut file's waste taken
+out. Open `solidcraft/NAME.sc` in SolidCraft. The parameters are under the **SOLID**
+tab, **MODIFY** panel, **Change Parameters**; `solidcraft/NAME.solidcraft.json` is the
+script it was built from (`solidcraft-cli run FILE --save NAME.sc`). The `.sc` holds
+the design without SolidCraft's build cache, which it rebuilds on opening, so it is the
+same file every time.
+
+| Parameter | Default | What it is |
+|---|---|---|
+| `ply` | 3 mm | the soundboard's thickness |
+| `margin` | 12 mm | board past the rim, at least; a fifth of the reach on the big ones |
+| `reach` · `half` | read only | the rosette's reach from the cut file, and the board's half-width, to the mm |
+
+Only the board follows its parameters. The waste is the cut file's own: the generators
+contour it out of a field sampled on a grid, which no expression can follow, so it stays
+where the cut file has it. To change the rosette itself, run the generator with new
+parameters and write the design again.
+
+The designs, each beside its script:
+
+- `solidcraft/knotwork-soundholes-2-3-trefoil.sc` · `solidcraft/knotwork-soundholes-2-3-trefoil.solidcraft.json`
+- `solidcraft/knotwork-soundholes-2-5-cinquefoil.sc` · `solidcraft/knotwork-soundholes-2-5-cinquefoil.solidcraft.json`
+- `solidcraft/knotwork-soundholes-2-7-septafoil.sc` · `solidcraft/knotwork-soundholes-2-7-septafoil.solidcraft.json`
+- `solidcraft/knotwork-soundholes-3-2.sc` · `solidcraft/knotwork-soundholes-3-2.solidcraft.json`
+- `solidcraft/knotwork-soundholes-3-4.sc` · `solidcraft/knotwork-soundholes-3-4.solidcraft.json`
+- `solidcraft/knotwork-soundholes-3-5.sc` · `solidcraft/knotwork-soundholes-3-5.solidcraft.json`
+- `solidcraft/knotwork-soundholes-4-3-39mm.sc` · `solidcraft/knotwork-soundholes-4-3-39mm.solidcraft.json`
+- `solidcraft/knotwork-soundholes-4-5-39mm.sc` · `solidcraft/knotwork-soundholes-4-5-39mm.solidcraft.json`
+- `solidcraft/knotwork-soundholes-5-4-60mm.sc` · `solidcraft/knotwork-soundholes-5-4-60mm.solidcraft.json`
+- `solidcraft/knotwork-soundholes-9-11-300mm.sc` · `solidcraft/knotwork-soundholes-9-11-300mm.solidcraft.json`
+- `solidcraft/knotwork-soundholes-plait-10.sc` · `solidcraft/knotwork-soundholes-plait-10.solidcraft.json`
+- `solidcraft/knotwork-soundholes-plait-10-50mm.sc` · `solidcraft/knotwork-soundholes-plait-10-50mm.solidcraft.json`
+- `solidcraft/knotwork-soundholes-plait-8.sc` · `solidcraft/knotwork-soundholes-plait-8.solidcraft.json`
+
+**Checked** body by body against the 3D view: all thirteen boards match it exactly.
+
 ## STEP files
 
-`step/` holds the 3D view as STEP files, one per design, to open or import in a
-CAD program such as SolidCraft, Fusion or FreeCAD: one solid body per part, in
-millimetres, assembled as the view shows it. Every face is flat, so a curve comes
-in as short straight runs; engraving has no depth and is left out. They are written
-from `turn.html` by lasermade-tools' `step-export`, and `.repro` checks them:
+`step/` holds each SolidCraft design, built by SolidCraft, as a STEP file to open or
+import in a CAD program such as Fusion or FreeCAD: one solid body, in millimetres,
+with no parameters. Every face is flat, so a curve comes in as short straight runs;
+engraving has no depth and is left out. `.repro` checks them:
 
 ```
-../lasermade-tools/target/release/step-export turn.html --name=knotwork-soundholes
+target/release/viewer --solidcraft=solidcraft
+solidcraft-cli run solidcraft/NAME.solidcraft.json --out step/NAME.step
 ```
 
 The files:
