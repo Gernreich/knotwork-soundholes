@@ -35,8 +35,10 @@ const ROSETTES: [(&str, &str); 13] = [
 const MARGIN: f64 = 12.0; // mm of board past the rim
 
 /// -> one part: a square of soundboard with the cut layer's waste as its holes.
-fn board(svg: &str) -> Part {
-    let waste = parts(svg);
+/// (eps: see parts_eps; the 3D view drops points within 0.02 mm of a line,
+/// the design keeps the cut file's every point)
+fn board(svg: &str, eps: f64) -> Part {
+    let waste = parts_eps(svg, eps);
     // a waste region with a hole in it would be an island of ribbon that drops
     // out with it -- the one thing these designs are built not to do
     assert!(waste.iter().all(|w| w.h.is_empty()), "{svg}");
@@ -57,7 +59,7 @@ fn build() -> Vec<(String, J)> {
     ROSETTES
         .iter()
         .map(|(name, f)| {
-            let b = board(&format!("{HERE}/{f}"));
+            let b = board(&format!("{HERE}/{f}"), 0.02);
             (
                 name.to_string(),
                 design(vec![
@@ -81,7 +83,7 @@ fn solidcraft(dir: &str) {
     const SLUGS: [&str; 13] = ["2-3-trefoil", "2-5-cinquefoil", "2-7-septafoil", "3-2", "3-4", "3-5", "4-3-39mm", "4-5-39mm", "5-4-60mm", "9-11-300mm", "plait-8", "plait-10", "plait-10-50mm"];
     for ((name, f), slug) in ROSETTES.iter().zip(SLUGS) {
         let svg = format!("{HERE}/{f}");
-        let b = board(&svg);
+        let b = board(&svg, 0.0);
         let (_, vbw) = geometry(&svg).unwrap_or_else(|e| lasermade_tools::die(e));
         let mut sc = Script::new();
         sc.len("ply", "3 mm", "the soundboard's thickness");

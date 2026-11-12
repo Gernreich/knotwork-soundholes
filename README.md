@@ -112,7 +112,7 @@ Requires Rust ([rustup](https://rustup.rs)); no crates beyond the standard libra
 
 `target/release/viewer --solidcraft=DIR` writes each rosette's soundboard as a
 SolidCraft design, one per sample: a square of board with the cut file's waste taken
-out. Open `solidcraft/NAME.sc` in SolidCraft. The parameters are under the **SOLID**
+out, every point of it as the cut file has it. Open `solidcraft/NAME.sc` in SolidCraft. The parameters are under the **SOLID**
 tab, **MODIFY** panel, **Change Parameters**; `solidcraft/NAME.solidcraft.json` is the
 script it was built from (`solidcraft-cli run FILE --save NAME.sc`). The `.sc` holds
 the design without SolidCraft's build cache, which it rebuilds on opening, so it is the
