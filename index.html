@@ -99,57 +99,49 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <body>
 <button class="tog" type="button">theme</button>
 <div class="wrap">
-<nav><b>Contents</b><a class="l1" href="#knotwork-sound-holes">Knotwork Sound Holes</a><a class="l2" href="#which-generator">Which generator?</a><a class="l2" href="#quick-start">Quick start</a><a class="l2" href="#before-you-cut">Before you cut</a><a class="l2" href="#files">Files</a><a class="l2" href="#solidcraft-designs">SolidCraft designs</a><a class="l2" href="#step-files">STEP files</a><a class="l2" href="#credits">Credits</a></nav>
+<nav><b>Contents</b><a class="l1" href="#knotwork-sound-holes">Knotwork Sound Holes</a><a class="l2" href="#why-there-are-two-leads-bights-and-one-rule">Why there are two: leads, bights, and one rule</a><a class="l2" href="#which-one-do-i-want">Which one do I want?</a><a class="l2" href="#get-the-files">Get the files</a><a class="l2" href="#before-you-cut">Before you cut</a><a class="l2" href="#every-sample-at-a-glance">Every sample, at a glance</a><a class="l2" href="#four-worth-a-note">Four worth a note</a><a class="l2" href="#credits">Credits</a></nav>
 <main>
 <h1 id="knotwork-sound-holes">Knotwork Sound Holes</h1>
 <p><strong><a href="https://gernreich.github.io/" target="_blank" rel="noopener">← All projects</a></strong></p>
-<p><strong><a href="https://gernreich.github.io/knotwork-soundholes/" target="_blank" rel="noopener">Read the writeup</a></strong> · plait: <a href="plait_soundhole.html" target="_blank" rel="noopener"><code>plait_soundhole.md</code></a> · knot: <a href="knot_soundhole.html" target="_blank" rel="noopener"><code>knot_soundhole.md</code></a></p>
+<p><strong><a href="https://github.com/Gernreich/knotwork-soundholes" target="_blank" rel="noopener">Read the README</a></strong></p>
 <p><strong><a href="https://gernreich.github.io/knotwork-soundholes/turn.html" target="_blank" rel="noopener">Turn it in 3D</a></strong></p>
-<p>Two Rust generators that produce cut-ready SVG rosettes for an instrument sound hole. Output is millimetre-true — <code>1 user unit = 1mm</code>, with a physical <code>width</code>/<code>height</code> — so it prints and cuts at real size.</p>
-<p>
-<img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A 2-lead 3-bight knot rosette in deep gold: one continuous ribbon crossing itself three times across a 60 mm hole and running on into the paler surrounding board at three anchors; the white shapes are the material that drops out" width="46%">
-<img src="previews/10-crossing_plait_radius30mm.svg" alt="A 10-crossing plait rosette in deep gold: two ribbons woven around a 60 mm hole and running on into the paler surrounding board; the white shapes are the material that drops out" width="46%">
-</p>
+<iframe src="turn.html?embed" title="Each rosette cut through a square of 3 mm plywood soundboard, as a solid you can drag to turn, with a button for each of the thirteen samples" style="width:100%;height:560px;border:0"></iframe>
 
-<p><em>Left: one strand, 2 leads × 3 bights. Right: two ribbons, 10 crossings. Both at a 60 mm hole. Display renderings — <strong>deep gold is the rosette, pale gold the board it fuses into, white is what drops out.</strong> The ribbon crosses between the two golds without a break, because the rosette is not a ring sitting in a hole: it is board material, and that is what stops it falling through. The cut files carry no fill, so a browser shows them as thin lines on a transparency checkerboard. <strong><a href="https://gernreich.github.io/knotwork-soundholes/#every-sample-at-a-glance" target="_blank" rel="noopener">See all thirteen</a></strong>.</em></p>
-<p>Built for <strong><a href="https://www.youtube.com/@LaserMadeMusic" target="_blank" rel="noopener">LaserMadeMusic</a></strong>, where the cutting and assembly are shown.</p>
-<p><strong><a href="https://gernreich.github.io/lasermademusic.html" target="_blank" rel="noopener">The rest of the build files</a></strong> — every instrument, generator and tool, indexed.</p>
-<p><strong><a href="https://github.com/Gernreich/knotwork-soundholes/archive/refs/heads/main.zip" target="_blank" rel="noopener">Download everything as a ZIP</a></strong> — both generators, both writeups, every cut file.</p>
-<h2 id="which-generator">Which generator?</h2>
-<p>They differ in whether the ribbon is one strand or two, and neither can produce the other's shapes. Both are described the same way — <code>L</code> leads by <code>B</code> bights — and <code>gcd(L, B)</code> is the number of separate pieces you end up with. An alternating over/under interlace has to close up when you return to your start, and that is what decides it.</p>
+<p>Two generators that produce cut-ready SVG rosettes for an instrument sound hole, millimetre-true at <code>1 user unit = 1mm</code>. Both emit a validation report on every run, and that report — not the picture — is the point of the tools.</p>
+<p>They differ in one thing, and it is not cosmetic: <strong>whether the ribbon is one strand or two.</strong> An alternating over/under interlace has to close up when you return to your start, and that constraint decides which curve you need.</p>
 <div class="tw">
 <table>
 <thead>
 <tr>
 <th></th>
-<th>two ribbons</th>
-<th>one strand</th>
+<th><a href="plait_soundhole.html" target="_blank" rel="noopener">Two ribbons</a></th>
+<th><a href="knot_soundhole.html" target="_blank" rel="noopener">One strand</a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Look</td>
-<td>two-ribbon plait, braided</td>
+<td>plait, braided</td>
 <td>one continuous self-crossing strand</td>
 </tr>
 <tr>
 <td>Sized by</td>
 <td><code>N</code> lobes → <code>2N</code> crossings</td>
-<td><code>LEADS</code> × <code>BIGHTS</code>, coprime</td>
+<td><code>LEADS</code> × <code>BIGHTS</code></td>
 </tr>
 <tr>
 <td>Named forms</td>
 <td>6, 8, <strong>10</strong>, 12 crossings</td>
-<td><strong>trefoil</strong>, cinquefoil, septafoil, any coprime pair</td>
+<td><strong>trefoil</strong>, cinquefoil, septafoil, and any coprime pair</td>
 </tr>
 <tr>
-<td>Program</td>
+<td>Generator</td>
 <td><code>plait_soundhole.rs</code></td>
 <td><code>knot_soundhole.rs</code></td>
 </tr>
 <tr>
 <td>Open area at radius 30 mm</td>
-<td>52.4% (default <code>N = 5</code>)</td>
+<td>52.4% at the default <code>N = 5</code></td>
 <td>63.3% at 2 × 3, 48.2% at 3 × 5</td>
 </tr>
 <tr>
@@ -160,145 +152,129 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 </tbody>
 </table>
 </div>
-<p>In the plait each strand meets every crossing once, so the count is even by construction. A self-crossing strand visits each crossing twice, which is why a 3-crossing trefoil is a valid alternating knot. Asking the knot generator for a leads/bights pair that is not coprime is refused with an error.</p>
-<h2 id="quick-start">Quick start</h2>
-<pre><code>cargo build --release                                                # once; programs land in target/release/
-target/release/plait_soundhole                                       # report only, writes nothing
-OUT=10-crossing_plait_radius30mm.svg target/release/plait_soundhole  # 10-crossing plait, 60mm hole
-LEADS=2 BIGHTS=5 OUT=2-lead_5-bight_knot_radius30mm.svg target/release/knot_soundhole</code></pre>
-<p><strong>Nothing is written unless you set <code>OUT</code>.</strong> A bare run prints the validation report and exits, which is the cheapest way to see what a parameter change would do.</p>
-<p>Every run prints a validation report. Read it — it is the point of the tools, not decoration. <code>loose islands (CW)</code> must be <code>0</code>, or material falls out when cut.</p>
-<h2 id="before-you-cut">Before you cut</h2>
-<p>These are <strong>cut-outs</strong>: the removed material is the open area, and the ribbon is what stays. A ribbon ring floating inside a round hole would drop out when the last cut closes, so the ribbon peaks deliberately overrun the rim and fuse the rosette into the soundboard. <strong>There is no continuous rim circle in the cut layer</strong> — the outer boundary is a series of arcs between anchors. That is correct; adding a full circle drops the rosette on the floor.</p>
-<p>The files carry two layers: black <code>#000000</code> cuts, blue <code>#0000ff</code> engraves. Give the blue lines a score or engrave operation — cutting them severs the ribbon. That follows the sequence every LaserMadeMusic repository uses — blue engraves, then green → orange → cyan → black — where black is always the last cut. These rosettes have a single cut stage, so it is black. Elsewhere that last cut frees the part; <strong>here it must not.</strong> What black removes is the waste, and the rosette stays fused to the soundboard by its rim anchors. A rosette that comes free has been cut wrong. The designs are very open — <strong>37% to 63%</strong> of the disc removed, measured across the thirteen shipped samples. Cut in <strong>3 mm Baltic birch plywood</strong> — the void-free core matters when the ribbon narrows to a couple of millimetres.</p>
-<h2 id="files">Files</h2>
-<div class="tw">
-<table>
-<tbody>
-<tr>
-<td><code>plait_soundhole.rs</code> · <code>.md</code></td>
-<td>even-crossing plait generator and its writeup</td>
-</tr>
-<tr>
-<td><code>knot_soundhole.rs</code> · <code>.md</code></td>
-<td>single-strand knot generator, any coprime leads × bights</td>
-</tr>
-<tr>
-<td><code>src/contour.rs</code></td>
-<td>what both generators share: flood fill, sliver welding, marching squares, chaining, simplification</td>
-</tr>
-<tr>
-<td><code>src/jsmath.rs</code> · <code>src/jsfmt.rs</code></td>
-<td>Node's own sin, cos, atan2 and hypot, and JavaScript's number-to-text, so every SVG drawn while the generators were JavaScript redraws byte for byte</td>
-</tr>
-<tr>
-<td><code>src/lib.rs</code> · <code>Cargo.toml</code> · <code>Cargo.lock</code></td>
-<td>the Rust package: four programs and the library above; only <code>viewer.rs</code> needs another crate, lasermade-tools, from the checkout beside this one</td>
-</tr>
-<tr>
-<td><code>*-bight_knot_radius*.svg</code></td>
-<td>cut-ready knot samples, named leads × bights × radius</td>
-</tr>
-<tr>
-<td><code>*-crossing_plait_radius*.svg</code></td>
-<td>cut-ready plait samples</td>
-</tr>
-<tr>
-<td><code>preview.rs</code></td>
-<td>draws <code>previews/</code> from the cut files: the cut layer filled in gold and white</td>
-</tr>
-<tr>
-<td><code>previews/</code></td>
-<td>display renderings of every sample — <strong>not</strong> cut files</td>
-</tr>
-<tr>
-<td><code>turn.html</code></td>
-<td>every sample in 3D, its waste taken out of a square of 3 mm plywood — drag to turn</td>
-</tr>
-<tr>
-<td><code>viewer.rs</code></td>
-<td>builds <code>turn.html</code> from the cut files, with the turn3d module in lasermade-tools, and the SolidCraft designs (<code>--solidcraft=DIR</code>)</td>
-</tr>
-<tr>
-<td><code>solidcraft/</code></td>
-<td>each sample's soundboard as a SolidCraft design, and the script it was built from</td>
-</tr>
-<tr>
-<td><code>index.md</code> · <code>*.html</code></td>
-<td>the published pages; the markdown is the source</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Requires Rust (<a href="https://rustup.rs" target="_blank" rel="noopener">rustup</a>); no crates beyond the standard library. The generators were JavaScript until 2026-11-02. Released under <a href="LICENSE" target="_blank" rel="noopener">CC0 1.0</a>.</p>
-<h2 id="solidcraft-designs">SolidCraft designs</h2>
-<p><code>target/release/viewer --solidcraft=DIR</code> writes each rosette's soundboard as a SolidCraft design, one per sample: a square of board with the cut file's waste taken out, every point of it as the cut file has it. Open <code>solidcraft/NAME.sc</code> in SolidCraft. The parameters are under the <strong>SOLID</strong> tab, <strong>MODIFY</strong> panel, <strong>Change Parameters</strong>; <code>solidcraft/NAME.solidcraft.json</code> is the script it was built from (<code>solidcraft-cli run FILE --save NAME.sc</code>). The <code>.sc</code> holds the design without SolidCraft's build cache, which it rebuilds on opening, so it is the same file every time.</p>
+<h2 id="why-there-are-two-leads-bights-and-one-rule">Why there are two: leads, bights, and one rule</h2>
+<p>Both are described the same way: <strong><code>L</code> leads by <code>B</code> bights</strong>, where the strand travels round <code>L</code> times and shows <code>B</code> scallops at the rim. Everything follows from one fact — <code>gcd(L, B)</code> is the number of separate closed pieces you end up with.</p>
 <div class="tw">
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>What it is</th>
+<th></th>
+<th>leads</th>
+<th>bights</th>
+<th><code>gcd</code></th>
+<th>strands</th>
+<th>it is a…</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>ply</code></td>
-<td>3 mm</td>
-<td>the soundboard's thickness</td>
+<td><a href="plait_soundhole.html" target="_blank" rel="noopener">plait</a></td>
+<td>2</td>
+<td><code>2N</code>, even</td>
+<td>2</td>
+<td>2</td>
+<td><strong>link</strong></td>
 </tr>
 <tr>
-<td><code>margin</code></td>
-<td>12 mm</td>
-<td>board past the rim, at least; a fifth of the reach on the big ones</td>
-</tr>
-<tr>
-<td><code>reach</code> · <code>half</code></td>
-<td>read only</td>
-<td>the rosette's reach from the cut file, and the board's half-width, to the mm</td>
+<td><a href="knot_soundhole.html" target="_blank" rel="noopener">one strand</a></td>
+<td>any <code>L</code></td>
+<td>any <code>B</code> coprime to <code>L</code></td>
+<td>1</td>
+<td>1</td>
+<td><strong>knot</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Only the board follows its parameters. The waste is the cut file's own: the generators contour it out of a field sampled on a grid, which no expression can follow, so it stays where the cut file has it. To change the rosette itself, run the generator with new parameters and write the design again.</p>
-<p>The designs, each beside its script:</p>
+<p>A knot is a <em>single</em> closed curve. Two woven ribbons are two curves, so the plait has never been a knot in the strict sense, whatever the decorative tradition calls it — and the coprime one is the design that earns the word.</p>
+<p>That is why neither can produce the other's shapes. In the plait each strand meets every crossing once, so its crossing count is even by construction; a self-crossing strand visits each crossing twice, which is why a 3-crossing trefoil is a valid alternating knot. Ask the coprime generator for a non-coprime pair and it refuses, listing the bight counts that would work.</p>
+<p>This reading is the mathematics set against the writeups' own descriptions, not something measured out of the emitted geometry. The <code>gcd</code> argument is the load-bearing part, and each writeup derives it independently.</p>
+<h2 id="which-one-do-i-want">Which one do I want?</h2>
 <ul>
-<li><code>solidcraft/knotwork-soundholes-2-3-trefoil.sc</code> · <code>solidcraft/knotwork-soundholes-2-3-trefoil.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-2-5-cinquefoil.sc</code> · <code>solidcraft/knotwork-soundholes-2-5-cinquefoil.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-2-7-septafoil.sc</code> · <code>solidcraft/knotwork-soundholes-2-7-septafoil.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-3-2.sc</code> · <code>solidcraft/knotwork-soundholes-3-2.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-3-4.sc</code> · <code>solidcraft/knotwork-soundholes-3-4.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-3-5.sc</code> · <code>solidcraft/knotwork-soundholes-3-5.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-4-3-39mm.sc</code> · <code>solidcraft/knotwork-soundholes-4-3-39mm.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-4-5-39mm.sc</code> · <code>solidcraft/knotwork-soundholes-4-5-39mm.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-5-4-60mm.sc</code> · <code>solidcraft/knotwork-soundholes-5-4-60mm.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-9-11-300mm.sc</code> · <code>solidcraft/knotwork-soundholes-9-11-300mm.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-plait-10.sc</code> · <code>solidcraft/knotwork-soundholes-plait-10.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-plait-10-50mm.sc</code> · <code>solidcraft/knotwork-soundholes-plait-10-50mm.solidcraft.json</code></li>
-<li><code>solidcraft/knotwork-soundholes-plait-8.sc</code> · <code>solidcraft/knotwork-soundholes-plait-8.solidcraft.json</code></li>
+<li><strong>"A woven rosette, braided look, 12 crossings"</strong> → <a href="plait_soundhole.html" target="_blank" rel="noopener">the plait</a>.</li>
+<li><strong>"A trefoil sound hole"</strong>, or one continuous ribbon you can trace with a finger → <a href="knot_soundhole.html" target="_blank" rel="noopener">the coprime generator</a> at <code>LEADS=2 BIGHTS=3</code>.</li>
+<li><strong>"A 3-lead 5-bight knot"</strong>, or anything named in leads and bights → <a href="knot_soundhole.html" target="_blank" rel="noopener">the coprime generator</a>.</li>
+<li><strong>"N crossings"</strong> where you named the number → an even count is the plait; an odd one is the coprime generator at 2 leads.</li>
 </ul>
-<p><strong>Checked</strong> body by body against the 3D view: all thirteen boards match it exactly.</p>
-<h2 id="step-files">STEP files</h2>
-<p><code>step/</code> holds each SolidCraft design, built by SolidCraft, as a STEP file to open or import in a CAD program such as Fusion or FreeCAD: one solid body, in millimetres, with no parameters. Every face is flat, so a curve comes in as short straight runs; engraving has no depth and is left out. <code>.repro</code> checks them:</p>
-<pre><code>target/release/viewer --solidcraft=solidcraft
-solidcraft-cli run solidcraft/NAME.solidcraft.json --out step/NAME.step</code></pre>
-<p>The files:</p>
+<h2 id="get-the-files">Get the files</h2>
 <ul>
-<li><code>step/knotwork-soundholes-2-3-trefoil.step</code></li>
-<li><code>step/knotwork-soundholes-2-5-cinquefoil.step</code></li>
-<li><code>step/knotwork-soundholes-2-7-septafoil.step</code></li>
-<li><code>step/knotwork-soundholes-3-2.step</code></li>
-<li><code>step/knotwork-soundholes-3-4.step</code></li>
-<li><code>step/knotwork-soundholes-3-5.step</code></li>
-<li><code>step/knotwork-soundholes-4-3-39mm.step</code></li>
-<li><code>step/knotwork-soundholes-4-5-39mm.step</code></li>
-<li><code>step/knotwork-soundholes-5-4-60mm.step</code></li>
-<li><code>step/knotwork-soundholes-9-11-300mm.step</code></li>
-<li><code>step/knotwork-soundholes-plait-10-50mm.step</code></li>
-<li><code>step/knotwork-soundholes-plait-10.step</code></li>
-<li><code>step/knotwork-soundholes-plait-8.step</code></li>
+<li><strong><a href="https://github.com/Gernreich/knotwork-soundholes/archive/refs/heads/main.zip" target="_blank" rel="noopener">Every design as a ZIP</a></strong> — both generators, both writeups, every cut file.</li>
+<li><strong><a href="https://github.com/Gernreich/knotwork-soundholes" target="_blank" rel="noopener">Repository</a></strong> — the code, if you want to change a parameter or read how it works.</li>
+<li>Or click any picture above to download that one cut file.</li>
 </ul>
+<p>Released under CC0 1.0 — do what you like with them, no attribution needed. Built for <strong><a href="https://www.youtube.com/@LaserMadeMusic" target="_blank" rel="noopener">LaserMadeMusic</a></strong>.</p>
+<p><strong><a href="https://gernreich.github.io/lasermademusic.html" target="_blank" rel="noopener">The rest of the build files</a></strong> — every instrument, generator and tool, indexed.</p>
+<h2 id="before-you-cut">Before you cut</h2>
+<p>These are <strong>cut-outs</strong>: the removed material is the open area and the ribbon is what stays. A ribbon ring floating inside a round hole would drop out when the last cut closes, so the ribbon peaks deliberately overrun the rim and fuse the rosette into the soundboard. <strong>There is no continuous rim circle in the cut layer</strong> — the outer boundary is a series of arcs between anchors. That is correct. Do not "fix" it by adding a full circle, or the rosette falls on the floor.</p>
+<p>Both designs are very open — <strong>37% to 63%</strong> of the disc removed, measured across the thirteen shipped samples, and 48% (the knot at its <code>3 × 5</code> default) and 52% (the plait at <code>N = 5</code>) if you run either generator without arguments. More leads means less open area, so the sparser end of that range is where the knots get busy, not where they get tame. Three anchors are enough to fix a trefoil's plane, but that is a kinematic statement, not a stiffness one. These are cut in <strong>3 mm Baltic birch plywood</strong> — its void-free core matters here, because a void landing in a 2mm-wide ribbon is a break waiting to happen. Compare the narrowest-cut figures against your kerf before choosing a design.</p>
+<p><strong>One layer is not a cut.</strong> Give the blue <code>#0000ff</code> <code>engrave</code> lines a score or engrave operation rather than a cut — they run across the ribbon at every crossing, so cutting them takes the rosette apart. Only the black <code>#000000</code> <code>cut</code> layer is meant to go through the material. Each writeup has the full table.</p>
+<p>Those two colours are the same everywhere in these repositories: blue engraves and never cuts, and black is always the last cut. A design with more stages fills in green → orange → cyan before it; these rosettes need only the one.</p>
+<p>In the other repositories that last cut is the one that frees the part. <strong>Here it is not, and must not be.</strong> Black removes the waste; the rosette stays attached to the soundboard at its rim anchors, which is the whole reason there is no continuous rim circle. If yours drops out, the cut was wrong.</p>
+<h2 id="every-sample-at-a-glance">Every sample, at a glance</h2>
+<p>Click any of these to download the cut file. The pictures are display renderings — <strong>deep gold is the rosette, pale gold the board it fuses into, white is what drops out.</strong> The ribbon crosses between the two golds without a break, because the rosette is not a separate ring sitting in a hole: it is board material, continuous with the board around it, which is what keeps it from falling through. The cut files themselves carry no fill, so a browser shows them as thin lines on a transparency checkerboard.</p>
+<p><strong>Every sample is a 30 mm radius — a 60 mm hole — unless its label says otherwise.</strong> Five do: <code>4 × 3</code> and <code>4 × 5</code> at 39 mm, <code>5 × 4</code> at 60 mm, <code>9 × 11</code> at 300 mm, and the plait at 50 mm last. The pictures are all scaled to the same width here, so a 300 mm rosette and a 30 mm one look the same size on the page; only the label tells you which is which.</p>
+<div class="tw">
+<table>
+<tr>
+<td align="center"><a href="2-lead_3-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/2-lead_3-bight_knot_radius30mm.svg" alt="A trefoil rosette, one ribbon crossing itself three times" width="150"></a></td>
+<td align="center"><a href="2-lead_5-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/2-lead_5-bight_knot_radius30mm.svg" alt="A cinquefoil rosette, five self-crossings" width="150"></a></td>
+<td align="center"><a href="2-lead_7-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/2-lead_7-bight_knot_radius30mm.svg" alt="A septafoil rosette, seven self-crossings" width="150"></a></td>
+<td align="center"><a href="3-lead_2-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/3-lead_2-bight_knot_radius30mm.svg" alt="A three-lead two-bight knot, held on two anchors" width="150"></a></td>
+</tr>
+<tr>
+<td align="center"><sub>2 × 3 &middot; trefoil</sub></td>
+<td align="center"><sub>2 × 5 &middot; cinquefoil</sub></td>
+<td align="center"><sub>2 × 7 &middot; septafoil</sub></td>
+<td align="center"><sub>3 × 2</sub></td>
+</tr>
+<tr>
+<td align="center"><a href="3-lead_4-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/3-lead_4-bight_knot_radius30mm.svg" alt="A three-lead four-bight knot" width="150"></a></td>
+<td align="center"><a href="3-lead_5-bight_knot_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/3-lead_5-bight_knot_radius30mm.svg" alt="A three-lead five-bight knot" width="150"></a></td>
+<td align="center"><a href="4-lead_3-bight_knot_radius39mm.svg" target="_blank" rel="noopener"><img src="previews/4-lead_3-bight_knot_radius39mm.svg" alt="A four-lead three-bight knot at 39 mm radius" width="150"></a></td>
+<td align="center"><a href="4-lead_5-bight_knot_radius39mm.svg" target="_blank" rel="noopener"><img src="previews/4-lead_5-bight_knot_radius39mm.svg" alt="A four-lead five-bight knot at 39 mm radius" width="150"></a></td>
+</tr>
+<tr>
+<td align="center"><sub>3 × 4</sub></td>
+<td align="center"><sub>3 × 5</sub></td>
+<td align="center"><sub>4 × 3 &middot; 39 mm</sub></td>
+<td align="center"><sub>4 × 5 &middot; 39 mm</sub></td>
+</tr>
+<tr>
+<td align="center"><a href="5-lead_4-bight_knot_radius60mm.svg" target="_blank" rel="noopener"><img src="previews/5-lead_4-bight_knot_radius60mm.svg" alt="A five-lead four-bight knot at 60 mm radius" width="150"></a></td>
+<td align="center"><a href="9-lead_11-bight_knot_radius300mm.svg" target="_blank" rel="noopener"><img src="previews/9-lead_11-bight_knot_radius300mm.svg" alt="A nine-lead eleven-bight knot at 300 mm radius" width="150"></a></td>
+<td align="center"><a href="8-crossing_plait_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/8-crossing_plait_radius30mm.svg" alt="An eight-crossing plait" width="150"></a></td>
+<td align="center"><a href="10-crossing_plait_radius30mm.svg" target="_blank" rel="noopener"><img src="previews/10-crossing_plait_radius30mm.svg" alt="A ten-crossing plait, two ribbons woven around a ring" width="150"></a></td>
+</tr>
+<tr>
+<td align="center"><sub>5 × 4 &middot; 60 mm</sub></td>
+<td align="center"><sub>9 × 11 &middot; 300 mm</sub></td>
+<td align="center"><sub>plait &middot; 8 crossings</sub></td>
+<td align="center"><sub>plait &middot; 10 crossings</sub></td>
+</tr>
+<tr>
+<td align="center"><a href="10-crossing_plait_radius50mm.svg" target="_blank" rel="noopener"><img src="previews/10-crossing_plait_radius50mm.svg" alt="A ten-crossing plait at 50 mm radius" width="150"></a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><sub>plait &middot; 10 crossings &middot; 50 mm</sub></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</div>
+
+<h2 id="four-worth-a-note">Four worth a note</h2>
+<p>Most of the samples above need no explanation: pick the crossing count you like. Four carry a caveat.</p>
+<ul>
+<li><strong><code>3-lead_2-bight</code></strong> is held on <strong>two rim anchors</strong>, the fewest these designs can have. It removes half the disc and holds the result on two 4 mm tabs.</li>
+<li><strong><code>4-lead_3-bight_radius39mm</code></strong> and <strong><code>4-lead_5-bight_radius39mm</code></strong> are the two four-lead samples, both at 39 mm on the same <code>AMP=9.75 HW=2.6</code>. A bigger panel alone does not fix their narrow cuts — the ribbon has to scale with it, and <a href="knot_soundhole.html#variants-at-r_hole30-60mm-hole" target="_blank" rel="noopener">the writeup shows the numbers</a>.</li>
+<li><strong><code>5-lead_4-bight_radius60mm</code></strong> is a 120 mm hole. Scaling <code>AMP</code> and <code>HW</code> in step with <code>R_HOLE</code>, five leads stop resolving below about 44 mm — the rim gaps weld shut and the region count drops from 21 to 17 — but the size shipped is chosen for the <em>cut</em>, not for that floor: the narrowest cut is 0.55 mm at 44 mm and 1.29 mm at 60 mm. Hold <code>AMP</code> and <code>HW</code> at the shipped <code>15</code> and <code>2.4</code> while shrinking the panel and you get neither number: 21 regions and a 1.29 mm cut all the way down to 35 mm, and no geometry at all below 34.3 mm, where the centre opening falls under the 1 mm the generator insists on.</li>
+<li><strong><code>9-lead_11-bight_radius300mm</code></strong> is a <strong>600 mm</strong> hole and <strong>not a sound hole at all</strong> — read it as a decorative panel. It satisfies every invariant, but only at that scale and only away from the defaults; <a href="knot_soundhole.html#size-is-the-other-lever-and-it-works" target="_blank" rel="noopener">the writeup explains why</a>.</li>
+</ul>
+<p>Every sample is cut-ready geometry, but the layers still need the treatment described above: the blue engrave lines must be given a non-cutting operation before you send the file. Requires Rust (<a href="https://rustup.rs" target="_blank" rel="noopener">rustup</a>), and neither generator writes anything unless you set <code>OUT</code>.</p>
 <h2 id="credits">Credits</h2>
 <p>Made by Michael Gernreich with <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">Claude</a> (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a <code>Co-Authored-By: Claude</code> line.</p>
 </main>
